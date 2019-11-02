@@ -9,8 +9,6 @@ MetaDescription: Python Django tutorial demonstrating IntelliSense, code navigat
 ---
 # Django Tutorial in Visual Studio Code
 
-hws test
-
 Django is a high-level Python framework designed for rapid, secure, and scalable web development. Django includes rich support for URL routing, page templates, and working with data.
 
 In this Django tutorial, you create a simple Django app with three pages that use a common base template. You create this app in the context of Visual Studio Code in order to understand how to work with Django in the VS Code terminal, editor, and debugger. This tutorial does not explore various details about Django itself, such as working with data models and creating an administrative interface. For guidance on those aspects, refer to the Django documentation links at the end of this tutorial.
@@ -37,9 +35,9 @@ To successfully complete this Django tutorial, you must do the following (which 
 
 In this section, you create a virtual environment in which Django is installed. Using a virtual environment avoids installing Django into a global Python environment and gives you exact control over the libraries used in an application. A virtual environment also makes it easy to [Create a requirements.txt file for the environment](#create-a-requirementstxt-file-for-the-environment).
 
-1. On your file system, create a project folder for this tutorial, such as `hello_django`.
+1. 创建一个 `hello_django` 项目文件夹 。
 
-1. In that folder, use the following command (as appropriate to your computer) to create a virtual environment named `env` based on your current interpreter:
+1. 在命令窗口中，此目录下，使用如下指令创建基于当前python版本的 `env` 虚拟环境:
 
     ```bash
     # macOS/Linux
