@@ -37,11 +37,11 @@ In this section, you create a virtual environment in which Django is installed. 
 
 1. 创建一个 `hello_django` 项目文件夹 。
 
-1. 在命令窗口中，此目录下，使用如下指令创建基于当前python版本的 `env` 虚拟环境:
+1. 此目录下，使用如下指令创建基于当前python版本的 `env` 虚拟环境:
 
     ```bash
     # macOS/Linux
-    sudo apt-get install python3-venv    # If needed
+    sudo apt-get install python3-venv    # 如果有必要的话
     python3 -m venv env
 
     # Windows
@@ -50,7 +50,7 @@ In this section, you create a virtual environment in which Django is installed. 
 
     > **Note**: Use a stock Python installation when running the above commands. If you use `python.exe` from an Anaconda installation, you see an error because the ensurepip module isn't available, and the environment is left in an unfinished state.
 
-1. Open the project folder in VS Code by running `code .`, or by running VS Code and using the **File** > **Open Folder** command.
+1. 在此项目目录中执行 `code .` 命令启动 VS Code , 或者运行 VS Code 后，点 **File** 菜单，再选 **Open Folder** 菜单打开项目目录.
 
 1. In VS Code, open the Command Palette (**View** > **Command Palette** or (`kb(workbench.action.showCommands)`)). Then select the **Python: Select Interpreter** command:
 
