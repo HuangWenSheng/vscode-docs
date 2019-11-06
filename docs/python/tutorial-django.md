@@ -7,7 +7,7 @@ PageTitle: Python and Django tutorial in Visual Studio Code
 DateApproved: 03/07/2019
 MetaDescription: Python Django tutorial demonstrating IntelliSense, code navigation, and debugging for both code and templates in Visual Studio Code, the best Python IDE.
 ---
-# Django Tutorial in Visual Studio Code
+# 使用 VS Code 开发 Django 项目指南
 
 Django is a high-level Python framework designed for rapid, secure, and scalable web development. Django includes rich support for URL routing, page templates, and working with data.
 
@@ -31,7 +31,7 @@ To successfully complete this Django tutorial, you must do the following (which 
 
 1. On Windows, make sure the location of your Python interpreter is included in your PATH environment variable. You can check the location by running `path` at the command prompt. If the Python interpreter's folder isn't included, open Windows Settings, search for "environment", select **Edit environment variables for your account**, then edit the **Path** variable to include that folder.
 
-## Create a project environment for the Django tutorial
+## 为本Django项目指南创建虚拟环境
 
 In this section, you create a virtual environment in which Django is installed. Using a virtual environment avoids installing Django into a global Python environment and gives you exact control over the libraries used in an application. A virtual environment also makes it easy to [Create a requirements.txt file for the environment](#create-a-requirementstxt-file-for-the-environment).
 
@@ -52,7 +52,7 @@ In this section, you create a virtual environment in which Django is installed. 
 
 1. 在此项目目录中执行 `code .` 命令启动 VS Code , 或者运行 VS Code 后，点 **File** 菜单，再选 **Open Folder** 菜单打开项目目录.
 
-1. In VS Code, open the Command Palette (**View** > **Command Palette** or (`kb(workbench.action.showCommands)`)). Then select the **Python: Select Interpreter** command:
+1. 在 VS Code 界面 , 打开"命令面板"( 点 **View** 菜单，再选 **Command Palette** 菜单)。 然后选择 **Python: Select Interpreter** 命令:
 
     ![Django tutorial: opening the Command Palette in VS Code](images/shared/command-palette.png)
 
