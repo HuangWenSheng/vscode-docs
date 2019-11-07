@@ -131,7 +131,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
     python manage.py startapp hello
     ```
 
-    The command creates a folder called `hello` that contains a number of code files and one subfolder. Of these, you frequently work with `views.py` (that contains the functions that define pages in your web app) and `models.py` (that contains classes defining your data objects). The `migrations` folder is used by Django's administrative utility to manage database versions as discussed later in this tutorial. There are also the files `apps.py` (app configuration), `admin.py` (for creating an administrative interface), and `tests.py` (for tests), which are not covered here.
+    该命令创建一个名为 `hello` 的文件夹，其中包含许多代码文件和一个子文件夹。其中，您经常使用 `views.py` (包含在web应用程序中定义页面的函数) 和 `models.py` (包含定义数据对象的类)。 Django的管理实用程序使用 `migrations` 文件夹来管理数据库版本，本教程后面将对此进行讨论。 还有这些文件 `apps.py` (app配置)， `admin.py` (用于创建管理接口) 和 `tests.py`(用于测试)，这里不讨论。
 
 1. 修改 `hello/views.py` 文件为如下代码, 为此应用的主页创建一个 view :
 
@@ -142,7 +142,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
         return HttpResponse("Hello, Django!")
     ```
 
-1. 创建一个 `hello/urls.py` 文件, 包含下列代码。 The `urls.py` file is where you specify patterns to route different URLs to their appropriate views. The code below contains one route to map root URL of the app (`""`) to the `views.home` function that you just added to `hello/views.py`:
+1. 创建一个 `hello/urls.py` 文件, 包含下列代码。 `urls.py`文件是您指定将不同url路由到相应视图的模式的地方。下面的代码包含一个将app的根URL (`""`) 映射到你刚刚添加到`hello/views.py`的`views.home`函数的路径：
 
     ```python
     from django.urls import path
@@ -153,7 +153,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
     ]
     ```
 
-1. 这个 `web_project` 目录也包含了一个 `urls.py` 文件, which is where URL routing is actually handled. 修改 `web_project/urls.py` 文件为如下代码 (you can retain the instructive comments if you like). This code pulls in the app's `hello/urls.py` using `django.urls.include`, which keeps the app's routes contained within the app. This separation is helpful when a project contains multiple apps.
+1. 这个 `web_project` 目录也包含了一个 `urls.py` 文件, 这是实际处理URL路由的地方。 修改 `web_project/urls.py` 文件为如下代码。这段代码用 `django.urls.include` 把app的 `hello/urls.py` 拉入，它将app的路由包含在app中。 当一个项目包含多个app时，这种分离很有帮助。
 
     ```python
     from django.contrib import admin
@@ -166,21 +166,21 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 1. 保存所有修改的文件可以用快捷键( Ctrl+K S )。
 
-1. In the VS Code Terminal, again with the virtual environment activated, run the development server with `python manage.py runserver` and open a browser to  `http://127.0.0.1:8000/` to see a page that renders "Hello, Django".
+1. 在VS Code终端中，在激活了虚拟环境下，使用 `python manage.py runserver` 运行开发服务器，并打开浏览器到  `http://127.0.0.1:8000/` 查看呈现的"Hello, Django"页面。
 
     ![Django tutorial: the basic Django app running in a browser](images/django-tutorial/app-in-browser-01.png)
 
-## Create a debugger launch profile
+## 创建调试器启动配置文件
 
-You're probably already wondering if there's an easier way to run the server and test the app without typing `python manage.py runserver` each time. Fortunately, there is! You can create a customized launch profile in VS Code, which is also used for the inevitable exercise of debugging.
+您可能已经在想，是否有一种更简单的方法来运行服务器和测试应用程序，而不是每次都输入 `python manage.py runserver` 。幸运的是,有! 您可以在VS Code中创建一个定制的启动配置文件，它也用于调试的必要练习。
 
-1. Switch to **Debug** view in VS Code (using the left-side activity bar). Along the top of the Debug view, you may see "No Configurations" and a warning dot on the gear icon. Both indicators mean that you don't yet have a `launch.json` file containing debug configurations:
+1. 在VS Code中，切换到**Debug**视图 (使用左侧的活动栏)。在Debug视图的顶部，您可能会看到 "No Configurations" 和齿轮图标上的警告点。这两个指示器都意味着您还没有包含调试配置的`launch.json`文件：
 
     ![Django tutorial: initial view of the debug panel](images/shared/debug-panel-initial-view.png)
 
-1. Select the gear icon and wait for a few seconds for VS Code to create and open a `launch.json` file. (If you're using an older version of VS Code, you may be prompted with a list of debugger targets, in which case select **Python** from the list.) The `launch.json` file contains a number of debugging configurations, each of which is a separate JSON object within the `configuration` array.
+1. 选择齿轮图标，等待几秒钟，等待VS Code创建并打开 `launch.json` 文件。(如果您正在使用较老版本的VS Code，可能会提示您一个调试器目标列表，在这种情况下，请从列表中选择 **Python** )  `launch.json` 文件包含许多调试配置，每个配置在 `configuration` 数组中都是一个单独的JSON对象。
 
-1. Scroll down to and examine the configuration with the name "Python: Django":
+1. 向下滚动查找名为 "Python: Django"的配置:
 
     ```json
     {
@@ -197,39 +197,39 @@ You're probably already wondering if there's an easier way to run the server and
     },
     ```
 
-    This configuration tells VS Code to run `"${workspaceFolder}/manage.py"` using the selected Python interpreter and the arguments in the `args` list. Launching the VS Code debugger with this configuration, then, is the same as running `python manage.py runserver --noreload` in the VS Code Terminal with your activated virtual environment. (You can add a port number like `"5000"` to `args` if desired.) The `"django": true` entry also tells VS Code to enable debugging of Django page templates, which you see later in this tutorial.
+    这个配置告诉VS Code用所选的Python解释器及`args`列表中的参数去运行`"${workspaceFolder}/manage.py"`。使用此配置启动VS Code调试器，与在激活的虚拟环境的VS Code终端中运行  `python manage.py runserver --noreload` 相同。(如果需要，可以将 `"5000"`之类的端口号添加到`args` 中。)`"django": true`条目还告诉VS Code启用Django页面模板的调试，您将在本教程的后面看到这一点。
 
-1. Save `launch.json` (`kb(workbench.action.files.save)`). In the debug configuration drop-down list (which reads **Python: Current File**) select the **Python: Django** configuration:
+1. 保存 `launch.json` 。 在debug configuration下拉列表中选择 **Python: Django** 配置:
 
     ![Django tutorial: selecting the Django debugging configuration](images/django-tutorial/debug-select-configuration.png)
 
-1. Test the configuration by selecting the **Debug** > **Start Debugging** menu command, or selecting the green **Start Debugging** arrow next to the list (`kb(workbench.action.debug.continue)`):
+1. 测试配置 ，选择 **Debug** > **Start Debugging** 菜单, 或者选择如下所示的绿色 **Start Debugging** 箭头:
 
     ![Django tutorial: start debugging/continue arrow on the debug toolbar](images/django-tutorial/debug-continue-arrow.png)
 
-1. `kbstyle(Ctrl+click)` the `http://127.0.0.1:8000/` URL in the terminal output window to open the browser and see that the app is running properly.
+1. `kbstyle(Ctrl+click)`在终端输出窗口中的 `http://127.0.0.1:8000/`  URL打开浏览器，查看应用程序是否正常运行。
 
-1. Close the browser and stop the debugger when you're finished. To stop the debugger, use the Stop toolbar button (the red square) or the **Debug** > **Stop Debugging** command (`kb(workbench.action.debug.stop)`).
+1. 完成后，关闭浏览器并停止调试器。要停止调试器，可以使用stop工具栏按钮(红色方块)或 **Debug** > **Stop Debugging** 命令(`kb(workbench.action.debug.stop)`)。
 
-1. You can now use the **Debug** > **Start Debugging** at any time to test the app, which also has the benefit of automatically saving all modified files.
+1. 现在您可以随时使用**Debug** > **Start Debugging**来测试app，还可以自动保存所有修改的文件。
 
-## Explore the debugger
+## 探索调试器
 
-Debugging gives you the opportunity to pause a running program on a particular line of code. When a program is paused, you can examine variables, run code in the Debug Console panel, and otherwise take advantage of the features described on [Debugging](/docs/python/debugging.md). Running the debugger also automatically saves any modified files before the debugging session begins.
+调试使您有机会在特定的代码行上暂停正在运行的程序。当程序暂停时，您可以检查变量，在调试控制台面板中运行代码，或者利用 [Debugging](/docs/python/debugging.md) 中描述的特性。运行调试器还会在调试会话开始之前自动保存任何修改后的文件。
 
-**Before you begin**: Make sure you've stopped the running app at the end of the last section by using `kbstyle(Ctrl+C)` in the terminal. If you leave the app running in one terminal, it continues to own the port. As a result, when you run the app in the debugger using the same port, the original running app handles all the requests and you won't see any activity in the app being debugged and the program won't stop at breakpoints. In other words, if the debugger doesn't seem to be working, make sure that no other instance of the app is still running.
+在开始之前: 确保你已经在最后一节结束时通过在终端中使用 `kbstyle(Ctrl+C)` 来停止了正在运行的应用程序。如果您让应用程序在一个终端上运行，它将继续拥有该端口。因此，当您使用相同的端口在调试器中运行应用程序时，最初运行的应用程序将处理所有请求，您不会看到正在调试的应用程序中的任何活动，程序也不会在断点处停止。换句话说，如果调试器似乎不工作，请确保没有应用程序的其他实例仍在运行。
 
-1. In `hello/urls.py`, add a route to the `urlpatterns` list:
+1. 在 `hello/urls.py` 上, 添加如下路由项到 `urlpatterns` 列表:
 
     ```python
     path("hello/<name>", views.hello_there, name="hello_there"),
     ```
 
-    The first argument to `path` defines a route "hello/" that accepts a variable string called *name*. The string is passed to the `views.hello_there` function specified in the second argument to `path`.
+     `path` 的第一个参数定义了一个路由“hello/”，它接受一个名为*name*的变量字符串。该字符串被传递给在 `path` 的第二个参数中指定的 `views.hello_there` 函数。
 
-    URL routes are case-sensitive. For example, the route `/hello/<name>` is distinct from `/Hello/<name>`. If you want the same view function to handle both, define paths for each variant.
+    URL路由是区分大小写的。例如，路由`/hello/<name>`不同于`/Hello/<name>`。如果您想让相同的视图函数处理这不同的两个，请为每个定义相同路径。
 
-1. Replace the contents of `views.py` with the following code to define the `hello_there` function that you can step through in the debugger:
+1. 用以下代码替换 `views.py` 的内容定义 `hello_there` 函数，你可以单步通过调试：
 
     ```python
     import re
@@ -256,26 +256,26 @@ Debugging gives you the opportunity to pause a running program on a particular l
         return HttpResponse(content)
     ```
 
-    The `name` variable defined in the URL route is given as an argument to the `hello_there` function. As described in the code comments, always filter arbitrary user-provided information to avoid various attacks on your app. In this case, the code filters the name argument to contain only letters, which avoids injection of control characters, HTML, and so forth. (When you use templates in the next section, Django does automatic filtering and you don't need this code.)
+    URL路由中定义的 `name` 变量作为 `hello_there` 函数的参数。如代码注释所述，始终过滤用户提供的任意信息，以避免对应用程序的各种攻击。在本例中，代码将name参数过滤为只包含字母，从而避免了注入控制字符、HTML等。(在下一节中使用模板时，Django会自动过滤，因此不需要这些代码。)
 
-1. Set a breakpoint at the first line of code in the `hello_there` function (`now = datetime.now()`) by doing any one of the following:
-    - With the cursor on that line, press `kb(editor.debug.action.toggleBreakpoint)`, or,
-    - With the cursor on that line, select the **Debug** > **Toggle Breakpoint** menu command, or,
-    - Click directly in the margin to the left of the line number (a faded red dot appears when hovering there).
+1. 在 `hello_there` 函数 (`now = datetime.now()`) 的第一行代码设置一个断点，方法如下:
+    - 在当前行, 按 F9, 或者,
+    - 在当前行, 选择菜单 **Debug** > **Toggle Breakpoint** , 或者,
+    - 直接点击行号左边的空白(当鼠标停留在那里时，会出现一个褪色的红点)。
 
-    The breakpoint appears as a red dot in the left margin:
+    断点在左侧空白处显示为一个红点:
 
     ![Django tutorial: a breakpoint set on the first line of the hello_there function](images/django-tutorial/debug-breakpoint-set.png)
 
-1. Start the debugger by selecting the **Debug** > **Start Debugging** menu command, or selecting the green **Start Debugging** arrow next to the list (`kb(workbench.action.debug.continue)`):
+1. 通过选择 **Debug** > **Start Debugging** 菜单命令来启动调试器，或者点击如下所示的边上的绿色 **Start Debugging** 箭头：
 
     ![Django tutorial: start debugging/continue arrow on the debug toolbar](images/django-tutorial/debug-continue-arrow.png)
 
-    Observe that the status bar changes color to indicate debugging:
+    可以看到状态栏的颜色发生了变化，表示正在调试：
 
     ![Django tutorial: appearance of the debugging status bar](images/django-tutorial/debug-status-bar.png)
 
-    A debugging toolbar (shown below) also appears in VS Code containing commands in the following order: Pause (or Continue, `kb(workbench.action.debug.continue)`), Step Over (`kb(workbench.action.debug.stepOver)`), Step Into (`kb(workbench.action.debug.stepInto)`), Step Out (`kb(workbench.action.debug.stepOut)`), Restart (`kb(workbench.action.debug.restart)`), and Stop (`kb(workbench.action.debug.stop)`). See [VS Code debugging](/docs/editor/debugging.md) for a description of each command.
+    在VS Code中还会出现一个调试工具栏 (如下所示)，其中包含以下顺序的命令: Pause ( 或者 Continue), Step Over , Step Into , Step Out , Restart ,  Stop 。 有关每个命令的描述，请参见 [VS Code debugging](/docs/editor/debugging.md) 。
 
     ![Django tutorial: the VS Code debug toolbar](images/shared/debug-toolbar.png)
 
