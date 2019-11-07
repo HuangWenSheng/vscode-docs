@@ -7,33 +7,33 @@ PageTitle: Python and Django tutorial in Visual Studio Code
 DateApproved: 03/07/2019
 MetaDescription: Python Django tutorial demonstrating IntelliSense, code navigation, and debugging for both code and templates in Visual Studio Code, the best Python IDE.
 ---
-# 使用 VS Code 开发 Django 项目指南
+# 使用 VS Code 开发 Django 项目教程
 
-Django is a high-level Python framework designed for rapid, secure, and scalable web development. Django includes rich support for URL routing, page templates, and working with data.
+Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web 网站的 Python 框架。 Django包含对URL路由、页面模板和数据处理的丰富支持。
 
-In this Django tutorial, you create a simple Django app with three pages that use a common base template. You create this app in the context of Visual Studio Code in order to understand how to work with Django in the VS Code terminal, editor, and debugger. This tutorial does not explore various details about Django itself, such as working with data models and creating an administrative interface. For guidance on those aspects, refer to the Django documentation links at the end of this tutorial.
+在这个 Django 教程里, 你创建一个简单的 Django 应用，使用了基于模板的三个页面。为了理解Django在VS Code终端、编辑器和调试器中如何工作，在Visual Studio Code中创建了这个应用。 本教程不探讨Django本身的各种细节, 比如使用数据模型和创建管理接口。有关这些方面的指导，请参阅本教程末尾的Django文档链接。
 
-The completed code project from this Django tutorial can be found on GitHub: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
+本 Django 教程中完成的代码可以在GitHub上找到: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
 
-If you have any problems, feel free to file an issue for this tutorial in the [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues).
+如果有任何问题, 您可以在 [VScode 文档仓库](https://github.com/Microsoft/vscode-docs/issues) 中提交本教程中的问题。
 
-## Prerequisites
+## 要求
 
-To successfully complete this Django tutorial, you must do the following (which are the same steps as in the [general Python tutorial](/docs/python/python-tutorial.md)):
+要成功地完成本 Django 教程，您必须执行以下操作 ( 与 [general Python教程](/docs/python/python-tutorial.md) 中的步骤相同 ):
 
 1. Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
 
-1. Install a version of Python 3 (for which this tutorial is written). Options include:
+1. 安装Python 3的一个版本(本教程就是为这个版本编写的)。 包括:
    - (All operating systems) A download from [python.org](https://www.python.org/downloads/); typically use the **Download Python 3.7.0** button that appears first on the page (or whatever is the latest version).
    - (Linux) The built-in Python 3 installation works well, but to install other Python packages you must run `sudo apt install python3-pip` in the terminal.
    - (macOS) An installation through [Homebrew](https://brew.sh/) on macOS using `brew install python3` (the system install of Python on macOS is not supported).
    - (All operating systems) A download from [Anaconda](https://www.anaconda.com/download/) (for data science purposes).
 
-1. On Windows, make sure the location of your Python interpreter is included in your PATH environment variable. You can check the location by running `path` at the command prompt. If the Python interpreter's folder isn't included, open Windows Settings, search for "environment", select **Edit environment variables for your account**, then edit the **Path** variable to include that folder.
+1. 在Windows上,确保Python解释器的路径包含在PATH环境变量中。您可以通过在命令提示符中运行“path”来检查路径。如果Python解释器的文件夹不包括在内, 打开Windows控制面板, 搜索"environment", 选择 **Edit environment variables for your account**, 然后编辑 **Path** 变量包含此文件夹。
 
 ## 为本Django项目指南创建虚拟环境
 
-In this section, you create a virtual environment in which Django is installed. Using a virtual environment avoids installing Django into a global Python environment and gives you exact control over the libraries used in an application. A virtual environment also makes it easy to [Create a requirements.txt file for the environment](#create-a-requirementstxt-file-for-the-environment).
+这部分, 您将创建一个虚拟环境来安装 Django 框架。使用虚拟环境可以避免将 Django 安装到全局 Python 环境中，使您能够精确地控制应用程序中使用的库。虚拟环境也让 [创建 requirements.txt 文件](#create-a-requirementstxt-file-for-the-environment)  很方便。
 
 1. 创建一个 `hello_django` 项目文件夹 。
 
@@ -56,53 +56,53 @@ In this section, you create a virtual environment in which Django is installed. 
 
     ![Django tutorial: opening the Command Palette in VS Code](images/shared/command-palette.png)
 
-1. The command presents a list of available interpreters that VS Code can locate automatically (your list will vary; if you don't see the desired interpreter, see [Configuring Python environments](/docs/python/environments.md)). From the list, select the virtual environment in your project folder that starts with `./env` or `.\env`:
+1. 选择此命令后，会显示 VS Code 中可用的解释器列表 ( 会有所差异 ; 但如果没有找到所需的解释器, 请参见 [Configuring Python environments](/docs/python/environments.md) )。 从列表中为项目选择一个虚拟环境 ，起始是 `./env` 或 `.\env` :
 
     ![Django tutorial: Selecting the virtual environment for Python](images/shared/select-virtual-environment.png)
 
-1. Run **Terminal: Create New Integrated Terminal** (`kb(workbench.action.terminal.new)`) from the Command Palette, which creates a terminal and automatically activates the virtual environment by running its activation script.
+1. 打开"命令面板" 输入 **Terminal: Create New Integrated Terminal** 选择执行后，会打开一个自动激活虚拟环境的终端。
 
     > **Note**: On Windows, if your default terminal type is PowerShell, you may see an error that it cannot run activate.ps1 because running scripts is disabled on the system. The error provides a link for information on how to allow scripts. Otherwise, use **Terminal: Select Default Shell** to set "Command Prompt" or "Git Bash" as your default instead.
 
-1. The selected environment appears on the left side of the VS Code status bar, and notice the "(venv)" indicator that tells you that you're using a virtual environment:
+1. 所选择的虚拟环境名会显示在 VS Code 状态条的左边, 有 "(venv)" 的提示，即表示你正处在虚拟环境下:
 
     ![Django tutorial: selected environment showing in the VS Code status bar](images/shared/environment-in-status-bar.png)
 
-1. Install Django in the virtual environment by running one of the following commands in the VS Code Terminal:
+1. 在 VS Code 界面的终端窗口内，所属的虚拟环境下，执行如下列命令安装 Django 框架：
 
     ```bash
     python -m pip install django
     ```
 
-You now have a self-contained environment ready for writing Django code. VS Code activates the environment automatically when you use **Terminal: Create New Integrated Terminal**. If you open a separate command prompt or terminal, activate the environment by running `source env/bin/activate` (Linux/macOS) or `env\scripts\activate` (Windows).  You know the environment is activated when the command prompt shows **(env)** at the beginning.
+现在您已经为编写Django代码准备好了一个独立的环境。 当你点击 `终端` 菜单，再点击 `新建终端` 菜单后 VS Code 打开自动激活虚拟环境的终端窗口。 如果您已经打开了命令提示符或终端，则可以通过运行`source env/bin/activate`(Linux/macOS)或`env\scripts\activate`(Windows)来激活虚拟环境。 当命令提示符的开始处显示 **(env)** 时，表示虚拟环境被激活。
 
-## Create and run a minimal Django app
+## 创建和运行最小化的 Django 应用
 
-In Django terminology, a "Django project" is composed of several site-level configuration files along with one or more "apps" that you deploy to a web host to create a full web application. A Django project can contain multiple apps, each of which typically has an independent function in the project, and the same app can be in multiple Django projects. An app, for its part, is just a Python package that follows certain conventions that Django expects.
+在Django术语中，“Django project”由几个site-level配置文件和一个或多个“app”组成，您可以将这些“apps”部署到web主机上以创建完整的web应用。 Django project 可以包含多个app，每个app通常在项目中具有独立的功能，相同功能的app可以应用在多个Django项目中。 每个app只是符合Django约定的 Python 包。
 
-To create a minimal Django app, then, it's necessary to first create the Django project to serve as the container for the app, then create the app itself. For both purposes, you use the Django administrative utility, `django-admin`, which is installed when you install the Django package.
+要创建最小的Django app，首先需要创建Django项目作为app的容器，然后创建app。出于这两个目的, 您可以使用Django管理实用程序 `Django-admin` , 它是在安装Django时已经安装了的。
 
-### Create the Django project
+### 创建 Django 项目
 
-1. In the VS Code Terminal where your virtual environment is activated, run the following command:
+1. 在 VS Code 终端，激活了虚拟环境的窗口中, 执行如下指令:
 
     ```bash
     django-admin startproject web_project .
     ```
 
-    This `startproject` command assumes (by use of `.` at the end) that the current folder is your project folder, and creates the following within it:
+     在当前目录为项目目录下 ( 指令最后有个 `.` ) , 执行指令后会创建如下这些内容:
 
-    - `manage.py`: The Django command-line administrative utility for the project. You run administrative commands for the project using `python manage.py <command> [options]`.
+    - `manage.py`: Django命令行管理实用程序。 使用 `python manage.py <command> [options]` 的格式.
 
-    - A subfolder named `web_project`, which contains the following files:
-        - `__init__.py`: an empty file that tells Python that this folder is a Python package.
-        - `wsgi.py`: an entry point for WSGI-compatible web servers to serve your project. You typically leave this file as-is as it provides the hooks for production web servers.
-        - `settings.py`: contains settings for Django project, which you modify in the course of developing a web app.
-        - `urls.py`: contains a table of contents for the Django project, which you also modify in the course of development.
+    - 名为 `web_project` 的子目录, 包含了如下这些文件:
+        - `__init__.py`: 一个空文件，告诉 Python 这个文件夹为 Python 包。
+        - `wsgi.py`: WSGI兼容的web服务器为项目提供入口。 通常不必去修改此文件。
+        - `settings.py`: 包含Django项目的设置，您可以在开发web应用程序的过程中对其进行修改。
+        - `urls.py`: 包含了Django项目的 `对应表` ，在开发过程中根据需要修改。
 
-1. To verify the Django project, make sure your virtual environment is activated, then start Django's development server using the command `python manage.py runserver`. The server runs on the default port 8000, and you see output like the following output in the terminal window:
+1. 要验证Django项目，请确保您的虚拟环境是激活的，然后使用 `python manage.py runserver` 命令启动Django的开发服务器。 服务器在默认端口8000上运行，在终端窗口中可以看到如下输出:
 
-    ```
+    ```bash
     Performing system checks...
 
     System check identified no issues (0 silenced).
@@ -113,19 +113,19 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     Quit the server with CTRL-BREAK.
     ```
 
-    When you run the server the first time, it creates a default SQLite database in the file `db.sqlite3`, which is intended for development purposes but can be used in production for low-volume web apps. Also, Django's built-in web server is intended *only* for local development purposes. When you deploy to a web host, however, Django uses the host's web server instead. The `wsgi.py` module in the Django project takes care of hooking into the production servers.
+    第一次运行服务器时，它会创建一个默认的SQLite数据库文件 `db.sqlite3`, 它用于开发目的，但也可用于生产中，用于小容量的web应用程序。 此外，Django内置的web服务器仅用于本地开发。 在部署到web主机时，Django使用主机的web服务器。`wsgi.py` 模块在Django项目中，负责连接到生产服务器。
 
-    If you want to use a different port than the default 8000, specify the port number on the command line, such as `python manage.py runserver 5000`.
+    如果您想使用与默认端口8000不同的端口，请在命令行上指定端口号，例如 `python manage.py runserver 5000` 。
 
-1. `kbstyle(Ctrl+click)` the `http://127.0.0.1:8000/` URL in the terminal output window to open your default browser to that address. If Django is installed correctly and the project is valid, you see the default page shown below. The VS Code terminal output window also shows the server log.
+1. 按住`Ctrl`键不放，鼠标点击终端输出窗口中的 `http://127.0.0.1:8000/` URL，在默认浏览器上打开该地址页。 如果正确安装了Django并且项目有效，您将看到如下所示的默认页面。VS Code终端输出窗口也显示了服务器日志。
 
     ![Django tutorial: default view of empty Django project](images/django-tutorial/django-empty-project-success.png)
 
-1. When you're done, close the browser window and stop the server in VS Code using `kbstyle(Ctrl+C)` as indicated in the terminal output window.
+1. 完成后，关闭浏览器窗口并在VS Code终端输出窗口中使用`(Ctrl+C)`停止服务器。
 
-### Create A Django app
+### 创建一个 Django 应用
 
-1. In the VS Code Terminal with your virtual environment activated, run the administrative utility's `startapp` command in your project folder (where `manage.py` resides):
+1. 在 VS Code 终端，虚拟环境内，项目路径下执行如下指令:
 
     ```bash
     python manage.py startapp hello
@@ -133,7 +133,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
 
     The command creates a folder called `hello` that contains a number of code files and one subfolder. Of these, you frequently work with `views.py` (that contains the functions that define pages in your web app) and `models.py` (that contains classes defining your data objects). The `migrations` folder is used by Django's administrative utility to manage database versions as discussed later in this tutorial. There are also the files `apps.py` (app configuration), `admin.py` (for creating an administrative interface), and `tests.py` (for tests), which are not covered here.
 
-1. Modify `hello/views.py` to match the following code, which creates a single view for the app's home page:
+1. 修改 `hello/views.py` 文件为如下代码, 为此应用的主页创建一个 view :
 
     ```python
     from django.http import HttpResponse
@@ -142,7 +142,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
         return HttpResponse("Hello, Django!")
     ```
 
-1. Create a file, `hello/urls.py`, with the contents below. The `urls.py` file is where you specify patterns to route different URLs to their appropriate views. The code below contains one route to map root URL of the app (`""`) to the `views.home` function that you just added to `hello/views.py`:
+1. 创建一个 `hello/urls.py` 文件, 包含下列代码。 The `urls.py` file is where you specify patterns to route different URLs to their appropriate views. The code below contains one route to map root URL of the app (`""`) to the `views.home` function that you just added to `hello/views.py`:
 
     ```python
     from django.urls import path
@@ -153,7 +153,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     ]
     ```
 
-1. The `web_project` folder also contains a `urls.py` file, which is where URL routing is actually handled. Open `web_project/urls.py` and modify it to match the following code (you can retain the instructive comments if you like). This code pulls in the app's `hello/urls.py` using `django.urls.include`, which keeps the app's routes contained within the app. This separation is helpful when a project contains multiple apps.
+1. 这个 `web_project` 目录也包含了一个 `urls.py` 文件, which is where URL routing is actually handled. 修改 `web_project/urls.py` 文件为如下代码 (you can retain the instructive comments if you like). This code pulls in the app's `hello/urls.py` using `django.urls.include`, which keeps the app's routes contained within the app. This separation is helpful when a project contains multiple apps.
 
     ```python
     from django.contrib import admin
@@ -164,7 +164,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     ]
     ```
 
-1. Save all modified files with `kb(workbench.action.files.saveAll)`.
+1. 保存所有修改的文件可以用快捷键( Ctrl+K S )。
 
 1. In the VS Code Terminal, again with the virtual environment activated, run the development server with `python manage.py runserver` and open a browser to  `http://127.0.0.1:8000/` to see a page that renders "Hello, Django".
 
