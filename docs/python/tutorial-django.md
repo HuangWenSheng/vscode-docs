@@ -1,12 +1,3 @@
----
-Order: 9
-Area: python
-TOCTitle: Django Tutorial
-ContentId: 3c0948f9-85a5-4dd4-a461-59788dbfce4c
-PageTitle: Python and Django tutorial in Visual Studio Code
-DateApproved: 03/07/2019
-MetaDescription: Python Django tutorial demonstrating IntelliSense, code navigation, and debugging for both code and templates in Visual Studio Code, the best Python IDE.
----
 # 使用 VS Code 开发 Django 项目教程
 
 Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web 网站的 Python 框架。 Django包含对URL路由、页面模板和数据处理的丰富支持。
