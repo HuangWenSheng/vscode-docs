@@ -65,6 +65,12 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
     python -m pip install django
     ```
 
+    >用阿里的镜像源安装可以执行以下命令
+
+    ```bash
+    python -m pip install -i https://mirrors.aliyun.com/pypi/simple django
+    ```
+
 现在您已经为编写Django代码准备好了一个独立的环境。 当你点击 `终端` 菜单，再点击 `新建终端` 菜单后 VS Code 打开自动激活虚拟环境的终端窗口。 如果您已经打开了命令提示符或终端，则可以通过运行`source env/bin/activate`(Linux/macOS)或`env\scripts\activate`(Windows)来激活虚拟环境。 当命令提示符的开始处显示 **(env)** 时，表示虚拟环境被激活。
 
 ## 创建和运行最小化的 Django 应用
