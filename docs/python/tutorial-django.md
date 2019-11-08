@@ -172,7 +172,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 ## 创建调试器启动配置文件
 
-您可能已经在想，是否有一种更简单的方法来运行服务器和测试应用程序，而不是每次都输入 `python manage.py runserver` 。幸运的是,有! 您可以在VS Code中创建一个定制的启动配置文件，它也用于调试的必要练习。
+您可能已经在想，是否有一种更简单的方法来运行服务器和测试应用程序，而不是每次都输入 `python manage.py runserver` 。幸运的是,有! 您可以在VS Code中创建一个定制的启动配置文件，用于调试和练习。
 
 1. 在VS Code中，切换到**Debug**视图 (使用左侧的活动栏)。在Debug视图的顶部，您可能会看到 "No Configurations" 和齿轮图标上的警告点。这两个指示器都意味着您还没有包含调试配置的`launch.json`文件：
 
@@ -279,13 +279,13 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
     ![Django tutorial: the VS Code debug toolbar](images/shared/debug-toolbar.png)
 
-1. Output appears in a "Python Debug Console" terminal. Open a browser and navigate to `http://127.0.0.1:8000/hello/VSCode`. Before the page renders, VS Code pauses the program at the breakpoint you set. The small yellow arrow on the breakpoint indicates that it's the next line of code to run.
+1. 输出出现在 "Python Debug Console" 终端中。打开浏览器并导航到 `http://127.0.0.1:8000/hello/VSCode` 。在页面渲染之前，VS代码会在您设置的断点处暂停程序。断点上的黄色小箭头表示这是要运行的下一行代码。
 
     ![Django tutorial: VS Code paused at a breakpoint](images/django-tutorial/debug-program-paused.png)
 
-1. Use Step Over to run the `now = datetime.now()` statement.
+1. 使用Step Over来运行 `now = datetime.now()` 语句。
 
-1. On the left side of the VS Code window, you see a **Variables** pane that shows local variables, such as `now`, as well as arguments, such as `name`. Below that are panes for **Watch**, **Call Stack**, and **Breakpoints** (see [VS Code debugging](/docs/editor/debugging.md) for details). In the **Locals** section, try expanding different values. You can also double-click values (or use `kb(debug.setVariable)`) to modify them. Changing variables such as `now`, however, can break the program. Developers typically make changes only to correct values when the code didn't produce the right value to begin with.
+1. 在VS Code窗口的左侧，您将看到一个 **Variables** 窗格，其中显示了本地变量及其参数(如 `now` 和 `name` )。下面的窗格的 **Watch** , **Call Stack** , **Breakpoints** (详见[VS Code debugging](/docs/editor/debugging.md) )。在 **Locals** 部分,尝试输入不同的值。你也可以双击来修改它们。然而，像 `now` 这样的变量改变会破坏程序。开发人员通常只在代码一开始没有生成正确的值时才更改值。
 
     ![Django tutorial: local variables and arguments in VS Code during debugging](images/django-tutorial/debug-local-variables.png)
 
