@@ -280,22 +280,22 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
     ![Django tutorial: VS Code paused at a breakpoint](images/django-tutorial/debug-program-paused.png)
 
-1. 使用Step Over来运行 `now = datetime.now()` 语句。
+1. 使用 Step Over 来运行 `now = datetime.now()` 语句。
 
 1. 在VS Code窗口的左侧，您将看到一个 **Variables** 窗格，其中显示了本地变量及其参数(如 `now` 和 `name` )。下面的窗格的 **Watch** , **Call Stack** , **Breakpoints** (详见[VS Code debugging](/docs/editor/debugging.md) )。在 **Locals** 部分,尝试输入不同的值。你也可以双击来修改它们。然而，像 `now` 这样的变量改变会破坏程序。开发人员通常只在代码一开始没有生成正确的值时才更改值。
 
     ![Django tutorial: local variables and arguments in VS Code during debugging](images/django-tutorial/debug-local-variables.png)
 
-1. When a program is paused, the **Debug Console** panel (which is different from the "Python Debug Console" in the Terminal panel) lets you experiment with expressions and try out bits of code using the current state of the program. For example, once you've stepped over the line `now = datetime.now()`, you might experiment with different date/time formats. In the editor, select the code that reads `now.strftime("%A, %d %B, %Y at %X")`, then right-click and select **Debug: Evaluate** to send that code to the debug console, where it runs:
+1. 当程序暂停时， **Debug Console** 面板(与终端面板中的 "Python Debug Console" 不同)允许您使用表达式进行试验，并使用程序的当前状态调试 。例如，一旦你 step over 了 `now = datetime.now()` 这行代码，就可以尝试不同的日期/时间格式 。在编辑器中，选择 `now.strftime("%A, %d %B, %Y at %X")` 代码，然后右击并选择 **Debug: Evaluate** 将代码发送到调试控制台，在那里运行:
 
     ```bash
     now.strftime("%A, %d %B, %Y at %X")
     'Friday, 07 September, 2018 at 07:46:32'
     ```
 
-    > **Tip**: The **Debug Console** also shows exceptions from within the app that may not appear in the terminal. For example, if you see a "Paused on exception" message in the **Call Stack** area of Debug View, switch to the **Debug Console** to see the exception message.
+    > **提示**: **Debug Console** 也显示来自应用程序内部的异常，这些异常可能不会出现在终端中。例如，如果您在调试视图的 **Call Stack** 区域中看到 "Paused on exception" 消息，请切换到 **Debug Console** 查看异常消息 。
 
-1. Copy that line into the > prompt at the bottom of the debug console, and try changing the formatting:
+1. 将下列行复制到调试控制台底部的 > 提示符中，并尝试更改格式 :
 
     ```bash
     now.strftime("%a, %d %B, %Y at %X")
@@ -306,45 +306,45 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
     'Fri, 07 Sep, 18 at 07:46:32'
     ```
 
-    > **Note**: If you see a change you like, you can copy and paste it into the editor during a debugging session. However, those changes aren't applied until you restart the debugger.
+    > **注意**:如果您看到您想要的更改，您可以在调试会话期间将其复制并粘贴到编辑器中。但是，在重新启动调试器之前不会应用这些更改 。
 
-1. Step through a few more lines of code, if you'd like, then select Continue (`kb(workbench.action.debug.continue)`) to let the program run. The browser window shows the result:
+1. 如果您愿意，再多执行几行代码，然后选择 Continue，让程序继续运行。浏览器窗口显示如下结果:
 
     ![Django tutorial: result of the modified program](images/django-tutorial/debug-run-result.png)
 
-1. Close the browser and stop the debugger when you're finished. To stop the debugger, use the Stop toolbar button (the red square) or the **Debug** > **Stop Debugging** command (`kb(workbench.action.debug.stop)`).
+1. 完成后，关闭浏览器并停止调试器。要停止调试器，请使用 stop工具栏按钮(红色方块) 或 **Debug** > **Stop Debugging** 命令 。
 
-> **Tip**: To make it easier to repeatedly navigate to a specific URL like `http://127.0.0.1:8000/hello/VSCode`, output that URL using a `print` statement somewhere in a file like `views.py`. The URL appears in the VS Code Terminal where you can use `kbstyle(Ctrl+click)` to open it in a browser.
+> **提示**: 为了更方便地重复导航到一个特定的URL，比如 `http://127.0.0.1:8000/hello/VSCode`，可以在类似 `views.py` 的文件中使用 `print` 语句输出该URL。URL出现在 VS Code 终端中，您可以使用 `kbstyle(Ctrl+click)` 在浏览器中打开它。
 
-## Go to Definition and Peek Definition commands
+## Go to Definition 和 Peek Definition 命令
 
-During your work with Django or any other library, you may want to examine the code in those libraries themselves. VS Code provides two convenient commands that navigate directly to the definitions of classes and other objects in any code:
+在使用Django或任何其他库的过程中，您可能想检查这些库本身的代码。VS Code 提供了两个方便的命令，可以直接导航到任何代码中的类和其他对象的定义:
 
-- **Go to Definition** jumps from your code into the code that defines an object. For example, in `views.py`, right-click on `HttpResponse` in the `home` function and select **Go to Definition** (or use `kb(editor.action.revealDefinition)`), which navigates to the class definition in the Django library.
+- **Go to Definition** 从你的代码跳转到定义对象的代码。例如, 在 `views.py` 内, 在 `home` 函数内的 `HttpResponse` 上右键选择 **Go to Definition**, 导航到Django库中的类定义。
 
-- **Peek Definition** (`kb(editor.action.peekDefinition)`, also on the right-click context menu), is similar, but displays the class definition directly in the editor (making space in the editor window to avoid obscuring any code). Press `kbstyle(Escape)` to close the Peek window or use the **x** in the upper right corner.
+- **Peek Definition** (同样在右键菜单上), 但是直接在编辑器中显示类定义(会在编辑器窗口中腾出空间以避免遮盖代码)。按 `kbstyle(Escape)` 键或点击右上角的 **x** 关闭 Peek 窗口。
 
     ![Django tutorial: Peek Definition showing the Flask class inline](images/django-tutorial/peek-definition.png)
 
-## Use a template to render a page
+## 使用模版和渲染页面
 
-The app you've created so far in this tutorial generates only plain text web pages from Python code. Although it's possible to generate HTML directly in code, developers avoid such a practice because it opens the app to [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). In the `hello_there` function of this tutorial, for example, one might think to format the output in code with something like `content = "<h1>Hello there, " + clean_name + "!</h1>`, where the result in `content` is given directly to a browser. This opening allows an attacker to place malicious HTML, including JavaScript code, in the URL that ends up in `clean_name` and thus ends up being run in the browser.
+到目前为止，您在本教程中创建的应用程序用Python代码仅生成纯文本web页面 。虽然可以直接在代码中生成HTML，但开发人员避免这样做，因为这样会将应用程序以 [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting) 方式打开 。例如，在本教程的 `hello_there` 函数中，可以考虑使用类似 `content = "<h1>Hello there, " + clean_name + "!</h1>` 的代码格式来格式化输出，其中 `content` 的结果直接提供给浏览器 。这个开放允许攻击者将恶意HTML(包括JavaScript代码)放置在 `clean_name` 后面的URL中运行。
 
-A much better practice is to keep HTML out of your code entirely by using **templates**, so that your code is concerned only with data values and not with rendering.
+一个更好的实践是通过使用 **templates** 将HTML完全排除在您的代码之外，这样您的代码只关心数据值而不关心渲染。
 
-In Django, a template is an HTML file that contains placeholders for values that the code provides at run time. The Django templating engine then takes care of making the substitutions when rendering the page, and provides automatic escaping to prevent XSS attacks (that is, if you tried using HTML in a data value, you would see the HTML rendered only as plain text). The code, therefore, concerns itself only with data values and the template concerns itself only with markup. Django templates provide flexible options such as template inheritance, which allows you to define a base page with common markup and then build upon that base with page-specific additions.
+在Django中，模板是一个HTML文件，其中包含代码在运行时提供的值的占位符。 Django模板引擎在渲染页面时负责进行替换，并提供自动转义来防止XSS攻击(也就是说，如果您尝试在数据值中使用HTML，您将看到仅以纯文本形式渲染的HTML)。因此，代码只与数据值有关，模板只与标记有关。  Django模板提供了灵活的选项，比如模板继承，它允许您使用通用标记定义基页面，然后在此基础上添加特定于页面的内容。
 
-In this section, you start by creating a single page using a template. In subsequent sections, you configure the app to serve static files and then create multiple pages to the app that each contains a nav bar from a base template. Django templates also support control flow and iteration, as you see later in this tutorial in the context of template debugging.
+在本节中，首先使用模板创建一个页面。在后面的小节中，您将应用程序配置为提供静态文件，然后为应用程序创建多个页面，每个页面都包含一个来自基本模板的导航栏。Django 模板还支持控制流和迭代，您将在本教程后面的模板调试上下文中看到这一点。
 
-1. In the `web_project/settings.py` file, locate the `INSTALLED_APPS` list and add the following entry, which makes sure the project knows about the app so it can handle templating:
+1. 在 `web_project/settings.py` 文件中，找到 `INSTALLED_APPS` 列表并添加以下条目，以确保 project 知道 app，以便处理模板：
 
     ```python
     'hello',
     ```
 
-1. Inside the `hello` folder, create a folder named `templates`, and then another subfolder named `hello` to match the app name (this two-tiered folder structure is typical Django convention).
+1. 在 `hello` 文件夹中，创建一个名为 `templates`的文件夹，然后创建另一个名为 `hello` 的子文件夹，以匹配 app 名称 (这种两层的文件夹结构是典型的Django约定)。
 
-1. In the `templates/hello` folder, create a file named `hello_there.html` with the contents below. This template contains two placeholders for data values named "name", and "date", which are delineated by pairs of curly braces, `\{{` and `}}`. All other invariant text is part of the template, along with formatting markup (such as `<strong>`). As you can see, template placeholders can also include formatting, the expressions after the pipe `|` symbols, in this case using Django's built-in [date filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date) and [time filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#time).  The code, then needs only to pass the datetime *value* rather than a pre-formatted string:
+1. 在 `templates/hello` 文件夹中，创建一个名为 `hello_there.html` 的文件，其内容如下。此模板包含两个占位符，分别表示名为 "name" 和 "date" 的数据值，它们由一对大括号 `\{{` 和 `}}` 来描述。所有其他不变的文本和格式化标记(如 `<strong>`)都是模板的一部分。如您所见，模板占位符还可以包括格式、管道 `|` 符号后面的表达式，在本例中使用的是Django内置的 [date filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date) 和 [time filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#time) 。然后，代码只需要传递 datetime 值 ，而不是预格式化的字符串:
 
     ```html
     <!DOCTYPE html>
@@ -359,13 +359,13 @@ In this section, you start by creating a single page using a template. In subseq
     </html>
     ```
 
-1. At the top of `views.py`, add the following import statement:
+1. 在 `views.py` 的顶部添加以下import语句:
 
     ```python
     from django.shortcuts import render
     ```
 
-1. Also in `views.py`, modify the `hello_there` function to use `django.shortcuts.render` method to load a template and to provide the *template context*. The context is simply the set of variables for use within the template. The `render` function takes the request object, followed by the path to to the template *relative to the `templates` folder*, then the context object. (Developers typically name the templates the same as the functions that use them, but matching names are not required because you always refer to the exact filename in your code.)
+1. 同样在 `views.py` 中，修改 `hello_there` 函数以使用 `django.shortcuts.render` 方法加载模板并提供 *template context* 。上下文只是模板中使用的一组变量。`render` 函数接受请求对象，然后是相对于 `templates` 文件夹的模板路径，然后是上下文对象。(开发人员通常将模板命名为与使用它们的函数相同的名称，但是不需要匹配名称，因为您总是在代码中引用准确的文件名。)
 
     ```python
     def hello_there(request, name):
@@ -379,15 +379,15 @@ In this section, you start by creating a single page using a template. In subseq
         )
     ```
 
-    You can see that the code is now much simpler, and concerned only with data values, because the markup and formatting is all contained in the template.
+    您可以看到，代码现在简单多了，而且只关心数据值，因为标记和格式都包含在模板中。
 
-1. Start the program (inside or outside of the debugger, using `kb(workbench.action.debug.run)`), navigate to a /hello/name URL, and observe the results.
+1. 启动程序 ( 在调试器内部或外部，使用 `kb(workbench.action.debug.run)` )，导航到 /hello/name URL，然后观察结果。
 
-1. Also try navigating to a /hello/name URL using a name like `<a%20value%20that%20could%20be%20HTML>` to see Django's automatic escaping at work. The "name" value shows up as plain text in the browser rather than as rendering an actual element.
+1. 还可以尝试使用 `<a%20value%20that%20could%20be%20HTML>` 之类的名称导航到 /hello/name URL，以查看Django在工作时的自动转义。 "name" 值在浏览器中显示为纯文本，而不是渲染的实际元素
 
-## Serve static files
+## 提供静态文件
 
-Static files are pieces of content that your web app returns as-is for certain requests, such as CSS files. Serving static files requires that the `INSTALLED_APPS` list in `settings.py` contains `django.contrib.staticfiles`, which is included by default.
+静态文件是web应用程序按原样返回的内容片段，用于某些请求，如CSS文件。服务静态文件需要 `settings.py` 中的 `INSTALLED_APPS` 列表包含 `django.contrib.staticfiles`，
 
 Serving static files in Django is something of an art, especially when deploying to production. What's shown here is a simple approach that works with the Django development server and also a production server like gunicorn. A full treatment of static files, however, is beyond the scope of this tutorial, so for more information, see [Managing static files](https://docs.djangoproject.com/en/2.1/howto/static-files/) in the Django documentation.
 
