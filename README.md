@@ -71,4 +71,4 @@
 
 ## Publishing
 
-如何发布文档更改的方法可以在 [here](https://github.com/Microsoft/vscode-website#publishing-a-documentation-change) （ VS Code网站的（私有）仓库中）找到。
+如何发布文档更改的方法可以在（ VS Code网站的（私有）仓库中）找到。
