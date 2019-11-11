@@ -3,15 +3,15 @@
   <h1 align="center">Visual Studio Code Documentation</h1>
 </p>
 
-You've found the Visual Studio Code documentation GitHub repository, which contains the content for the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
+您已经找到了Visual Studio Code文档GitHub仓库, 其中包含了[Visual Studio Code文档](https://code.visualstudio.com/docs)的内容。
 
-Topics submitted here will be published to the [Visual Studio Code](https://code.visualstudio.com) portal.
+此处提交的主题将发布到[Visual Studio Code](https://code.visualstudio.com)门户。
 
-If you are looking for the VS Code product GitHub repository, you can find it [here](https://github.com/Microsoft/vscode).
+如果你正在寻找VS Code产品的GitHub仓库，你可以在[here](https://github.com/Microsoft/vscode)找到它。
 
 ## Index
 
-1. [About Visual Studio Code](#visual-studio-code)
+1. [关于 Visual Studio Code](#visual-studio-code)
 2. [Feedback](#feedback)
 3. [Documentation Issues](#documentation-issues)
 4. [Contributing to the documentation](#contributing)
@@ -19,13 +19,13 @@ If you are looking for the VS Code product GitHub repository, you can find it [h
 
 ## Visual Studio Code
 
-[VS Code](https://code.visualstudio.com/) is a lightweight source code editor and powerful development environment for building and debugging modern web and cloud applications. It is free and available on your favorite platform - Linux, macOS, and Windows.
+[VS Code](https://code.visualstudio.com/) 是一个轻量级的源代码编辑器和强大的开发环境，用于构建和调试现代web和云应用。 它是免费的，可以在你喜欢的平台上使用——Linux、macOS和Windows。
 
-If you landed here looking for other information about VS Code, head over to [our website](https://code.visualstudio.com) for additional information.
+如果你寻找关于VS代码的其他信息，请前往 [our website](https://code.visualstudio.com) 获取更多信息。
 
 ## Feedback
 
-If you want to give documentation feedback, please use the feedback control located at the bottom of each documentation page.
+如果您希望提供文档反馈，请使用位于每个文档页面底部的反馈控件。
 
 ## Documentation Issues
 
@@ -39,10 +39,10 @@ To contribute new topics/information or make changes to existing documentation, 
 
 ### Workflow
 
-The two suggested workflows are:
+建议的两个工作流程是:
 
-- For small changes, use the "Edit" button on each page to edit the Markdown file directly on GitHub.
-- If you plan to make significant changes or preview the Markdown files in VS Code, [clone](#cloning) the repo to [edit and preview](https://code.visualstudio.com/docs/languages/markdown) the files directly in VS Code.
+- 对于小的更改，可以在每个页面上使用 "Edit" 按钮直接在GitHub上编辑Markdown文件。
+- 如果您想在VS Code中进行重大更改或预览Markdown文件，[克隆](#cloning) 仓库到 VS Code 中直接 [编辑与预览](https://code.visualstudio.com/docs/languages/markdown) 文件。
 
 ![Markdown Preview Button](images/MDPreviewButton.png)
 
