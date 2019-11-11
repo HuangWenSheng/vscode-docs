@@ -46,29 +46,29 @@ The two suggested workflows are:
 
 ![Markdown Preview Button](images/MDPreviewButton.png)
 
-### Cloning
+### 克隆
 
-1. Install [Git LFS](https://git-lfs.github.com/).
-2. Run `git lfs install` to setup global git hooks. You only need to run this once per machine.
-3. `git clone git@github.com:Microsoft/vscode-docs.git`.
-4. Now you can `git add` binary files and commit them. They'll be tracked in LFS.
+1. 安装 [Git LFS](https://git-lfs.github.com/).
+2. 运行 `git lfs install` 指令安装全局的 git hooks. 每台机器只需要运行一次。
+3. 执行 `git clone git@github.com:Microsoft/vscode-docs.git`。
+4. 现在你可以 `git add` 二进制文件以及提交。 他们将在LFS中被追踪。
 
-#### Cloning without binary files
+#### 不包含二进制文件的克隆
 
-You might want to clone the repo without the 1.6GB images. Here are the steps:
+您可能希望不使用1.6GB映像的情况下克隆。按如下操作:
 
-1. Install [Git LFS](https://git-lfs.github.com/).
-2. Run `git lfs install` to setup global git hooks. You only need to run this once per machine.
-3. Clone the repo without binary files.
+1. 安装 [Git LFS](https://git-lfs.github.com/).
+2. 运行 `git lfs install` 指令安装全局的 git hooks. 每台机器只需要运行一次。
+3. 克隆仓库而不包含二进制文件。
     - macOS / Linux: `GIT_LFS_SKIP_SMUDGE=1 git clone git@github.com:Microsoft/vscode-docs.git`.
-    - Windows: `$env:GIT_LFS_SKIP_SMUDGE="1"; git clone git@github.com:Microsoft/vscode-docs.git`.
-4. Now you can selectively checkout some binary files to work with. For example:
+    - Windows: `GIT_LFS_SKIP_SMUDGE="1"; git clone git@github.com:Microsoft/vscode-docs.git`.
+4. 现在您可以有选择地检出一些要使用的二进制文件。例如:
     - `git lfs pull -I "docs/nodejs"`
     - `git lfs pull -I "release-notes/images/1_3*/*"`
-    - You can do `git lfs pull -I <PATTERN>`, as long as `<PATTERN>` is comma-separated glob strings. For more patterns, see [Git LFS: Include and Exclude](https://github.com/git-lfs/git-lfs/blob/master/docs/man/git-lfs-fetch.1.ronn#include-and-exclude).
+    - 你可以执行 `git lfs pull -I <PATTERN>` 指令 , 只要 `<PATTERN>` 是 comma-separated glob strings. 更多的模式详见 [Git LFS: Include and Exclude](https://github.com/git-lfs/git-lfs/blob/master/docs/man/git-lfs-fetch.1.ronn#include-and-exclude).
 
-The history of this repo before we adopted LFS can be found at [microsoft/vscode-docs-archive](https://github.com/Microsoft/vscode-docs-archive).
+我们采用LFS之前仓库的历史可以在 [microsoft/vscode-docs-archive](https://github.com/Microsoft/vscode-docs-archive) 这里找到。
 
 ## Publishing
 
-Steps for how to publish documentation changes can be found [here](https://github.com/Microsoft/vscode-website#publishing-a-documentation-change) in the (private) repository of the VS Code website.
+如何发布文档更改的方法可以在 [here](https://github.com/Microsoft/vscode-website#publishing-a-documentation-change) （ VS Code网站的（私有）仓库中）找到。
