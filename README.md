@@ -23,21 +23,21 @@
 
 如果你寻找关于VS代码的其他信息，请前往 [our website](https://code.visualstudio.com) 获取更多信息。
 
-## Feedback
+## 反馈
 
 如果您希望提供文档反馈，请使用位于每个文档页面底部的反馈控件。
 
 ## Documentation Issues
 
-To enter documentation bugs, please create a [new GitHub issue](https://github.com/Microsoft/vscode-docs/issues). Please check if there is an existing issue first.
+要输入文档错误，请创建一个[new GitHub issue](https://github.com/Microsoft/vscode-docs/issues)。
 
-If you think the issue is with the VS Code product itself, please enter issues in the VS Code product repo [here](https://github.com/Microsoft/vscode/issues).
+如果您认为问题出在 VS Code 产品本身，请在 VS Code 产品仓库中输入问题 [这里](https://github.com/Microsoft/vscode/issues) 。
 
-## Contributing
+## 贡献
 
-To contribute new topics/information or make changes to existing documentation, please read the [Contributing Guideline](./CONTRIBUTING.md#contributing).
+若要贡献新的 主题/信息 或对现有文档进行更改，请阅读[Contributing Guideline](./CONTRIBUTING.md#contributing)
 
-### Workflow
+### 流程
 
 建议的两个工作流程是:
 
