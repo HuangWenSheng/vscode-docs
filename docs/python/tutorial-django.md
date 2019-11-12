@@ -653,26 +653,26 @@ class LogMessage(models.Model):
         return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 ```
 
-A model class can include methods that return values computed from other class properties. Models typically include a `__str__` method that returns a string representation of the instance.
+模型类可以包含从其他类属性计算的返回值的方法。模型通常包含 `__str__` 方法，该方法返回实例的字符串表示形式。
 
-### Migrate the database
+### 迁移数据库
 
-Because you changed your data models by editing `models.py`, you need to update the database itself. In VS Code, open a Terminal with your virtual environment activated (use the **Terminal: Create New Integrated Terminal** command, `kb(workbench.action.terminal.new)`)), navigate to the project folder, and run the following commands:
+因为通过编辑 `models.py` 更改了数据模型，所以需要更新数据库本身。在VS Code中，打开一个终端，激活您的虚拟环境(使用 **Terminal: Create New Integrated Terminal** 命令)，导航到项目文件夹，运行以下命令:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-Take a look in the `migrations` folder to see the scripts that `makemigrations` generates. You can also look at the database itself to see that the schema is updated.
+查看 `migrations` 文件夹，查看 `makemigrations` 生成的脚本。您还可以查看数据库本身，以查看模式是否更新。
 
-If you see errors when running the commands, make sure you're not using a debugging terminal that's left over from previous steps, as they may not have the virtual environment activated.
+如果在运行命令时看到错误，请确保没有使用前面步骤遗留下来的调试终端，因为它们可能没有激活虚拟环境。
 
-### Use the database through the models
+### 通过模型使用数据库
 
-With your models in place and the database migrated, you can store and retrieve data using only your models. In this section, you add a form page to the app through which you can log a message. You then modify the home page to display those messages. Because you modify many code files here, be mindful of the details.
+有了模型并迁移了数据库之后，您只需要使用模型存储和检索数据。在本节中，您将向 app 添加一个表单页面，通过它可以记录消息。然后修改主页以显示这些消息。因为您在这里修改了许多代码文件，所以要注意细节。
 
-1. In the `hello` folder (where you have `views.py`), create a new file named `forms.py` with the following code, which defines a Django form that contains field drawn from the data model, `LogMessage`:
+1. 在 `hello` 文件夹中(其中有 `views.py` )，用以下代码创建一个名为 `forms.py` 的新文件，它定义了一个 Django 表单，其中包含从数据模型 `LogMessage` 中提取的字段:
 
     ```python
     from django import forms
@@ -684,7 +684,7 @@ With your models in place and the database migrated, you can store and retrieve 
             fields = ("message",)   # NOTE: the trailing comma is required
     ```
 
-1. In the `templates/hello` folder, create a new template named `log_message.html` with the following contents, which assumes that the template is given a variable named `form` to define the body of the form. It then adds a submit button with the label "Log".
+1. 在 `templates/hello` 文件夹中，使用以下内容创建一个名为 `log_message.html` 的新模板，该模板假设有一个名为 `form` 的变量来定义表单主体。然后添加一个带有标签 "Log" 的提交按钮。
 
     ```html
     {% extends "hello/layout.html" %}
@@ -700,9 +700,9 @@ With your models in place and the database migrated, you can store and retrieve 
     {% endblock %}
     ```
 
-    > **Note**: Django's `{% csrf_token %}` tag provides protection from cross-site request forgeries. See [Cross Site Request Forgery protection](https://docs.djangoproject.com/en/2.1/ref/csrf/) in the Django documentation for details.
+    > **注意**: Django的 `{% csrf_token %}` 标签提供了对跨站点请求伪造的保护。有关详细信息，请参阅Django文档中的 [Cross Site Request Forgery protection](https://docs.djangoproject.com/en/2.1/ref/csrf/) 。
 
-1. In the app's `static/hello/site.css` file, add a rule to make the input form wider:
+1. 在应用程序的 `static/hello/site.css` 文件中，添加一条规则使输入表单更宽:
 
     ```css
     input[name=message] {
@@ -710,13 +710,13 @@ With your models in place and the database migrated, you can store and retrieve 
     }
     ```
 
-1. In the app's `urls.py` file, add a route for the new page:
+1. 在应用程序的 `urls.py` 文件中，为新页面添加一条路径:
 
     ```python
     path("log/", views.log_message, name="log"),
     ```
 
-1. In `views.py`, define the view named `log_message` (as referred to by the URL route). This view handles both HTTP GET and POST cases. In the GET case (the `else:` section), it just displays the form that you defined in the previous steps. In the POST case, it retrieves the data from the form into a data object (`message`), sets the timestamp, then saves that object at which point it's written to the database:
+1. 在 `views.py` 中，定义名为 `log_message` 的视图(通过URL路由引用)。这个视图同时处理HTTP GET和POST两种情况。在GET案例( `else:` 部分)中，它只显示您在前面步骤中定义的表单。在POST的情况下，它从表单中检索数据到一个数据对象( `message` )中，设置时间戳，然后保存该对象写入数据库的时间:
 
     ```python
     # Add these to existing imports at the top of the file:
@@ -738,22 +738,22 @@ With your models in place and the database migrated, you can store and retrieve 
             return render(request, "hello/log_message.html", {"form": form})
     ```
 
-1. One more step before you're ready to try everything out! In `templates/hello/layout.html`, add a link in the "navbar" div for the message logging page:
+1. 在你准备好尝试一切之前，再多走一步! 在 `templates/hello/layout.html` 中，在 "navbar" div 中为消息日志页面添加一个链接:
 
     ```html
     <!-- Insert below the link to Home -->
     <a href="{% url 'log' %}" class="navbar-item">Log Message</a>
     ```
 
-1. Run the app and open a browser to the home page. Select the **Log Message** link on the nav bar, which should display the message logging page:
+1. 运行该应用程序并打开主页的浏览器。选择导航栏上的 **Log Message** 链接，将显示消息日志页面:
 
     ![Django tutorial: the message logging page added to the app](images/django-tutorial/message-logging-page.png)
 
-1. Enter a message, select **Log**, and you should be taken back to the home page. The home page doesn't yet show any of the logged messages yet (which you remedy in a moment). Feel free to log a few more messages as well. If you want, peek in the database using a tool like SQLite Browser to see that records have been created. Open the database as read-only, or otherwise remember to close the database before using the app, otherwise the app will fail because the database is locked.
+1. 输入一条消息，选择 **Log** ，您应该被带回到主页。主页还没有显示任何已记录的消息(稍后您将对此进行纠正)。您也可以随意记录更多的消息。如果需要，可以使用SQLite浏览器之类的工具在数据库中查看是否创建了记录。以只读方式打开数据库，或者在使用应用程序之前关闭数据库，否则应用程序将失败，因为数据库已被锁定。
 
-1. Stop the app when you're done.
+1. 完成后停止应用程序。
 
-1. Now modify the home page to display the logged messages. Start by replacing the contents of app's `templates/hello/home.html` file with the markup below. This template expects a context variable named `message_list`. If it receives one (checked with the `{% if message_list %}` tag), it then iterates over that list (the `{% for message in message_list %}` tag) to generate table rows for each message. Otherwise the page indicates that no messages have yet been logged.
+1. 现在修改主页以显示记录的消息。首先用下面的标记替换 app 的 `templates/hello/home.html` 文件的内容。该模板需要一个名为 `message_list` 的上下文变量。如果它收到一条消息(通过 `{% if message_list %}` 标记检查)，那么它将遍历该列表( `{% for message in message_list %}` 标记)，为每个消息生成表行。否则，该页面表明还没有记录任何消息。
 
     ```html
     {% extends "hello/layout.html" %}
@@ -790,7 +790,7 @@ With your models in place and the database migrated, you can store and retrieve 
     {% endblock %}
     ```
 
-1. In `static/hello/site.css`, add a rule to format the table a little:
+1. 在 `static/hello/site.css` 中，添加一个规则来稍微格式化表格:
 
     ```css
     .message_list th,td {
@@ -799,13 +799,13 @@ With your models in place and the database migrated, you can store and retrieve 
     }
     ```
 
-1. In `views.py`, import Django's generic `ListView` class, which we'll use to implement the home page:
+1. 在 `views.py` 中，导入 Django 的通用 `ListView` 类，我们将使用它来实现主页:
 
     ```python
     from django.views.generic import ListView
     ```
 
-1. Also in `views.py`, replace the `home` function with a *class* named `HomeListView`, derived from `ListView`, which ties itself to the `LogMessage` model and implements a function `get_context_data` to generate the context for the template.
+1. 同样在 `views.py` 中，将 `home` 函数替换为一个名为 `HomeListView` 的 *类* ,  `HomeListView` 派生于 `ListView` ，它将自己与 `LogMessage` 模型绑定，并实现一个 `get_context_data` 函数来生成模板的上下文。
 
     ```python
     # Remove the old home function if you want; it's no longer used
@@ -819,13 +819,13 @@ With your models in place and the database migrated, you can store and retrieve 
             return context
     ```
 
-1. In the app's `urls.py`, import the data model:
+1. 在app的 `urls.py` 中。导入数据模型:
 
     ```python
     from hello.models import LogMessage
     ```
 
-1. Also in `urls.py`, make a variable for the new view, which retrieves the five most recent `LogMessage` objects in descending order (meaning that it queries the database), and then provides a name for the data in the template context (`message_list`), and identifies the template to use:
+1. 同样在 `urls.py` 中，为新视图创建一个变量，该变量按降序检索最近的5个 `LogMessage` 对象(即查询数据库)，然后为模板上下文中的数据提供一个名称( `message_list` )，并标识要使用的模板:
 
     ```python
     home_list_view = views.HomeListView.as_view(
@@ -835,104 +835,104 @@ With your models in place and the database migrated, you can store and retrieve 
     )
     ```
 
-1. In `urls.py`, modify the path to the home page to use the `home_list_view` variable:
+1. 在 `urls.py`，修改主页的路径，使用 `home_list_view` 变量:
 
     ```python
         # Replace the existing path for ""
         path("", home_list_view, name="home"),
     ```
 
-1. Start the app and open a browser to the home page, which should now display messages:
+1. 启动应用程序，打开主页的浏览器，现在应该会显示以下信息:
 
     ![Django tutorial: app home page displaying message from the database](images/django-tutorial/app-with-message-list.png)
 
-1. Stop the app when you're done.
+1. 完成后停止应用程序。
 
-## Use the debugger with page templates
+## 使用带有页面模板的调试器
 
-As shown in the previous section, page templates can contain procedural directives like `{% for message in message_list %}` and `{% if message_list %}`, rather than only passive, declarative elements like `{% url %}` and `{% block %}`. As a result, you can have programming errors inside templates as with any other procedural code.
+如前一节所示，页面模板可以包含 `{% for message in message_list %}` 和 `{% if message_list %}` 这样的程序性指令，而不仅仅是 `{% url %}` 和 `{% block %}` 这样的被动的声明性元素。因此，与任何其他过程代码一样，模板内部也可能出现编程错误。
 
-Fortunately, the Python Extension for VS Code provides template debugging when you have `"django": true` in the debugging configuration (as you do already). The following steps demonstrate this capability:
+幸运的是，当您在调试配置中有 `"django": true` 时 ( 您已经这样做了 )，VS Code 的Python 扩展提供了模板调试。以下步骤演示了这种能力:
 
-1. In `templates/hello/home.html`, set breakpoints on both the `{% if message_list %}` and `{% for message in message_list %}` lines, as indicated by the yellow arrows in the image below:
+1. 在 `templates/hello/home.html` 中，在 `{% if message_list %}` 和 `{% for message in message_list %}` 线上设置断点，如下图中黄色箭头所示:
 
     ![Django tutorial: breakpoints set in a Django page template](images/django-tutorial/template-breakpoints.png)
 
-1. Run the app in the debugger and open a browser to the home page. (If you're already running the debugger, you don't have to restart the app after setting breakpoints; just refresh the page.) Observe that VS Code breaks into the debugger in the template on the `{% if %}` statement and shows all the context variables in the **Variables** pane:
+1. 在调试器中运行该应用程序，并打开主页的浏览器。(如果你已经在运行调试器，你不需要在设置断点后重新启动应用程序;请刷新页面。)注意，VS代码在 `{% if %}` 语句的模板中进入调试器，并在 **Variables** 窗格中显示所有上下文变量:
 
     ![Django tutorial: debugger stopped at breakpoints in the page template](images/django-tutorial/template-debugger.png)
 
-1. Use the Step Over (`kb(workbench.action.debug.stepOver)`) command to step through the template code. Observe that the debugger steps over all declarative statements and pauses at any procedural code. For example, stepping through the `{% for message in message_list %}` loops lets you examine each value in `message` and lets you step to lines like `<td>\{{ message.log_date | date:'d M Y' }}</td>`.
+1. 使用 Step Over 命令逐步检查模板代码。观察调试器遍历所有声明性语句并暂停任何过程性代码。例如，遍历 `{% for message in message_list %}` 循环可以检查 `message` 中的每个值，还可以遍历像 `<td>\{{ message.log_date | date:'d M Y' }}</td>` 这样的行。
 
-1. You can also work with variables in the **Debug Console** panel. (Django filters like `date`, however, are not presently available in the console.)
+1. 您还可以使用 **Debug Console** 面板中的变量。(不过，像 `date` 这样的 Django 过滤器目前还不能在控制台中使用。)
 
-1. When you're ready, select Continue (`kb(workbench.action.debug.continue)`) to finish running the app and view the rendered page in the browser. Stop the debugger when you're done.
+1. 当你准备好了，选择继续完成运行应用程序，并在浏览器中查看呈现的页面。完成后停止调试器。
 
-## Optional activities
+## 可选活动
 
-The following sections describe additional steps that you might find helpful in your work with Python and Visual Studio Code.
+以下部分描述了您在使用 Python 和 Visual Studio Code 时可能会发现有帮助的其他步骤。
 
-### Create a requirements.txt file for the environment
+### 为环境创建一个 requirements.txt 文件
 
-When you share your app code through source control or some other means, it doesn't make sense to copy all the files in a virtual environment because recipients can always recreate that environment themselves.
+当您通过源代码控制或其他方式共享应用程序代码时，复制虚拟环境中的所有文件是没有意义的，因为收件人总是可以自己重新创建该环境。
 
-Accordingly, developers typically omit the virtual environment folder from source control and instead describe the app's dependencies using a `requirements.txt` file.
+因此，开发人员通常会忽略源代码控制中的虚拟环境文件夹，而是使用 `requirements.txt` 文件描述应用程序的依赖关系。
 
-Although you can create the file by hand, you can also use the `pip freeze` command to generate the file based on the exact libraries installed in the activated environment:
+虽然你可以手动创建文件，但你也可以使用 `pip freeze` 命令，根据安装在激活环境中的库生成文件:
 
-1. With your chosen environment selected using the **Python: Select Interpreter** command, run the **Terminal: Create New Integrated Terminal** command (`kb(workbench.action.terminal.new)`)) to open a terminal with that environment activated.
+1. 使用 **Python: Select Interpreter** 命令选择您所选择的环境后，运行 **Terminal: Create New Integrated Terminal** 命令以打开激活该环境的终端。
 
-1. In the terminal, run `pip freeze > requirements.txt` to create the `requirements.txt` file in your project folder.
+1. 在终端中，运行 `pip freeze > requirements.txt` 以在项目文件夹中创建 `requirements.txt` 文件。
 
-Anyone (or any build server) that receives a copy of the project needs only to run the `pip install -r requirements.txt` command to reinstall the packages on which the app depends within the active environment.
+任何接收到项目副本的人(或任何构建服务器)只需要运行 `pip install -r requirements.txt` 命令就可以在活动环境中重新安装应用程序所依赖的包。
 
-> **Note**: `pip freeze` lists all the Python packages you have installed in the current environment, including packages you aren't currently using. The command also lists packages with exact version numbers, which you might want to convert to ranges for more flexibility in the future. For more information, see [Requirements files](https://pip.readthedocs.io/1.1/requirements.html) in the pip command documentation.
+> **注意**: `pip freeze` 列出了您在当前环境中安装的所有Python包，包括您当前没有使用的包。该命令还列出了具有确切版本号的包，您可能希望将这些版本号转换为范围，以便将来获得更大的灵活性。有关更多信息，请参见 pip 命令文档中的[Requirements files](https://pip.readthedocs.io/1.1/requirements.html)。
 
-### Create a superuser and enable the administrative interface
+### 创建超级用户并启用管理界面
 
-By default, Django provides an administrative interface for a web app that's protected by authentication. The interface is implemented through the build-in `django.contrib.admin` app, which is included by default in the project's `INSTALLED_APPS` list (`settings.py`), and authentication is handled with the built-in `django.contrib.auth` app, which is also in `INSTALLED_APPS` by default.
+缺省情况下，Django 为受身份验证保护的 web 应用程序提供管理界面。该接口通过内置的 `django.contrib.admin` 应用程序实现， `django.contrib.admin` 应用程序默认包含在项目的 `INSTALLED_APPS` 列表( `settings.py` )中，认证使用内置的 `django.contrib.auth` 应用程序处理， `django.contrib.auth` 应用程序默认也在 `INSTALLED_APPS` 中。
 
-Perform the following steps to enable the administrative interface:
+执行以下步骤以启用管理界面:
 
-1. Create a superuser account in the app by opening a Terminal in VS Code for your virtual environment, then running the command `python manage.py createsuperuser --username=<username> --email=<email>`, replacing `<username>` and `<email>`, of course, with your personal information. When you run the command, Django prompts you to enter and confirm your password.
+1. 在 app 中为你的虚拟环境打开一个 VS Code 的终端，创建一个超级用户账号，然后运行命令 `python manage.py createsuperuser --username=<username> --email=<email>` ，当然是用你的个人信息代替 `<username>` 和 `<email>` 。当您运行该命令时，Django会提示您输入并确认您的密码。
 
-    Be sure to remember your username and password combination. These are the credentials you use to authenticate with the app.
+    请务必记住您的用户名和密码组合。这些是您用来验证应用程序的凭据。
 
-1. Add the following URL route in the project-level `urls.py` (`web_project/urls.py` in this tutorial) to point to the built-in administrative interface:
+1. 在项目级 `urls.py` (本教程中的 `web_project/urls.py` )中添加以下URL路由，以指向内置的管理界面:
 
     ```python
     # This path is included by default when creating the app
      path("admin/", admin.site.urls),
     ```
 
-1. Run the server, the open a browser to the app's /admin page (such as `http://127.0.0.1:8000/admin` when using the development server).
+1. 运行服务器，打开浏览器到应用程序的 /admin 页面(如使用开发服务器时的 `http://127.0.0.1:8000/admin` )。
 
-1. A login page appears, courtesy of `django.contrib.auth`. Enter your superuser credentials.
+1. 出现一个登录页面，由 `django.contrib.auth` 提供。输入您的超级用户凭证。
 
     ![Django tutorial: default Django login prompt](images/django-tutorial/login-prompt.png)
 
-1. Once you're authenticated, you see the default administration page, through which you can manage users and groups:
+1. 一旦你通过认证，你可以看到默认的管理页面，通过这个页面你可以管理用户和组:
 
     ![Django tutorial: the default Django administrative interface](images/django-tutorial/default-admin-interface.png)
 
-You can customize the administrative interface as much as you like. For example, you could provide capabilities to edit and remove entries in the database. For more information on making customizations, refer to the [Django admin site documentation](https://docs.djangoproject.com/en/2.1/ref/contrib/admin/).
+您可以根据需要定制管理接口。例如，您可以提供编辑和删除数据库中的条目的功能。有关定制的更多信息，请参考 [Django admin site documentation](https://docs.djangoproject.com/en/2.1/ref/contrib/admin/).
 
-## Next steps
+## 下一个步骤
 
-Congratulations on completing this walkthrough of working with Django in Visual Studio Code!
+祝贺您完成了在Visual Studio Code中使用Django的演练!
 
-The completed code project from this tutorial can be found on GitHub: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
+本教程中的完整代码项目可以在GitHub上找到: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
 
-In this tutorial, we've only scratched the surface of everything Django can do. Be sure to visit the [Django documentation](https://docs.djangoproject.com/en/2.1/) and the [official Django tutorial](https://docs.djangoproject.com/en/2.1/intro/tutorial01/) for many more details on views, templates, data models, URL routing, the administrative interface, using other kinds of databases, deployment to production, and more.
+在本教程中，我们只讨论了Django所能做的所有事情的皮毛。请务必访问 [Django documentation](https://docs.djangoproject.com/en/2.1/) 和 [official Django tutorial](https://docs.djangoproject.com/en/2.1/intro/tutorial01/)，以获得关于视图、模板、数据模型、URL路由、管理接口、使用其他类型的数据库、部署到生产环境等等的更多详细信息。
 
-To try your app on a production website, check out the tutorial [Deploy Python apps to Azure App Service using Docker Containers](https://docs.microsoft.com/azure/python/tutorial-deploy-containers-01). Azure also offers a standard container, [App Service on Linux](https://docs.microsoft.com/azure/python/tutorial-deploy-app-service-on-linux-01), to which you deploy web apps from within VS Code.
+要在产品网站上试用你的应用程序，请查看教程 [Deploy Python apps to Azure App Service using Docker Containers](https://docs.microsoft.com/azure/python/tutorial-deploy-containers-01)。Azure还提供了一个标准的容器，[App Service on Linux](https://docs.microsoft.com/azure/python/tutorial-deploy-app-service-on-linux-01)，您可以在 VS Code 中部署 web 应用程序。
 
-You may also want to review the following articles in the VS Code docs that are relevant to Python:
+你也可以在 VS Code 文档中查看以下与 Python 相关的文章:
 
-- [Editing Python code](/docs/python/editing.md)
+- [编辑Python代码](/docs/python/editing.md)
 - [Linting](/docs/python/linting.md)
-- [Managing Python environments](/docs/python/environments.md)
-- [Debugging Python](/docs/python/debugging.md)
-- [Testing](/docs/python/testing.md)
+- [管理Python环境](/docs/python/environments.md)
+- [Python调试](/docs/python/debugging.md)
+- [测试](/docs/python/testing.md)
 
-If you encountered any problems in the course of this tutorial, feel free to file an issue in the [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues).
+如果您在本教程中遇到任何问题，请随时在 [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues) 中提交问题
