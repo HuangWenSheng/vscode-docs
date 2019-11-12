@@ -15,10 +15,10 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 1. Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
 
 1. 安装Python 3的一个版本(本教程就是为这个版本编写的)。 包括:
-   - (All operating systems) A download from [python.org](https://www.python.org/downloads/); typically use the **Download Python 3.7.0** button that appears first on the page (or whatever is the latest version).
-   - (Linux) The built-in Python 3 installation works well, but to install other Python packages you must run `sudo apt install python3-pip` in the terminal.
-   - (macOS) An installation through [Homebrew](https://brew.sh/) on macOS using `brew install python3` (the system install of Python on macOS is not supported).
-   - (All operating systems) A download from [Anaconda](https://www.anaconda.com/download/) (for data science purposes).
+   - (所有操作系统)下载自 [python.org](https://www.python.org/downloads/) ; 通常使用最先出现在页面上的 **Download Python 3.7.0** 按钮(或任何最新版本)。
+   - (Linux)内置的Python 3安装工作得很好，但是要安装其他 Python 包，您必须在终端中运行 `sudo apt install python3-pip` 。
+   - (macOS)通过 [Homebrew](https://brew.sh/) 在macOS上使用 `brew install python3` 进行安装(不支持在macOS上安装Python系统)。
+   - 下载自 [Anaconda](https://www.anaconda.com/download/) (用于数据科学目的)。
 
 1. 在Windows上,确保Python解释器的路径包含在PATH环境变量中。您可以通过在命令提示符中运行“path”来检查路径。如果Python解释器的文件夹不包括在内, 打开Windows控制面板, 搜索"environment", 选择 **Edit environment variables for your account**, 然后编辑 **Path** 变量包含此文件夹。
 
@@ -39,7 +39,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
     python -m venv env
     ```
 
-    > **Note**: Use a stock Python installation when running the above commands. If you use `python.exe` from an Anaconda installation, you see an error because the ensurepip module isn't available, and the environment is left in an unfinished state.
+    > **注意**:在运行上述命令时使用一个普通的Python安装。如果您使用来自Anaconda安装的 `python.exe`，您将看到一个错误，因为ensurepip模块不可用，并且环境处于未完成状态。
 
 1. 在此项目目录中执行 `code .` 命令启动 VS Code , 或者运行 VS Code 后，点 **File** 菜单，再选 **Open Folder** 菜单打开项目目录.
 
@@ -53,7 +53,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 1. 打开"命令面板" 输入 **Terminal: Create New Integrated Terminal** 选择执行后，会打开一个自动激活虚拟环境的终端。
 
-    > **Note**: On Windows, if your default terminal type is PowerShell, you may see an error that it cannot run activate.ps1 because running scripts is disabled on the system. The error provides a link for information on how to allow scripts. Otherwise, use **Terminal: Select Default Shell** to set "Command Prompt" or "Git Bash" as your default instead.
+    > **注意** : 在Windows上，如果您的默认终端类型是 PowerShell，您可能会看到一个错误，它不能运行 activate.ps1 ，因为系统上禁用了运行脚本。该错误提供了有关如何允许脚本的信息的链接。否则，使用 **Terminal: Select Default Shell** 将 "Command Prompt" 或 "Git Bash" 设置为默认值。
 
 1. 所选择的虚拟环境名会显示在 VS Code 状态条的左边, 有 "(venv)" 的提示，即表示你正处在虚拟环境下:
 
