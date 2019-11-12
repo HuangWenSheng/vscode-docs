@@ -389,33 +389,33 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 静态文件是web应用程序按原样返回的内容片段，用于某些请求，如CSS文件。服务静态文件需要 `settings.py` 中的 `INSTALLED_APPS` 列表包含 `django.contrib.staticfiles`，
 
-Serving static files in Django is something of an art, especially when deploying to production. What's shown here is a simple approach that works with the Django development server and also a production server like gunicorn. A full treatment of static files, however, is beyond the scope of this tutorial, so for more information, see [Managing static files](https://docs.djangoproject.com/en/2.1/howto/static-files/) in the Django documentation.
+在Django中提供静态文件是一门艺术，尤其是在部署到生产环境中时。这里展示的是一种简单的方法，它既可以用于Django开发服务器，也可以用于像gunicorn这样的生产服务器。 但是，对静态文件的完整处理超出了本教程的范围，因此要了解更多信息，请参阅Django文档中的[管理静态文件](https://docs.djangoproject.com/en/2.1/howto/static-files/)。
 
-In production, you also need to set `DEBUG=False` in `settings.py`, which necessitates some additional work when using containers. For details, see [Issue 13](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13).
+在生产中，您还需要在 `settings.py` 中设置 `DEBUG=False`，这需要在使用容器时进行一些额外的工作。 详情请参阅 [Issue 13](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13)
 
-### Ready the app for static files
+### 为静态文件准备 app
 
-1. In the project's `web_project/urls.py`, add the following `import` statement:
+1. 在项目的 `web_project/urls.py` 文件中添加下面的 `import` 语句:
 
     ```python
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     ```
 
-1. In that same file, add the following line at the end, which includes standard static file URLs to the list that the project recognizes:
+1. 在该文件中，在最后添加以下行，其中包括项目可识别的列表中的标准静态文件 url：
 
     ```python
     urlpatterns += staticfiles_urlpatterns()
     ```
 
-### Refer to static files in a template
+### 引用模板中的静态文件
 
-1. In the `hello` folder, create a folder named `static`.
+1. 在 `hello` 文件夹中，创建一个名为 `static` 的文件夹。
 
-1. Within the `static` folder, create a subfolder named `hello`, matching the app name.
+1. 在 `static` 文件夹中，创建一个名为 `hello` 的子文件夹，与应用程序名称匹配。
 
-    The reason for this extra subfolder is that when you deploy the Django project to a production server, you collect all the static files into a single folder that's then served by a dedicated static file server. The `static/hello` subfolder ensures that when the app's static files are collected, they're in an app-specific subfolder and won't collide with file from other apps in the same project.
+    这个额外的子文件夹的原因是，当您将Django项目部署到生产服务器时，您将所有静态文件收集到一个单独的文件夹中，然后由专用的静态文件服务器提供服务。 `static/hello` 子文件夹确保在收集应用程序的静态文件时，它们位于特定于应用程序的子文件夹中，不会与同一项目中其他应用程序的文件发生冲突。
 
-1. In the `static/hello` folder, create a file named `site.css` with the following contents. After entering this code, also observe the syntax highlighting that VS Code provides for CSS files, including a color preview.
+1. 在 `static/hello` 文件夹中，创建一个名为 `site.css` 的文件，其内容如下。输入这段代码后，还可以观察 VS Code 为CSS文件提供的语法高亮显示，包括颜色预览。
 
     ```css
     .message {
@@ -424,50 +424,50 @@ In production, you also need to set `DEBUG=False` in `settings.py`, which necess
     }
     ```
 
-1. In `templates/hello/hello_there.html`, add the following lines after the `<title>` element. The `{% load static %}` tag is a custom Django template tag set, which allows you to use `{% static %}` to refer to a file like the stylesheet.
+1. 在 `templates/hello/hello_there.html` 中，在 `<title>` 元素之后添加以下行。 `{% load static %}` 标记是一个定制的 Django 模板标记集，它允许您使用 `{% static %}` 引用类似样式表的文件。
 
     ```html
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}" />
     ```
 
-1. Also in `templates/hello/hello_there.html`, replace the contents `<body>` element with the following markup that uses the `message` style instead of a `<strong>` tag:
+1. 同样在 `templates/hello/hello_there.html` , 用以下标记替换 `<body>` 元素使用 `message` 风格而不是 `<strong>` 标签:
 
     ```html
     <span class="message">Hello, there \{{ name }}!</span> It's \{{ date | date:'l, d F, Y' }} at \{{ date | time:'H:i:s' }}.
     ```
 
-1. Run the app, navigate to a /hello/name URL, and observe that the message renders in blue. Stop the app when you're done.
+1. 运行 app，导航到 /hello/name URL，观察消息呈现为蓝色。完成后停止应用程序。
 
-### Use the collectstatic command
+### 使用collectstatic命令
 
-For production deployments, you typically collect all the static files from your apps into a single folder using the `python manage.py collectstatic` command. You can then use a dedicated static file server to serve those files, which typically results in better overall performance. The following steps show how this collection is made, although you don't use the collection when running with the Django development server.
+对于生产部署，通常使用 `python manage.py collectstatic` 命令将应用程序中的所有静态文件收集到一个文件夹中。然后可以使用专用的静态文件服务器来提供这些文件，这通常会带来更好的总体性能。下面的步骤展示了如何生成这个集合，但是在使用Django开发服务器时不使用这个集合。
 
-1. In `web_project/settings.py`, add the following line that defines a location where static files are collected when you use the `collectstatic` command:
+1. 在 `web_project/settings.py` 中，添加以下行，它定义了使用 `collectstatic` 命令收集静态文件的位置:
 
     ```python
     STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
     ```
 
-1. In the Terminal, run the command `python manage.py collectstatic` and observe that `hello/site.css` is copied into the top level `static_collected` folder alongside `manage.py`.
+1. 在终端，运行命令 `python manage.py collectstatic`，观察到 `hello/site.css` 与 `manage.py` 一起被复制到顶层的 `static_collected` 文件夹中。
 
-1. In practice, run `collectstatic` any time you change static files and before deploying into production.
+1. 在实践中，只要您更改了静态文件，并在部署到生产环境之前，就可以运行 `collectstatic` 。
 
-## Create multiple templates that extend a base template
+## 创建扩展基本模板的多个模板
 
-Because most web apps have more than one page, and because those pages typically share many common elements, developers separate those common elements into a base page template that other page templates then extend. (This is also called template inheritance, meaning the extended pages inherit elements from the base page.)
+因为大多数web应用程序有多个页面，而且这些页面通常共享许多公共元素，所以开发人员将这些公共元素分离到一个基页面模板中，然后其他页面模板进行扩展。(这也称为模板继承，即扩展页从基页继承元素。)
 
-Also, because you'll likely create many pages that extend the same template, it's helpful to create a code snippet in VS Code with which you can quickly initialize new page templates. A snippet helps you avoid tedious and error-prone copy-paste operations.
+另外，因为您可能会创建许多扩展相同模板的页面，所以在 VS Code 中创建一个可以快速初始化新页面模板的代码片段是很有帮助的。代码段可以帮助您避免繁琐且容易出错的复制粘贴操作。
 
-The following sections walk through different parts of this process.
+下面几节将介绍这个过程的不同部分。
 
-### Create a base page template and styles
+### 创建基本页面模板和样式
 
-A base page template in Django contains all the shared parts of a set of pages, including references to CSS files, script files, and so forth. Base templates also define one or more **block** tags with content that extended templates are expected to override. A block tag is delineated by `{% block <name> %}` and `{% endblock %}` in both the base template and extended templates.
+Django中的基本页面模板包含一组页面的所有共享部分，包括对CSS文件、脚本文件等的引用。基本模板还定义了一个或多个 **block** 标记，其中包含扩展模板期望覆盖的内容。块标记由基本模板和扩展模板中的 `{% block %}` 和 `{% endblock %}` 来描述。
 
-The following steps demonstrate creating a base template.
+下面的步骤演示如何创建基本模板。
 
-1. In the `templates/hello` folder, create a file named `layout.html` with the contents below, which contains blocks named "title" and "content". As you can see, the markup defines a simple nav bar structure with links to Home, About, and Contact pages, which you create in a later section. Notice the use of Django's `{% url %}` tag to refer to other pages through the names of the corresponding URL patterns rather than by relative path.
+1. 在 `templates/hello` 文件夹中，创建一个名为 `layout.html` 的文件，其内容如下，其中包含了名为 "title" 和 "content" 的块。如您所见，标记定义了一个简单的导航条结构，其中包含指向 Home、About 和 Contact 页面的链接，您将在后面的部分中创建这些链接。请注意 Django 的 `{% url %}` 标记是通过相应URL模式的名称而不是通过相对路径来引用其他页面的。
 
     ```html
     <!DOCTYPE html>
@@ -498,7 +498,7 @@ The following steps demonstrate creating a base template.
     </html>
     ```
 
-1. Add the following styles to `static/hello/site.css` below the existing "message" style, and save the file. (This walkthrough doesn't attempt to demonstrate responsive design; these styles simply generate a reasonably interesting result.)
+1. 将以下样式添加到 `static/hello/site.css` 文件的 "message" 样式下，并保存文件。(本演练不试图演示响应式设计;这些样式简单地生成了一个相当有趣的结果。
 
     ```css
     .navbar {
@@ -530,17 +530,17 @@ The following steps demonstrate creating a base template.
     }
     ```
 
-You can run the app at this point, but because you haven't made use of the base template anywhere and haven't changed any code files, the result is the same as the previous step. Complete the remaining sections to see the final effect.
+此时您可以运行应用程序，但是因为您没有在任何地方使用基本模板，也没有更改任何代码文件，所以结果与前面的步骤相同。完成剩下的部分来查看最终的效果。
 
-### Create a code snippet
+### 创建一个代码片段
 
-Because the three pages you create in the next section extend `layout.html`, it saves time to create a **code snippet** to initialize a new template file with the appropriate reference to the base template. A code snippet provides a consistent piece of code from a single source, which avoids errors that can creep in when using copy-paste from existing code.
+因为在下一节中创建的三个页面将扩展为 `layout.html`，所以创建一个 **code snippet** 来初始化一个新模板文件将节省时间，该文件将包含对基本模板的适当引用。代码片段提供来自单个源的一致代码段，这避免了在使用现有代码的复制粘贴时可能出现的错误。
 
-1. In VS Code, select the **File** (Windows/Linux) or **Code** (macOS), menu, then select **Preferences** > **User snippets**.
+1. 在 VS Code, 选择 **File** (Windows/Linux) 或者 **Code** (macOS), 菜单, 然后选择 **Preferences** > **User snippets**.
 
-1. In the list that appears, select **html**. (The option may appear as "html.json" in the **Existing Snippets** section of the list if you've created snippets previously.)
+1. 在出现的列表中, 选择 **html** 。 (如果您以前创建过代码片段，该选项可能会在列表的 **Existing Snippets** 部分显示为 "html.json" 。)
 
-1. After VS code opens `html.json`, add the code below within the existing curly braces. (The explanatory comments, not shown here, describe details such as how the `$0` line indicates where VS Code places the cursor after inserting a snippet):
+1. 在 VS code 打开 `html.json` 之后，将下面的代码添加到现有的花括号中。(此处未显示的注释描述了一些细节，比如 `$0` 行如何指示 VS code 在插入代码段后将光标放在何处):
 
     ```json
     "Django Tutorial: template extending layout.html": {
@@ -558,38 +558,38 @@ Because the three pages you create in the next section extend `layout.html`, it 
     },
     ```
 
-1. Save the `html.json` file (`kb(workbench.action.files.save)`).
+1. 保存 html.json 文件
 
-1. Now, whenever you start typing the snippet's prefix, such as `djext`, VS Code provides the snippet as an autocomplete option, as shown in the next section. You can also use the **Insert Snippet** command to choose a snippet from a menu.
+1. 现在，无论何时开始键入代码片段的前缀，例如 `djext` ,  VS Code 都会将代码片段作为自动完成选项提供，如下一节所示。您还可以使用 **Insert Snippet** 命令从菜单中选择一个代码段。
 
-For more information on code snippets in general, refer to [Creating snippets](/docs/editor/userdefinedsnippets.md).
+有关代码段的更多信息，请参考 [Creating snippets](/docs/editor/userdefinedsnippets.md).
 
-### Use the code snippet to add pages
+### 使用代码片段添加页面
 
-With the code snippet in place, you can quickly create templates for the Home, About, and Contact pages.
+有了适当的代码片段，您就可以快速地为主页、About和Contact页面创建模板。
 
-1. In the `templates/hello` folder, create a new file named `home.html`, Then start typing `djext` to see the snippet appear as a completion:
+1. 在 `templates/hello` 文件夹中，创建一个名为 `home.html` 的新文件，然后开始键入 `djext` ，看到代码片段为完成:
 
     ![Django tutorial: autocompletion for the djextlayout code snippet](images/django-tutorial/autocomplete-for-code-snippet.png)
 
-    When you select the completion, the snippet's code appears with the cursor on the snippet's insertion point:
+    当您选择完成时，代码片段的代码将与光标一起出现在代码片段的插入点上:
 
     ![Django tutorial: insertion of the djextlayout code snippet](images/django-tutorial/code-snippet-inserted.png)
 
-1. At the insertion point in the "title" block, write `Home`, and in the "content" block, write `<p>Home page for the Visual Studio Code Django tutorial.</p>`, then save the file. These lines are the only unique parts of the extended page template:
+1. 在 "title" 块中的插入点写入 `Home` ，在 "content" 块中写入 `<p>Home page for the Visual Studio Code Django tutorial.</p>` ，然后保存文件。这些行是扩展页面模板唯一独特的部分:
 
-1. In the `templates/hello` folder, create `about.html`, use the snippet to insert the boilerplate markup, insert `About us` and `<p>About page for the Visual Studio Code Django tutorial.</p>` in the "title" and "content" blocks, respectively, then save the file.
+1. 在 `templates/hello` 文件夹中，创建 `about.html` ，使用代码段插入样板标记，分别在 "title" 和 "content" 块中插入 `About us` 和 `<p>About page for the Visual Studio Code Django tutorial.</p>` ，然后保存文件。
 
-1. Repeat the previous step to create `templates/hello/contact.html` using `Contact us` and `<p>Contact page for the Visual Studio Code Django tutorial.</p>`.
+1. 重复前面的步骤，使用 `Contact us` 和 `<p>Contact page for the Visual Studio Code Django tutorial.</p>` 创建 `templates/hello/contact.html`
 
-1. In the app's `urls.py`, add routes for the /about and /contact pages. Be mindful that the `name` argument to the `path` function defines the name with which you refer to the page in the `{% url %}` tags in the templates.
+1. 在 app 的 `urls.py` 中，添加 /about 和 /contact 页面的路由。注意， `path` 函数的 `name` 参数定义了在模板的 `{% url %}` 标记中引用页面的名称。
 
     ```python
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     ```
 
-1. In `views.py`, add functions for the /about and /contact routes that refer to their respective page templates. Also modify the `home` function to use the `home.html` template.
+1. 在 `views.py` 中，为引用各自页面模板的 /about 和 /contact 路由添加功能。还可以修改 `home` 函数以使用 `home.html` 模板。
 
     ```python
     # Replace the existing home function with the one below
@@ -603,41 +603,41 @@ With the code snippet in place, you can quickly create templates for the Home, A
         return render(request, "hello/contact.html")
     ```
 
-### Run the app
+### 运行 app
 
-With all the page templates in place, save `views.py`, run the app, and open a browser to the home page to see the results. Navigate between the pages to verify that the page templates are properly extending the base template.
+有了所有的页面模板，保存 `views.py` ，运行应用程序，并打开浏览器到主页查看结果。在页面之间导航，以验证页面模板是否正确地扩展了基本模板。
 
 ![Django tutorial: app rendering a common nav bar from the base template](images/django-tutorial/full-app.png)
 
-## Work with data, data models, and migrations
+## 处理数据、数据模型和迁移
 
-Many web apps work with information stored in a database, and Django makes it easy to represent the objects in that database using *models*. In Django, a model is a Python class, derived from `django.db.models.Model`, that represents a specific database object, typically a table. You place these classes in an app's `models.py` file.
+许多web应用程序使用存储在数据库中的信息，Django使用 *models* 方便地表示数据库中的对象。在 Django 中，模型是一个Python类，派生自 `django.db.models.Model` ，它表示一个特定的数据库对象，通常是一个表。你把这些类放在应用的 `models.py` 文件中。
 
-With Django, your work with your database almost exclusively through the models you define in code. Django's "migrations" then handle all the details of the underlying database automatically as you evolve the models over time. The general workflow is as follows:
+使用 Django，您几乎完全通过在代码中定义的模型来处理数据库。Django 的 "migrations" 会自动处理底层数据库的所有细节，随着时间的推移，您可以对模型进行改进。一般工作流程如下:
 
-1. Make changes to the models in your *models.py* file.
-1. Run `python manage.py makemigrations` to generate scripts in the `migrations` folder that migrate the database from its current state to the new state.
-1. Run `python manage.py migrate` to apply the scripts to the actual database.
+1. 更改 *models.py* 文件中的模型。
+1. 运行 `python manage.py makemigrations` 以在 `migrations` 文件夹中生成将数据库从当前状态迁移到新状态的脚本。
+1. 运行 `python manage.py migrate` 将脚本应用于实际的数据库。
 
-The migration scripts effectively record all the incremental changes you make to your data models over time. By applying the migrations, Django updates the database to match your models. Because each incremental change has its own script, Django can automatically migrate *any* previous version of a database (including a new database) to the current version. As a result, you need concern yourself only with your models in `models.py`, never with the underlying database schema or the migration scripts. You let Django do that part!
+迁移脚本有效地记录了您随时间对数据模型所做的所有增量更改。通过应用迁移，Django更新数据库以匹配您的模型。因为每个增量更改都有自己的脚本，所以Django可以自动地将任何以前版本的数据库(包括新数据库)迁移到当前版本。因此，您只需要关心 `models.py` 中的模型，而不需要关心底层数据库模式或迁移脚本。你让Django演那个角色!
 
-In code, too, you work exclusively with your model classes to store and retrieve data; Django handles the underlying details. The one exception is that you can write data into your database using the Django administrative utility [loaddata command](https://docs.djangoproject.com/en/2.1/ref/django-admin/#loaddata). This utility is often used to initialize a data set after the `migrate` command has initialized the schema.
+在代码中，您也可以只使用模型类来存储和检索数据; Django 处理底层细节。唯一的例外是，可以使用Django管理实用程序 [loaddata command](https://docs.djangoproject.com/en/2.1/ref/django-admin/#loaddata) 将数据写入数据库。此实用程序通常用于在 `migrate` 命令初始化模式之后初始化数据集。
 
-When using the `db.sqlite3` file, you can also work directly with the database using a tool like the [SQLite browser](http://sqlitebrowser.org/). It's fine to add or delete records in tables using such a tool, but avoid making changes to the database schema because the database will then be out of sync with your app's models. Instead, change the models, run `makemigrations`, then run `migrate`.
+在使用 `db.sqlite3` 文件时，还可以使用 [SQLite browser](http://sqlitebrowser.org/) 之类的工具直接处理数据库。使用这样的工具在表中添加或删除记录是可以的，但是要避免更改数据库模式，因为这样数据库就会与应用程序的模型不同步。相反，更改模型，运行 `makemigrations` ，然后运行 `migrate` 。
 
-### Types of databases
+### 数据库类型
 
-By default, Django includes a `db.sqlite3` file for an app's database that's suitable for development work. As described on [When to use SQLite](https://www.sqlite.org/whentouse.html) (sqlite.org), SQLite works fine for low to medium traffic sites with fewer than 100 K hits/day, but is not recommended for higher volumes. It's also limited to a single computer, so it cannot be used in any multi-server scenario such as load-balancing and geo-replication.
+默认情况下，Django为应用程序的数据库提供了一个适合于开发工作的 `db.sqlite3` 文件。正如在[When to use SQLite](https://www.sqlite.org/whentouse.html) (sqlite.org)中所描述的，SQLite适用于低流量或中等流量的网站，但不推荐用于高流量的网站。它还仅限于一台计算机，因此不能用于任何多服务器场景，如负载平衡和异地备份。
 
-For these reasons, consider using a production-level data store such as [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), and [SQL Server](https://www.microsoft.com/en-ca/sql-server/). For information on Django's support for other databases, see [Database setup](https://docs.djangoproject.com/en/2.1/intro/tutorial02/#database-setup). You can also use the [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) to work with Azure storage services like tables and blobs.
+由于这些原因，可以考虑使用生产级的数据存储，如 [PostgreSQL](https://www.postgresql.org/)、[MySQL](https://www.mysql.com/) 和 [SQL Server](https://www.microsoft.com/en-ca/sql-server/) 。有关 Django 对其他数据库的支持的信息，请参阅 [Database setup](https://docs.djangoproject.com/en/2.1/intro/tutorial02/#database-setup) 。您还可以使用 [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) 来处理 Azure 存储服务，比如 tables 和 blobs 。
 
-### Define models
+### 定义模型
 
-A Django model is again a Python class derived from `django.db.model.Models`, which you place in the app's `models.py` file. In the database, each model is automatically given a unique ID field named `id`. All other fields are defined as properties of the class using types from `django.db.models` such as `CharField` (limited text), `TextField` (unlimited text), `EmailField`, `URLField`, `IntegerField`, `DecimalField`, `BooleanField`. `DateTimeField`, `ForeignKey`, and `ManyToMany`, among others. (See the [Model field reference](https://docs.djangoproject.com/en/2.1/ref/models/fields/) in the Django documentation for details.)
+Django 模型也是一个派生自 `django.db.model.Models` 的 Python 类，您可以将它放在应用程序的 `models.py` 文件中。在数据库中，每个模型都自动给出一个名为 `id` 的唯一ID字段。所有其他字段被定义为使用 `django.db.models` 类型的类的属性，如 `CharField` (有限的文本)、 `TextField` (无限的文本)、 `EmailField` 、 `URLField` 、 `IntegerField` 、 `DecimalField` 、 `BooleanField` 、 `DateTimeField`， `ForeignKey`， `ManyToMany`，等等。(详细信息请参阅 Django 文档中的 [Model field reference](https://docs.djangoproject.com/en/2.1/ref/models/fields/) )
 
-Each field takes some attributes, like `max_length`. The `blank=True` attribute means the field is optional; `null=true` means that a value is optional. There is also a `choices` attribute that limits values to values in an array of data value/display value tuples.
+每个字段都有一些属性，比如 `max_length` 。 `blank=True` 属性表示该字段是可选的 ;  `null=true` 表示一个值是可选的。还有一个 `choices` 属性，它将值限制为数据值/显示值元组数组中的值。
 
-For example, add the following class in `models.py` to define a data model that represents dated entries in a simple message log:
+例如，在 `models.py` 中添加以下类来定义一个数据模型，它表示一个简单的消息日志中的日期项:
 
 ```python
 from django.db import models
