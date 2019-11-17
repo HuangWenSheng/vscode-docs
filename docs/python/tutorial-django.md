@@ -935,4 +935,4 @@ python manage.py migrate
 - [Python调试](/docs/python/debugging.md)
 - [测试](/docs/python/testing.md)
 
-如果您在本教程中遇到任何问题，请随时在 [VS Code 文档仓库](https://github.com/Microsoft/vscode-docs/issues) 中提交问题
+如果您在本教程中遇到任何问题，请随时在 [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues) 中提交问题
