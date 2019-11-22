@@ -316,13 +316,13 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 > **提示**: 为了更方便地重复导航到一个特定的URL，比如 `http://127.0.0.1:8000/hello/VSCode`，可以在类似 `views.py` 的文件中使用 `print` 语句输出该URL。URL出现在 VS Code 终端中，您可以使用 `kbstyle(Ctrl+click)` 在浏览器中打开它。
 
-## Go to Definition 和 Peek Definition 命令
+## 转到定义 和 查看定义 命令
 
 在使用Django或任何其他库的过程中，您可能想检查这些库本身的代码。VS Code 提供了两个方便的命令，可以直接导航到任何代码中的类和其他对象的定义:
 
-- **Go to Definition** 从你的代码跳转到定义对象的代码。例如, 在 `views.py` 内, 在 `home` 函数内的 `HttpResponse` 上右键选择 **Go to Definition**, 导航到Django库中的类定义。
+- **转到定义** 从你的代码跳转到定义对象的代码。例如, 在 `views.py` 内, 在 `home` 函数内的 `HttpResponse` 上右键选择 **转到定义**, 导航到Django库中的类定义。
 
-- **Peek Definition** (同样在右键菜单上), 但是直接在编辑器中显示类定义(会在编辑器窗口中腾出空间以避免遮盖代码)。按 `kbstyle(Escape)` 键或点击右上角的 **x** 关闭 Peek 窗口。
+- **查看定义** (同样在右键菜单上), 但是直接在编辑器中显示类定义(会在编辑器窗口中腾出空间以避免遮盖代码)。按 `kbstyle(Escape)` 键或点击右上角的 **x** 关闭 Peek 窗口。
 
     ![Django tutorial: Peek Definition showing the Flask class inline](images/django-tutorial/peek-definition.png)
 
