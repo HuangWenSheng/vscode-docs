@@ -1,106 +1,103 @@
----
-Order: 9
-Area: python
-TOCTitle: Django Tutorial
-ContentId: 3c0948f9-85a5-4dd4-a461-59788dbfce4c
-PageTitle: Python and Django tutorial in Visual Studio Code
-DateApproved: 03/07/2019
-MetaDescription: Python Django tutorial demonstrating IntelliSense, code navigation, and debugging for both code and templates in Visual Studio Code, the best Python IDE.
----
-# Django Tutorial in Visual Studio Code
+# 使用 VS Code 开发 Django 项目教程
 
-Django is a high-level Python framework designed for rapid, secure, and scalable web development. Django includes rich support for URL routing, page templates, and working with data.
+Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web 网站的 Python 框架。 Django包含对URL路由、页面模板和数据处理的丰富支持。
 
-In this Django tutorial, you create a simple Django app with three pages that use a common base template. You create this app in the context of Visual Studio Code in order to understand how to work with Django in the VS Code terminal, editor, and debugger. This tutorial does not explore various details about Django itself, such as working with data models and creating an administrative interface. For guidance on those aspects, refer to the Django documentation links at the end of this tutorial.
+在这个 Django 教程里, 你创建一个简单的 Django 应用，使用了基于模板的三个页面。为了理解Django在VS Code终端、编辑器和调试器中如何工作，在Visual Studio Code中创建了这个应用。 本教程不探讨Django本身的各种细节, 比如使用数据模型和创建管理接口。有关这些方面的指导，请参阅本教程末尾的Django文档链接。
 
-The completed code project from this Django tutorial can be found on GitHub: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
+本 Django 教程中完成的代码可以在GitHub上找到: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
 
-If you have any problems, feel free to file an issue for this tutorial in the [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues).
+如果有任何问题, 您可以在 [VScode 文档仓库](https://github.com/Microsoft/vscode-docs/issues) 中提交本教程中的问题。
 
-## Prerequisites
+## 要求
 
-To successfully complete this Django tutorial, you must do the following (which are the same steps as in the [general Python tutorial](/docs/python/python-tutorial.md)):
+要成功地完成本 Django 教程，您必须执行以下操作 ( 与 [general Python教程](/docs/python/python-tutorial.md) 中的步骤相同 ):
 
 1. Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
 
-1. Install a version of Python 3 (for which this tutorial is written). Options include:
-   - (All operating systems) A download from [python.org](https://www.python.org/downloads/); typically use the **Download Python 3.7.0** button that appears first on the page (or whatever is the latest version).
-   - (Linux) The built-in Python 3 installation works well, but to install other Python packages you must run `sudo apt install python3-pip` in the terminal.
-   - (macOS) An installation through [Homebrew](https://brew.sh/) on macOS using `brew install python3` (the system install of Python on macOS is not supported).
-   - (All operating systems) A download from [Anaconda](https://www.anaconda.com/download/) (for data science purposes).
+1. 安装Python 3的一个版本(本教程就是为这个版本编写的)。 包括:
+   - (所有操作系统)下载自 [python.org](https://www.python.org/downloads/) ; 通常使用最先出现在页面上的 **Download Python 3.7.0** 按钮(或任何最新版本)。
+   - (Linux)内置的Python 3安装工作得很好，但是要安装其他 Python 包，您必须在终端中运行 `sudo apt install python3-pip` 。
+   - (macOS)通过 [Homebrew](https://brew.sh/) 在macOS上使用 `brew install python3` 进行安装(不支持在macOS上安装Python系统)。
+   - 下载自 [Anaconda](https://www.anaconda.com/download/) (用于数据科学目的)。
 
-1. On Windows, make sure the location of your Python interpreter is included in your PATH environment variable. You can check the location by running `path` at the command prompt. If the Python interpreter's folder isn't included, open Windows Settings, search for "environment", select **Edit environment variables for your account**, then edit the **Path** variable to include that folder.
+1. 在Windows上,确保Python解释器的路径包含在PATH环境变量中。您可以通过在命令提示符中运行“path”来检查路径。如果Python解释器的文件夹不包括在内, 打开Windows控制面板, 搜索"environment", 选择 **Edit environment variables for your account**, 然后编辑 **Path** 变量包含此文件夹。
 
-## Create a project environment for the Django tutorial
+## 为本Django项目指南创建虚拟环境
 
-In this section, you create a virtual environment in which Django is installed. Using a virtual environment avoids installing Django into a global Python environment and gives you exact control over the libraries used in an application. A virtual environment also makes it easy to [Create a requirements.txt file for the environment](#create-a-requirementstxt-file-for-the-environment).
+这部分, 您将创建一个虚拟环境来安装 Django 框架。使用虚拟环境可以避免将 Django 安装到全局 Python 环境中，使您能够精确地控制应用程序中使用的库。虚拟环境也让 [创建 requirements.txt 文件](#create-a-requirementstxt-file-for-the-environment)  很方便。
 
-1. On your file system, create a project folder for this tutorial, such as `hello_django`.
+1. 创建一个 `hello_django` 项目文件夹 。
 
-1. In that folder, use the following command (as appropriate to your computer) to create a virtual environment named `env` based on your current interpreter:
+1. 此目录下，使用如下指令创建基于当前python版本的 `env` 虚拟环境:
 
     ```bash
     # macOS/Linux
-    sudo apt-get install python3-venv    # If needed
+    sudo apt-get install python3-venv    # 如果有必要的话
     python3 -m venv env
 
     # Windows
     python -m venv env
     ```
 
-    > **Note**: Use a stock Python installation when running the above commands. If you use `python.exe` from an Anaconda installation, you see an error because the ensurepip module isn't available, and the environment is left in an unfinished state.
+    > **注意**:在运行上述命令时使用一个普通的Python安装。如果您使用来自Anaconda安装的 `python.exe`，您将看到一个错误，因为ensurepip模块不可用，并且环境处于未完成状态。
 
-1. Open the project folder in VS Code by running `code .`, or by running VS Code and using the **File** > **Open Folder** command.
+1. 在此项目目录中执行 `code .` 命令启动 VS Code , 或者运行 VS Code 后，点 **File** 菜单，再选 **Open Folder** 菜单打开项目目录.
 
-1. In VS Code, open the Command Palette (**View** > **Command Palette** or (`kb(workbench.action.showCommands)`)). Then select the **Python: Select Interpreter** command:
+1. 在 VS Code 界面 , 打开"命令面板"( 点 **View** 菜单，再选 **Command Palette** 菜单)。 然后选择 **Python: Select Interpreter** 命令:
 
     ![Django tutorial: opening the Command Palette in VS Code](images/shared/command-palette.png)
 
-1. The command presents a list of available interpreters that VS Code can locate automatically (your list will vary; if you don't see the desired interpreter, see [Configuring Python environments](/docs/python/environments.md)). From the list, select the virtual environment in your project folder that starts with `./env` or `.\env`:
+1. 选择此命令后，会显示 VS Code 中可用的解释器列表 ( 会有所差异 ; 但如果没有找到所需的解释器, 请参见 [Configuring Python environments](/docs/python/environments.md) )。 从列表中为项目选择一个虚拟环境 ，起始是 `./env` 或 `.\env` :
 
     ![Django tutorial: Selecting the virtual environment for Python](images/shared/select-virtual-environment.png)
 
-1. Run **Terminal: Create New Integrated Terminal** (`kb(workbench.action.terminal.new)`) from the Command Palette, which creates a terminal and automatically activates the virtual environment by running its activation script.
+1. 打开"命令面板" 输入 **Terminal: Create New Integrated Terminal** 选择执行后，会打开一个自动激活虚拟环境的终端。
 
-    > **Note**: On Windows, if your default terminal type is PowerShell, you may see an error that it cannot run activate.ps1 because running scripts is disabled on the system. The error provides a link for information on how to allow scripts. Otherwise, use **Terminal: Select Default Shell** to set "Command Prompt" or "Git Bash" as your default instead.
+    > **注意** : 在Windows上，如果您的默认终端类型是 PowerShell，您可能会看到一个错误，它不能运行 activate.ps1 ，因为系统上禁用了运行脚本。该错误提供了有关如何允许脚本的信息的链接。否则，使用 **Terminal: Select Default Shell** 将 "Command Prompt" 或 "Git Bash" 设置为默认值。
 
-1. The selected environment appears on the left side of the VS Code status bar, and notice the "(venv)" indicator that tells you that you're using a virtual environment:
+1. 所选择的虚拟环境名会显示在 VS Code 状态条的左边, 有 "(venv)" 的提示，即表示你正处在虚拟环境下:
 
     ![Django tutorial: selected environment showing in the VS Code status bar](images/shared/environment-in-status-bar.png)
 
-1. Install Django in the virtual environment by running one of the following commands in the VS Code Terminal:
+1. 在 VS Code 界面的终端窗口内，所属的虚拟环境下，执行如下列命令安装 Django 框架：
 
     ```bash
     python -m pip install django
     ```
 
-You now have a self-contained environment ready for writing Django code. VS Code activates the environment automatically when you use **Terminal: Create New Integrated Terminal**. If you open a separate command prompt or terminal, activate the environment by running `source env/bin/activate` (Linux/macOS) or `env\scripts\activate` (Windows).  You know the environment is activated when the command prompt shows **(env)** at the beginning.
+    >用阿里的镜像源安装可以执行以下命令
 
-## Create and run a minimal Django app
+    ```bash
+    python -m pip install -i https://mirrors.aliyun.com/pypi/simple django
+    ```
 
-In Django terminology, a "Django project" is composed of several site-level configuration files along with one or more "apps" that you deploy to a web host to create a full web application. A Django project can contain multiple apps, each of which typically has an independent function in the project, and the same app can be in multiple Django projects. An app, for its part, is just a Python package that follows certain conventions that Django expects.
+现在您已经为编写Django代码准备好了一个独立的环境。 当你点击 `终端` 菜单，再点击 `新建终端` 菜单后 VS Code 打开自动激活虚拟环境的终端窗口。 如果您已经打开了命令提示符或终端，则可以通过运行`source env/bin/activate`(Linux/macOS)或`env\scripts\activate`(Windows)来激活虚拟环境。 当命令提示符的开始处显示 **(env)** 时，表示虚拟环境被激活。
 
-To create a minimal Django app, then, it's necessary to first create the Django project to serve as the container for the app, then create the app itself. For both purposes, you use the Django administrative utility, `django-admin`, which is installed when you install the Django package.
+## 创建和运行最小化的 Django 应用
 
-### Create the Django project
+在Django术语中，“Django project”由几个site-level配置文件和一个或多个“app”组成，您可以将这些“apps”部署到web主机上以创建完整的web应用。 Django project 可以包含多个app，每个app通常在项目中具有独立的功能，相同功能的app可以应用在多个Django项目中。 每个app只是符合Django约定的 Python 包。
 
-1. In the VS Code Terminal where your virtual environment is activated, run the following command:
+要创建最小的Django app，首先需要创建Django项目作为app的容器，然后创建app。出于这两个目的, 您可以使用Django管理实用程序 `Django-admin` , 它是在安装Django时已经安装了的。
+
+### 创建 Django 项目
+
+1. 在 VS Code 终端，激活了虚拟环境的窗口中, 执行如下指令:
 
     ```bash
     django-admin startproject web_project .
     ```
 
-    This `startproject` command assumes (by use of `.` at the end) that the current folder is your project folder, and creates the following within it:
+     在当前目录为项目目录下 ( 指令最后有个 `.` ) , 执行指令后会创建如下这些内容:
 
-    - `manage.py`: The Django command-line administrative utility for the project. You run administrative commands for the project using `python manage.py <command> [options]`.
+    - `manage.py`: Django命令行管理实用程序。 使用 `python manage.py <command> [options]` 的格式.
 
-    - A subfolder named `web_project`, which contains the following files:
-        - `__init__.py`: an empty file that tells Python that this folder is a Python package.
-        - `wsgi.py`: an entry point for WSGI-compatible web servers to serve your project. You typically leave this file as-is as it provides the hooks for production web servers.
-        - `settings.py`: contains settings for Django project, which you modify in the course of developing a web app.
-        - `urls.py`: contains a table of contents for the Django project, which you also modify in the course of development.
+    - 名为 `web_project` 的子目录, 包含了如下这些文件:
+        - `__init__.py`: 一个空文件，告诉 Python 这个文件夹为 Python 包。
+        - `wsgi.py`: WSGI兼容的web服务器为项目提供入口。 通常不必去修改此文件。
+        - `settings.py`: 包含Django项目的设置，您可以在开发web应用程序的过程中对其进行修改。
+        - `urls.py`: 包含了Django项目的 `对应表` ，在开发过程中根据需要修改。
 
-1. To verify the Django project, make sure your virtual environment is activated, then start Django's development server using the command `python manage.py runserver`. The server runs on the default port 8000, and you see output like the following output in the terminal window:
+1. 要验证Django项目，请确保您的虚拟环境是激活的，然后使用 `python manage.py runserver` 命令启动Django的开发服务器。 服务器在默认端口8000上运行，在终端窗口中可以看到如下输出:
 
     ```bash
     Performing system checks...
@@ -113,27 +110,27 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     Quit the server with CTRL-BREAK.
     ```
 
-    When you run the server the first time, it creates a default SQLite database in the file `db.sqlite3`, which is intended for development purposes but can be used in production for low-volume web apps. Also, Django's built-in web server is intended *only* for local development purposes. When you deploy to a web host, however, Django uses the host's web server instead. The `wsgi.py` module in the Django project takes care of hooking into the production servers.
+    第一次运行服务器时，它会创建一个默认的SQLite数据库文件 `db.sqlite3`, 它用于开发目的，但也可用于生产中，用于小容量的web应用程序。 此外，Django内置的web服务器仅用于本地开发。 在部署到web主机时，Django使用主机的web服务器。`wsgi.py` 模块在Django项目中，负责连接到生产服务器。
 
-    If you want to use a different port than the default 8000, specify the port number on the command line, such as `python manage.py runserver 5000`.
+    如果您想使用与默认端口8000不同的端口，请在命令行上指定端口号，例如 `python manage.py runserver 5000` 。
 
-1. `kbstyle(Ctrl+click)` the `http://127.0.0.1:8000/` URL in the terminal output window to open your default browser to that address. If Django is installed correctly and the project is valid, you see the default page shown below. The VS Code terminal output window also shows the server log.
+1. 按住`Ctrl`键不放，鼠标点击终端输出窗口中的 `http://127.0.0.1:8000/` URL，在默认浏览器上打开该地址页。 如果正确安装了Django并且项目有效，您将看到如下所示的默认页面。VS Code终端输出窗口也显示了服务器日志。
 
     ![Django tutorial: default view of empty Django project](images/django-tutorial/django-empty-project-success.png)
 
-1. When you're done, close the browser window and stop the server in VS Code using `kbstyle(Ctrl+C)` as indicated in the terminal output window.
+1. 完成后，关闭浏览器窗口并在VS Code终端输出窗口中使用`(Ctrl+C)`停止服务器。
 
-### Create A Django app
+### 创建一个 Django 应用
 
-1. In the VS Code Terminal with your virtual environment activated, run the administrative utility's `startapp` command in your project folder (where `manage.py` resides):
+1. 在 VS Code 终端，虚拟环境内，项目路径下执行如下指令:
 
     ```bash
     python manage.py startapp hello
     ```
 
-    The command creates a folder called `hello` that contains a number of code files and one subfolder. Of these, you frequently work with `views.py` (that contains the functions that define pages in your web app) and `models.py` (that contains classes defining your data objects). The `migrations` folder is used by Django's administrative utility to manage database versions as discussed later in this tutorial. There are also the files `apps.py` (app configuration), `admin.py` (for creating an administrative interface), and `tests.py` (for tests), which are not covered here.
+    该命令创建一个名为 `hello` 的文件夹，其中包含许多代码文件和一个子文件夹。其中，您经常使用 `views.py` (包含在web应用程序中定义页面的函数) 和 `models.py` (包含定义数据对象的类)。 Django的管理实用程序使用 `migrations` 文件夹来管理数据库版本，本教程后面将对此进行讨论。 还有这些文件 `apps.py` (app配置)， `admin.py` (用于创建管理接口) 和 `tests.py`(用于测试)，这里不讨论。
 
-1. Modify `hello/views.py` to match the following code, which creates a single view for the app's home page:
+1. 修改 `hello/views.py` 文件为如下代码, 为此应用的主页创建一个 view :
 
     ```python
     from django.http import HttpResponse
@@ -142,7 +139,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
         return HttpResponse("Hello, Django!")
     ```
 
-1. Create a file, `hello/urls.py`, with the contents below. The `urls.py` file is where you specify patterns to route different URLs to their appropriate views. The code below contains one route to map root URL of the app (`""`) to the `views.home` function that you just added to `hello/views.py`:
+1. 创建一个 `hello/urls.py` 文件, 包含下列代码。 `urls.py`文件是您指定将不同url路由到相应视图的模式的地方。下面的代码包含一个将app的根URL (`""`) 映射到你刚刚添加到`hello/views.py`的`views.home`函数的路径：
 
     ```python
     from django.urls import path
@@ -153,7 +150,7 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     ]
     ```
 
-1. The `web_project` folder also contains a `urls.py` file, which is where URL routing is actually handled. Open `web_project/urls.py` and modify it to match the following code (you can retain the instructive comments if you like). This code pulls in the app's `hello/urls.py` using `django.urls.include`, which keeps the app's routes contained within the app. This separation is helpful when a project contains multiple apps.
+1. 这个 `web_project` 目录也包含了一个 `urls.py` 文件, 这是实际处理URL路由的地方。 修改 `web_project/urls.py` 文件为如下代码。这段代码用 `django.urls.include` 把app的 `hello/urls.py` 拉入，它将app的路由包含在app中。 当一个项目包含多个app时，这种分离很有帮助。
 
     ```python
     from django.contrib import admin
@@ -164,23 +161,23 @@ To create a minimal Django app, then, it's necessary to first create the Django 
     ]
     ```
 
-1. Save all modified files with `kb(workbench.action.files.saveAll)`.
+1. 保存所有修改的文件可以用快捷键( Ctrl+K S )。
 
-1. In the VS Code Terminal, again with the virtual environment activated, run the development server with `python manage.py runserver` and open a browser to  `http://127.0.0.1:8000/` to see a page that renders "Hello, Django".
+1. 在VS Code终端中，在激活了虚拟环境下，使用 `python manage.py runserver` 运行开发服务器，并打开浏览器到  `http://127.0.0.1:8000/` 查看呈现的"Hello, Django"页面。
 
     ![Django tutorial: the basic Django app running in a browser](images/django-tutorial/app-in-browser-01.png)
 
-## Create a debugger launch profile
+## 创建调试器启动配置文件
 
-You're probably already wondering if there's an easier way to run the server and test the app without typing `python manage.py runserver` each time. Fortunately, there is! You can create a customized launch profile in VS Code, which is also used for the inevitable exercise of debugging.
+您可能已经在想，是否有一种更简单的方法来运行服务器和测试应用程序，而不是每次都输入 `python manage.py runserver` 。幸运的是,有! 您可以在VS Code中创建一个定制的启动配置文件，用于调试和练习。
 
-1. Switch to **Debug** view in VS Code (using the left-side activity bar). Along the top of the Debug view, you may see "No Configurations" and a warning dot on the gear icon. Both indicators mean that you don't yet have a `launch.json` file containing debug configurations:
+1. 在VS Code中，切换到**Debug**视图 (使用左侧的活动栏)。在Debug视图的顶部，您可能会看到 "No Configurations" 和齿轮图标上的警告点。这两个指示器都意味着您还没有包含调试配置的`launch.json`文件：
 
     ![Django tutorial: initial view of the debug panel](images/shared/debug-panel-initial-view.png)
 
-1. Select the gear icon and wait for a few seconds for VS Code to create and open a `launch.json` file. (If you're using an older version of VS Code, you may be prompted with a list of debugger targets, in which case select **Python** from the list.) The `launch.json` file contains a number of debugging configurations, each of which is a separate JSON object within the `configuration` array.
+1. 选择齿轮图标，等待几秒钟，等待VS Code创建并打开 `launch.json` 文件。(如果您正在使用较老版本的VS Code，可能会提示您一个调试器目标列表，在这种情况下，请从列表中选择 **Python** )  `launch.json` 文件包含许多调试配置，每个配置在 `configuration` 数组中都是一个单独的JSON对象。
 
-1. Scroll down to and examine the configuration with the name "Python: Django":
+1. 向下滚动查找名为 "Python: Django"的配置:
 
     ```json
     {
@@ -197,39 +194,39 @@ You're probably already wondering if there's an easier way to run the server and
     },
     ```
 
-    This configuration tells VS Code to run `"${workspaceFolder}/manage.py"` using the selected Python interpreter and the arguments in the `args` list. Launching the VS Code debugger with this configuration, then, is the same as running `python manage.py runserver --noreload` in the VS Code Terminal with your activated virtual environment. (You can add a port number like `"5000"` to `args` if desired.) The `"django": true` entry also tells VS Code to enable debugging of Django page templates, which you see later in this tutorial.
+    这个配置告诉VS Code用所选的Python解释器及`args`列表中的参数去运行`"${workspaceFolder}/manage.py"`。使用此配置启动VS Code调试器，与在激活的虚拟环境的VS Code终端中运行  `python manage.py runserver --noreload` 相同。(如果需要，可以将 `"5000"`之类的端口号添加到`args` 中。)`"django": true`条目还告诉VS Code启用Django页面模板的调试，您将在本教程的后面看到这一点。
 
-1. Save `launch.json` (`kb(workbench.action.files.save)`). In the debug configuration drop-down list (which reads **Python: Current File**) select the **Python: Django** configuration:
+1. 保存 `launch.json` 。 在debug configuration下拉列表中选择 **Python: Django** 配置:
 
     ![Django tutorial: selecting the Django debugging configuration](images/django-tutorial/debug-select-configuration.png)
 
-1. Test the configuration by selecting the **Debug** > **Start Debugging** menu command, or selecting the green **Start Debugging** arrow next to the list (`kb(workbench.action.debug.continue)`):
+1. 测试配置 ，选择 **Debug** > **Start Debugging** 菜单, 或者选择如下所示的绿色 **Start Debugging** 箭头:
 
     ![Django tutorial: start debugging/continue arrow on the debug toolbar](images/django-tutorial/debug-continue-arrow.png)
 
-1. `kbstyle(Ctrl+click)` the `http://127.0.0.1:8000/` URL in the terminal output window to open the browser and see that the app is running properly.
+1. `kbstyle(Ctrl+click)`在终端输出窗口中的 `http://127.0.0.1:8000/`  URL打开浏览器，查看应用程序是否正常运行。
 
-1. Close the browser and stop the debugger when you're finished. To stop the debugger, use the Stop toolbar button (the red square) or the **Debug** > **Stop Debugging** command (`kb(workbench.action.debug.stop)`).
+1. 完成后，关闭浏览器并停止调试器。要停止调试器，可以使用stop工具栏按钮(红色方块)或 **Debug** > **Stop Debugging** 命令(`kb(workbench.action.debug.stop)`)。
 
-1. You can now use the **Debug** > **Start Debugging** at any time to test the app, which also has the benefit of automatically saving all modified files.
+1. 现在您可以随时使用**Debug** > **Start Debugging**来测试app，还可以自动保存所有修改的文件。
 
-## Explore the debugger
+## 探索调试器
 
-Debugging gives you the opportunity to pause a running program on a particular line of code. When a program is paused, you can examine variables, run code in the Debug Console panel, and otherwise take advantage of the features described on [Debugging](/docs/python/debugging.md). Running the debugger also automatically saves any modified files before the debugging session begins.
+调试使您有机会在特定的代码行上暂停正在运行的程序。当程序暂停时，您可以检查变量，在调试控制台面板中运行代码，或者利用 [Debugging](/docs/python/debugging.md) 中描述的特性。运行调试器还会在调试会话开始之前自动保存任何修改后的文件。
 
-**Before you begin**: Make sure you've stopped the running app at the end of the last section by using `kbstyle(Ctrl+C)` in the terminal. If you leave the app running in one terminal, it continues to own the port. As a result, when you run the app in the debugger using the same port, the original running app handles all the requests and you won't see any activity in the app being debugged and the program won't stop at breakpoints. In other words, if the debugger doesn't seem to be working, make sure that no other instance of the app is still running.
+在开始之前: 确保你已经在最后一节结束时通过在终端中使用 `kbstyle(Ctrl+C)` 来停止了正在运行的应用程序。如果您让应用程序在一个终端上运行，它将继续拥有该端口。因此，当您使用相同的端口在调试器中运行应用程序时，最初运行的应用程序将处理所有请求，您不会看到正在调试的应用程序中的任何活动，程序也不会在断点处停止。换句话说，如果调试器似乎不工作，请确保没有应用程序的其他实例仍在运行。
 
-1. In `hello/urls.py`, add a route to the `urlpatterns` list:
+1. 在 `hello/urls.py` 上, 添加如下路由项到 `urlpatterns` 列表:
 
     ```python
     path("hello/<name>", views.hello_there, name="hello_there"),
     ```
 
-    The first argument to `path` defines a route "hello/" that accepts a variable string called *name*. The string is passed to the `views.hello_there` function specified in the second argument to `path`.
+     `path` 的第一个参数定义了一个路由“hello/”，它接受一个名为*name*的变量字符串。该字符串被传递给在 `path` 的第二个参数中指定的 `views.hello_there` 函数。
 
-    URL routes are case-sensitive. For example, the route `/hello/<name>` is distinct from `/Hello/<name>`. If you want the same view function to handle both, define paths for each variant.
+    URL路由是区分大小写的。例如，路由`/hello/<name>`不同于`/Hello/<name>`。如果您想让相同的视图函数处理这不同的两个，请为每个定义相同路径。
 
-1. Replace the contents of `views.py` with the following code to define the `hello_there` function that you can step through in the debugger:
+1. 用以下代码替换 `views.py` 的内容定义 `hello_there` 函数，你可以单步通过调试：
 
     ```python
     import re
@@ -256,49 +253,49 @@ Debugging gives you the opportunity to pause a running program on a particular l
         return HttpResponse(content)
     ```
 
-    The `name` variable defined in the URL route is given as an argument to the `hello_there` function. As described in the code comments, always filter arbitrary user-provided information to avoid various attacks on your app. In this case, the code filters the name argument to contain only letters, which avoids injection of control characters, HTML, and so forth. (When you use templates in the next section, Django does automatic filtering and you don't need this code.)
+    URL路由中定义的 `name` 变量作为 `hello_there` 函数的参数。如代码注释所述，始终过滤用户提供的任意信息，以避免对应用程序的各种攻击。在本例中，代码将name参数过滤为只包含字母，从而避免了注入控制字符、HTML等。(在下一节中使用模板时，Django会自动过滤，因此不需要这些代码。)
 
-1. Set a breakpoint at the first line of code in the `hello_there` function (`now = datetime.now()`) by doing any one of the following:
-    - With the cursor on that line, press `kb(editor.debug.action.toggleBreakpoint)`, or,
-    - With the cursor on that line, select the **Debug** > **Toggle Breakpoint** menu command, or,
-    - Click directly in the margin to the left of the line number (a faded red dot appears when hovering there).
+1. 在 `hello_there` 函数 (`now = datetime.now()`) 的第一行代码设置一个断点，方法如下:
+    - 在当前行, 按 F9, 或者,
+    - 在当前行, 选择菜单 **Debug** > **Toggle Breakpoint** , 或者,
+    - 直接点击行号左边的空白(当鼠标停留在那里时，会出现一个褪色的红点)。
 
-    The breakpoint appears as a red dot in the left margin:
+    断点在左侧空白处显示为一个红点:
 
     ![Django tutorial: a breakpoint set on the first line of the hello_there function](images/django-tutorial/debug-breakpoint-set.png)
 
-1. Start the debugger by selecting the **Debug** > **Start Debugging** menu command, or selecting the green **Start Debugging** arrow next to the list (`kb(workbench.action.debug.continue)`):
+1. 通过选择 **Debug** > **Start Debugging** 菜单命令来启动调试器，或者点击如下所示的边上的绿色 **Start Debugging** 箭头：
 
     ![Django tutorial: start debugging/continue arrow on the debug toolbar](images/django-tutorial/debug-continue-arrow.png)
 
-    Observe that the status bar changes color to indicate debugging:
+    可以看到状态栏的颜色发生了变化，表示正在调试：
 
     ![Django tutorial: appearance of the debugging status bar](images/django-tutorial/debug-status-bar.png)
 
-    A debugging toolbar (shown below) also appears in VS Code containing commands in the following order: Pause (or Continue, `kb(workbench.action.debug.continue)`), Step Over (`kb(workbench.action.debug.stepOver)`), Step Into (`kb(workbench.action.debug.stepInto)`), Step Out (`kb(workbench.action.debug.stepOut)`), Restart (`kb(workbench.action.debug.restart)`), and Stop (`kb(workbench.action.debug.stop)`). See [VS Code debugging](/docs/editor/debugging.md) for a description of each command.
+    在VS Code中还会出现一个调试工具栏 (如下所示)，其中包含以下顺序的命令: Pause ( 或者 Continue), Step Over , Step Into , Step Out , Restart ,  Stop 。 有关每个命令的描述，请参见 [VS Code debugging](/docs/editor/debugging.md) 。
 
     ![Django tutorial: the VS Code debug toolbar](images/shared/debug-toolbar.png)
 
-1. Output appears in a "Python Debug Console" terminal. Open a browser and navigate to `http://127.0.0.1:8000/hello/VSCode`. Before the page renders, VS Code pauses the program at the breakpoint you set. The small yellow arrow on the breakpoint indicates that it's the next line of code to run.
+1. 输出出现在 "Python Debug Console" 终端中。打开浏览器并导航到 `http://127.0.0.1:8000/hello/VSCode` 。在页面渲染之前，VS代码会在您设置的断点处暂停程序。断点上的黄色小箭头表示这是要运行的下一行代码。
 
     ![Django tutorial: VS Code paused at a breakpoint](images/django-tutorial/debug-program-paused.png)
 
-1. Use Step Over to run the `now = datetime.now()` statement.
+1. 使用 Step Over 来运行 `now = datetime.now()` 语句。
 
-1. On the left side of the VS Code window, you see a **Variables** pane that shows local variables, such as `now`, as well as arguments, such as `name`. Below that are panes for **Watch**, **Call Stack**, and **Breakpoints** (see [VS Code debugging](/docs/editor/debugging.md) for details). In the **Locals** section, try expanding different values. You can also double-click values (or use `kb(debug.setVariable)`) to modify them. Changing variables such as `now`, however, can break the program. Developers typically make changes only to correct values when the code didn't produce the right value to begin with.
+1. 在VS Code窗口的左侧，您将看到一个 **Variables** 窗格，其中显示了本地变量及其参数(如 `now` 和 `name` )。下面的窗格的 **Watch** , **Call Stack** , **Breakpoints** (详见[VS Code debugging](/docs/editor/debugging.md) )。在 **Locals** 部分,尝试输入不同的值。你也可以双击来修改它们。然而，像 `now` 这样的变量改变会破坏程序。开发人员通常只在代码一开始没有生成正确的值时才更改值。
 
     ![Django tutorial: local variables and arguments in VS Code during debugging](images/django-tutorial/debug-local-variables.png)
 
-1. When a program is paused, the **Debug Console** panel (which is different from the "Python Debug Console" in the Terminal panel) lets you experiment with expressions and try out bits of code using the current state of the program. For example, once you've stepped over the line `now = datetime.now()`, you might experiment with different date/time formats. In the editor, select the code that reads `now.strftime("%A, %d %B, %Y at %X")`, then right-click and select **Debug: Evaluate** to send that code to the debug console, where it runs:
+1. 当程序暂停时， **Debug Console** 面板(与终端面板中的 "Python Debug Console" 不同)允许您使用表达式进行试验，并使用程序的当前状态调试 。例如，一旦你 step over 了 `now = datetime.now()` 这行代码，就可以尝试不同的日期/时间格式 。在编辑器中，选择 `now.strftime("%A, %d %B, %Y at %X")` 代码，然后右击并选择 **Debug: Evaluate** 将代码发送到调试控制台，在那里运行:
 
     ```bash
     now.strftime("%A, %d %B, %Y at %X")
     'Friday, 07 September, 2018 at 07:46:32'
     ```
 
-    > **Tip**: The **Debug Console** also shows exceptions from within the app that may not appear in the terminal. For example, if you see a "Paused on exception" message in the **Call Stack** area of Debug View, switch to the **Debug Console** to see the exception message.
+    > **提示**: **Debug Console** 也显示来自应用程序内部的异常，这些异常可能不会出现在终端中。例如，如果您在调试视图的 **Call Stack** 区域中看到 "Paused on exception" 消息，请切换到 **Debug Console** 查看异常消息 。
 
-1. Copy that line into the > prompt at the bottom of the debug console, and try changing the formatting:
+1. 将下列行复制到调试控制台底部的 > 提示符中，并尝试更改格式 :
 
     ```bash
     now.strftime("%a, %d %B, %Y at %X")
@@ -309,45 +306,45 @@ Debugging gives you the opportunity to pause a running program on a particular l
     'Fri, 07 Sep, 18 at 07:46:32'
     ```
 
-    > **Note**: If you see a change you like, you can copy and paste it into the editor during a debugging session. However, those changes aren't applied until you restart the debugger.
+    > **注意**:如果您看到您想要的更改，您可以在调试会话期间将其复制并粘贴到编辑器中。但是，在重新启动调试器之前不会应用这些更改 。
 
-1. Step through a few more lines of code, if you'd like, then select Continue (`kb(workbench.action.debug.continue)`) to let the program run. The browser window shows the result:
+1. 如果您愿意，再多执行几行代码，然后选择 Continue，让程序继续运行。浏览器窗口显示如下结果:
 
     ![Django tutorial: result of the modified program](images/django-tutorial/debug-run-result.png)
 
-1. Close the browser and stop the debugger when you're finished. To stop the debugger, use the Stop toolbar button (the red square) or the **Debug** > **Stop Debugging** command (`kb(workbench.action.debug.stop)`).
+1. 完成后，关闭浏览器并停止调试器。要停止调试器，请使用 stop工具栏按钮(红色方块) 或 **Debug** > **Stop Debugging** 命令 。
 
-> **Tip**: To make it easier to repeatedly navigate to a specific URL like `http://127.0.0.1:8000/hello/VSCode`, output that URL using a `print` statement somewhere in a file like `views.py`. The URL appears in the VS Code Terminal where you can use `kbstyle(Ctrl+click)` to open it in a browser.
+> **提示**: 为了更方便地重复导航到一个特定的URL，比如 `http://127.0.0.1:8000/hello/VSCode`，可以在类似 `views.py` 的文件中使用 `print` 语句输出该URL。URL出现在 VS Code 终端中，您可以使用 `kbstyle(Ctrl+click)` 在浏览器中打开它。
 
-## Go to Definition and Peek Definition commands
+## 转到定义 和 查看定义 命令
 
-During your work with Django or any other library, you may want to examine the code in those libraries themselves. VS Code provides two convenient commands that navigate directly to the definitions of classes and other objects in any code:
+在使用Django或任何其他库的过程中，您可能想检查这些库本身的代码。VS Code 提供了两个方便的命令，可以直接导航到任何代码中的类和其他对象的定义:
 
-- **Go to Definition** jumps from your code into the code that defines an object. For example, in `views.py`, right-click on `HttpResponse` in the `home` function and select **Go to Definition** (or use `kb(editor.action.revealDefinition)`), which navigates to the class definition in the Django library.
+- **转到定义** 从你的代码跳转到定义对象的代码。例如, 在 `views.py` 内, 在 `home` 函数内的 `HttpResponse` 上右键选择 **转到定义**, 导航到Django库中的类定义。
 
-- **Peek Definition** (`kb(editor.action.peekDefinition)`, also on the right-click context menu), is similar, but displays the class definition directly in the editor (making space in the editor window to avoid obscuring any code). Press `kbstyle(Escape)` to close the Peek window or use the **x** in the upper right corner.
+- **查看定义** (同样在右键菜单上), 但是直接在编辑器中显示类定义(会在编辑器窗口中腾出空间以避免遮盖代码)。按 `kbstyle(Escape)` 键或点击右上角的 **x** 关闭 Peek 窗口。
 
     ![Django tutorial: Peek Definition showing the Flask class inline](images/django-tutorial/peek-definition.png)
 
-## Use a template to render a page
+## 使用模版和渲染页面
 
-The app you've created so far in this tutorial generates only plain text web pages from Python code. Although it's possible to generate HTML directly in code, developers avoid such a practice because it opens the app to [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). In the `hello_there` function of this tutorial, for example, one might think to format the output in code with something like `content = "<h1>Hello there, " + clean_name + "!</h1>`, where the result in `content` is given directly to a browser. This opening allows an attacker to place malicious HTML, including JavaScript code, in the URL that ends up in `clean_name` and thus ends up being run in the browser.
+到目前为止，您在本教程中创建的应用程序用Python代码仅生成纯文本web页面 。虽然可以直接在代码中生成HTML，但开发人员避免这样做，因为这样会将应用程序以 [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting) 方式打开 。例如，在本教程的 `hello_there` 函数中，可以考虑使用类似 `content = "<h1>Hello there, " + clean_name + "!</h1>` 的代码格式来格式化输出，其中 `content` 的结果直接提供给浏览器 。这个开放允许攻击者将恶意HTML(包括JavaScript代码)放置在 `clean_name` 后面的URL中运行。
 
-A much better practice is to keep HTML out of your code entirely by using **templates**, so that your code is concerned only with data values and not with rendering.
+一个更好的实践是通过使用 **templates** 将HTML完全排除在您的代码之外，这样您的代码只关心数据值而不关心渲染。
 
-In Django, a template is an HTML file that contains placeholders for values that the code provides at run time. The Django templating engine then takes care of making the substitutions when rendering the page, and provides automatic escaping to prevent XSS attacks (that is, if you tried using HTML in a data value, you would see the HTML rendered only as plain text). The code, therefore, concerns itself only with data values and the template concerns itself only with markup. Django templates provide flexible options such as template inheritance, which allows you to define a base page with common markup and then build upon that base with page-specific additions.
+在Django中，模板是一个HTML文件，其中包含代码在运行时提供的值的占位符。 Django模板引擎在渲染页面时负责进行替换，并提供自动转义来防止XSS攻击(也就是说，如果您尝试在数据值中使用HTML，您将看到仅以纯文本形式渲染的HTML)。因此，代码只与数据值有关，模板只与标记有关。  Django模板提供了灵活的选项，比如模板继承，它允许您使用通用标记定义基页面，然后在此基础上添加特定于页面的内容。
 
-In this section, you start by creating a single page using a template. In subsequent sections, you configure the app to serve static files and then create multiple pages to the app that each contains a nav bar from a base template. Django templates also support control flow and iteration, as you see later in this tutorial in the context of template debugging.
+在本节中，首先使用模板创建一个页面。在后面的小节中，您将应用程序配置为提供静态文件，然后为应用程序创建多个页面，每个页面都包含一个来自基本模板的导航栏。Django 模板还支持控制流和迭代，您将在本教程后面的模板调试上下文中看到这一点。
 
-1. In the `web_project/settings.py` file, locate the `INSTALLED_APPS` list and add the following entry, which makes sure the project knows about the app so it can handle templating:
+1. 在 `web_project/settings.py` 文件中，找到 `INSTALLED_APPS` 列表并添加以下条目，以确保 project 知道 app，以便处理模板：
 
     ```python
     'hello',
     ```
 
-1. Inside the `hello` folder, create a folder named `templates`, and then another subfolder named `hello` to match the app name (this two-tiered folder structure is typical Django convention).
+1. 在 `hello` 文件夹中，创建一个名为 `templates`的文件夹，然后创建另一个名为 `hello` 的子文件夹，以匹配 app 名称 (这种两层的文件夹结构是典型的Django约定)。
 
-1. In the `templates/hello` folder, create a file named `hello_there.html` with the contents below. This template contains two placeholders for data values named "name", and "date", which are delineated by pairs of curly braces, `\{{` and `}}`. All other invariant text is part of the template, along with formatting markup (such as `<strong>`). As you can see, template placeholders can also include formatting, the expressions after the pipe `|` symbols, in this case using Django's built-in [date filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date) and [time filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#time).  The code, then needs only to pass the datetime *value* rather than a pre-formatted string:
+1. 在 `templates/hello` 文件夹中，创建一个名为 `hello_there.html` 的文件，其内容如下。此模板包含两个占位符，分别表示名为 "name" 和 "date" 的数据值，它们由一对大括号 `{{` 和 `}}` 来描述。所有其他不变的文本和格式化标记(如 `<strong>`)都是模板的一部分。如您所见，模板占位符还可以包括格式、管道 `|` 符号后面的表达式，在本例中使用的是Django内置的 [date filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date) 和 [time filter](https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#time) 。然后，代码只需要传递 datetime 值 ，而不是预格式化的字符串:
 
     ```html
     <!DOCTYPE html>
@@ -357,18 +354,18 @@ In this section, you start by creating a single page using a template. In subseq
             <title>Hello, Django</title>
         </head>
         <body>
-            <strong>Hello there, \{{ name }}!</strong> It's \{{ date | date:"l, d F, Y" }} at \{{ date | time:"H:i:s" }}
+            <strong>Hello there, {{ name }}!</strong> It's {{ date | date:"l, d F, Y" }} at {{ date | time:"H:i:s" }}
         </body>
     </html>
     ```
 
-1. At the top of `views.py`, add the following import statement:
+1. 在 `views.py` 的顶部添加以下import语句:
 
     ```python
     from django.shortcuts import render
     ```
 
-1. Also in `views.py`, modify the `hello_there` function to use `django.shortcuts.render` method to load a template and to provide the *template context*. The context is simply the set of variables for use within the template. The `render` function takes the request object, followed by the path to to the template *relative to the `templates` folder*, then the context object. (Developers typically name the templates the same as the functions that use them, but matching names are not required because you always refer to the exact filename in your code.)
+1. 同样在 `views.py` 中，修改 `hello_there` 函数以使用 `django.shortcuts.render` 方法加载模板并提供 *template context* 。上下文只是模板中使用的一组变量。`render` 函数接受请求对象，然后是相对于 `templates` 文件夹的模板路径，然后是上下文对象。(开发人员通常将模板命名为与使用它们的函数相同的名称，但是不需要匹配名称，因为您总是在代码中引用准确的文件名。)
 
     ```python
     def hello_there(request, name):
@@ -382,43 +379,43 @@ In this section, you start by creating a single page using a template. In subseq
         )
     ```
 
-    You can see that the code is now much simpler, and concerned only with data values, because the markup and formatting is all contained in the template.
+    您可以看到，代码现在简单多了，而且只关心数据值，因为标记和格式都包含在模板中。
 
-1. Start the program (inside or outside of the debugger, using `kb(workbench.action.debug.run)`), navigate to a /hello/name URL, and observe the results.
+1. 启动程序 ( 在调试器内部或外部，使用 `kb(workbench.action.debug.run)` )，导航到 /hello/name URL，然后观察结果。
 
-1. Also try navigating to a /hello/name URL using a name like `<a%20value%20that%20could%20be%20HTML>` to see Django's automatic escaping at work. The "name" value shows up as plain text in the browser rather than as rendering an actual element.
+1. 还可以尝试使用 `<a%20value%20that%20could%20be%20HTML>` 之类的名称导航到 /hello/name URL，以查看Django在工作时的自动转义。 "name" 值在浏览器中显示为纯文本，而不是渲染的实际元素
 
-## Serve static files
+## 提供静态文件
 
-Static files are pieces of content that your web app returns as-is for certain requests, such as CSS files. Serving static files requires that the `INSTALLED_APPS` list in `settings.py` contains `django.contrib.staticfiles`, which is included by default.
+静态文件是web应用程序按原样返回的内容片段，用于某些请求，如CSS文件。服务静态文件需要 `settings.py` 中的 `INSTALLED_APPS` 列表包含 `django.contrib.staticfiles`，
 
-Serving static files in Django is something of an art, especially when deploying to production. What's shown here is a simple approach that works with the Django development server and also a production server like gunicorn. A full treatment of static files, however, is beyond the scope of this tutorial, so for more information, see [Managing static files](https://docs.djangoproject.com/en/2.1/howto/static-files/) in the Django documentation.
+在Django中提供静态文件是一门艺术，尤其是在部署到生产环境中时。这里展示的是一种简单的方法，它既可以用于Django开发服务器，也可以用于像gunicorn这样的生产服务器。 但是，对静态文件的完整处理超出了本教程的范围，因此要了解更多信息，请参阅Django文档中的[管理静态文件](https://docs.djangoproject.com/en/2.1/howto/static-files/)。
 
-In production, you also need to set `DEBUG=False` in `settings.py`, which necessitates some additional work when using containers. For details, see [Issue 13](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13).
+在生产中，您还需要在 `settings.py` 中设置 `DEBUG=False`，这需要在使用容器时进行一些额外的工作。 详情请参阅 [Issue 13](https://github.com/Microsoft/python-sample-vscode-django-tutorial/issues/13)
 
-### Ready the app for static files
+### 为静态文件准备 app
 
-1. In the project's `web_project/urls.py`, add the following `import` statement:
+1. 在项目的 `web_project/urls.py` 文件中添加下面的 `import` 语句:
 
     ```python
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     ```
 
-1. In that same file, add the following line at the end, which includes standard static file URLs to the list that the project recognizes:
+1. 在该文件中，在最后添加以下行，其中包括项目可识别的列表中的标准静态文件 url：
 
     ```python
     urlpatterns += staticfiles_urlpatterns()
     ```
 
-### Refer to static files in a template
+### 引用模板中的静态文件
 
-1. In the `hello` folder, create a folder named `static`.
+1. 在 `hello` 文件夹中，创建一个名为 `static` 的文件夹。
 
-1. Within the `static` folder, create a subfolder named `hello`, matching the app name.
+1. 在 `static` 文件夹中，创建一个名为 `hello` 的子文件夹，与应用程序名称匹配。
 
-    The reason for this extra subfolder is that when you deploy the Django project to a production server, you collect all the static files into a single folder that's then served by a dedicated static file server. The `static/hello` subfolder ensures that when the app's static files are collected, they're in an app-specific subfolder and won't collide with file from other apps in the same project.
+    这个额外的子文件夹的原因是，当您将Django项目部署到生产服务器时，您将所有静态文件收集到一个单独的文件夹中，然后由专用的静态文件服务器提供服务。 `static/hello` 子文件夹确保在收集应用程序的静态文件时，它们位于特定于应用程序的子文件夹中，不会与同一项目中其他应用程序的文件发生冲突。
 
-1. In the `static/hello` folder, create a file named `site.css` with the following contents. After entering this code, also observe the syntax highlighting that VS Code provides for CSS files, including a color preview.
+1. 在 `static/hello` 文件夹中，创建一个名为 `site.css` 的文件，其内容如下。输入这段代码后，还可以观察 VS Code 为CSS文件提供的语法高亮显示，包括颜色预览。
 
     ```css
     .message {
@@ -427,50 +424,50 @@ In production, you also need to set `DEBUG=False` in `settings.py`, which necess
     }
     ```
 
-1. In `templates/hello/hello_there.html`, add the following lines after the `<title>` element. The `{% load static %}` tag is a custom Django template tag set, which allows you to use `{% static %}` to refer to a file like the stylesheet.
+1. 在 `templates/hello/hello_there.html` 中，在 `<title>` 元素之后添加以下行。 `{% load static %}` 标记是一个定制的 Django 模板标记集，它允许您使用 `{% static %}` 引用类似样式表的文件。
 
     ```html
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}" />
     ```
 
-1. Also in `templates/hello/hello_there.html`, replace the contents `<body>` element with the following markup that uses the `message` style instead of a `<strong>` tag:
+1. 同样在 `templates/hello/hello_there.html` , 用以下标记替换 `<body>` 元素使用 `message` 风格而不是 `<strong>` 标签:
 
     ```html
     <span class="message">Hello, there \{{ name }}!</span> It's \{{ date | date:'l, d F, Y' }} at \{{ date | time:'H:i:s' }}.
     ```
 
-1. Run the app, navigate to a /hello/name URL, and observe that the message renders in blue. Stop the app when you're done.
+1. 运行 app，导航到 /hello/name URL，观察消息呈现为蓝色。完成后停止应用程序。
 
-### Use the collectstatic command
+### 使用collectstatic命令
 
-For production deployments, you typically collect all the static files from your apps into a single folder using the `python manage.py collectstatic` command. You can then use a dedicated static file server to serve those files, which typically results in better overall performance. The following steps show how this collection is made, although you don't use the collection when running with the Django development server.
+对于生产部署，通常使用 `python manage.py collectstatic` 命令将应用程序中的所有静态文件收集到一个文件夹中。然后可以使用专用的静态文件服务器来提供这些文件，这通常会带来更好的总体性能。下面的步骤展示了如何生成这个集合，但是在使用Django开发服务器时不使用这个集合。
 
-1. In `web_project/settings.py`, add the following line that defines a location where static files are collected when you use the `collectstatic` command:
+1. 在 `web_project/settings.py` 中，添加以下行，它定义了使用 `collectstatic` 命令收集静态文件的位置:
 
     ```python
     STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
     ```
 
-1. In the Terminal, run the command `python manage.py collectstatic` and observe that `hello/site.css` is copied into the top level `static_collected` folder alongside `manage.py`.
+1. 在终端，运行命令 `python manage.py collectstatic`，观察到 `hello/site.css` 与 `manage.py` 一起被复制到顶层的 `static_collected` 文件夹中。
 
-1. In practice, run `collectstatic` any time you change static files and before deploying into production.
+1. 在实践中，只要您更改了静态文件，并在部署到生产环境之前，就可以运行 `collectstatic` 。
 
-## Create multiple templates that extend a base template
+## 创建扩展基本模板的多个模板
 
-Because most web apps have more than one page, and because those pages typically share many common elements, developers separate those common elements into a base page template that other page templates then extend. (This is also called template inheritance, meaning the extended pages inherit elements from the base page.)
+因为大多数web应用程序有多个页面，而且这些页面通常共享许多公共元素，所以开发人员将这些公共元素分离到一个基页面模板中，然后其他页面模板进行扩展。(这也称为模板继承，即扩展页从基页继承元素。)
 
-Also, because you'll likely create many pages that extend the same template, it's helpful to create a code snippet in VS Code with which you can quickly initialize new page templates. A snippet helps you avoid tedious and error-prone copy-paste operations.
+另外，因为您可能会创建许多扩展相同模板的页面，所以在 VS Code 中创建一个可以快速初始化新页面模板的代码片段是很有帮助的。代码段可以帮助您避免繁琐且容易出错的复制粘贴操作。
 
-The following sections walk through different parts of this process.
+下面几节将介绍这个过程的不同部分。
 
-### Create a base page template and styles
+### 创建基本页面模板和样式
 
-A base page template in Django contains all the shared parts of a set of pages, including references to CSS files, script files, and so forth. Base templates also define one or more **block** tags with content that extended templates are expected to override. A block tag is delineated by `{% block <name> %}` and `{% endblock %}` in both the base template and extended templates.
+Django中的基本页面模板包含一组页面的所有共享部分，包括对CSS文件、脚本文件等的引用。基本模板还定义了一个或多个 **block** 标记，其中包含扩展模板期望覆盖的内容。块标记由基本模板和扩展模板中的 `{% block %}` 和 `{% endblock %}` 来描述。
 
-The following steps demonstrate creating a base template.
+下面的步骤演示如何创建基本模板。
 
-1. In the `templates/hello` folder, create a file named `layout.html` with the contents below, which contains blocks named "title" and "content". As you can see, the markup defines a simple nav bar structure with links to Home, About, and Contact pages, which you create in a later section. Notice the use of Django's `{% url %}` tag to refer to other pages through the names of the corresponding URL patterns rather than by relative path.
+1. 在 `templates/hello` 文件夹中，创建一个名为 `layout.html` 的文件，其内容如下，其中包含了名为 "title" 和 "content" 的块。如您所见，标记定义了一个简单的导航条结构，其中包含指向 Home、About 和 Contact 页面的链接，您将在后面的部分中创建这些链接。请注意 Django 的 `{% url %}` 标记是通过相应URL模式的名称而不是通过相对路径来引用其他页面的。
 
     ```html
     <!DOCTYPE html>
@@ -501,7 +498,7 @@ The following steps demonstrate creating a base template.
     </html>
     ```
 
-1. Add the following styles to `static/hello/site.css` below the existing "message" style, and save the file. (This walkthrough doesn't attempt to demonstrate responsive design; these styles simply generate a reasonably interesting result.)
+1. 将以下样式添加到 `static/hello/site.css` 文件的 "message" 样式下，并保存文件。(本演练不试图演示响应式设计;这些样式简单地生成了一个相当有趣的结果。
 
     ```css
     .navbar {
@@ -533,17 +530,17 @@ The following steps demonstrate creating a base template.
     }
     ```
 
-You can run the app at this point, but because you haven't made use of the base template anywhere and haven't changed any code files, the result is the same as the previous step. Complete the remaining sections to see the final effect.
+此时您可以运行应用程序，但是因为您没有在任何地方使用基本模板，也没有更改任何代码文件，所以结果与前面的步骤相同。完成剩下的部分来查看最终的效果。
 
-### Create a code snippet
+### 创建一个代码片段
 
-Because the three pages you create in the next section extend `layout.html`, it saves time to create a **code snippet** to initialize a new template file with the appropriate reference to the base template. A code snippet provides a consistent piece of code from a single source, which avoids errors that can creep in when using copy-paste from existing code.
+因为在下一节中创建的三个页面将扩展为 `layout.html`，所以创建一个 **code snippet** 来初始化一个新模板文件将节省时间，该文件将包含对基本模板的适当引用。代码片段提供来自单个源的一致代码段，这避免了在使用现有代码的复制粘贴时可能出现的错误。
 
-1. In VS Code, select the **File** (Windows/Linux) or **Code** (macOS), menu, then select **Preferences** > **User snippets**.
+1. 在 VS Code, 选择 **File** (Windows/Linux) 或者 **Code** (macOS), 菜单, 然后选择 **Preferences** > **User snippets**.
 
-1. In the list that appears, select **html**. (The option may appear as "html.json" in the **Existing Snippets** section of the list if you've created snippets previously.)
+1. 在出现的列表中, 选择 **html** 。 (如果您以前创建过代码片段，该选项可能会在列表的 **Existing Snippets** 部分显示为 "html.json" 。)
 
-1. After VS code opens `html.json`, add the code below within the existing curly braces. (The explanatory comments, not shown here, describe details such as how the `$0` line indicates where VS Code places the cursor after inserting a snippet):
+1. 在 VS code 打开 `html.json` 之后，将下面的代码添加到现有的花括号中。(此处未显示的注释描述了一些细节，比如 `$0` 行如何指示 VS code 在插入代码段后将光标放在何处):
 
     ```json
     "Django Tutorial: template extending layout.html": {
@@ -561,38 +558,38 @@ Because the three pages you create in the next section extend `layout.html`, it 
     },
     ```
 
-1. Save the `html.json` file (`kb(workbench.action.files.save)`).
+1. 保存 html.json 文件
 
-1. Now, whenever you start typing the snippet's prefix, such as `djext`, VS Code provides the snippet as an autocomplete option, as shown in the next section. You can also use the **Insert Snippet** command to choose a snippet from a menu.
+1. 现在，无论何时开始键入代码片段的前缀，例如 `djext` ,  VS Code 都会将代码片段作为自动完成选项提供，如下一节所示。您还可以使用 **Insert Snippet** 命令从菜单中选择一个代码段。
 
-For more information on code snippets in general, refer to [Creating snippets](/docs/editor/userdefinedsnippets.md).
+有关代码段的更多信息，请参考 [Creating snippets](/docs/editor/userdefinedsnippets.md).
 
-### Use the code snippet to add pages
+### 使用代码片段添加页面
 
-With the code snippet in place, you can quickly create templates for the Home, About, and Contact pages.
+有了适当的代码片段，您就可以快速地为主页、About和Contact页面创建模板。
 
-1. In the `templates/hello` folder, create a new file named `home.html`, Then start typing `djext` to see the snippet appear as a completion:
+1. 在 `templates/hello` 文件夹中，创建一个名为 `home.html` 的新文件，然后开始键入 `djext` ，看到代码片段为完成:
 
     ![Django tutorial: autocompletion for the djextlayout code snippet](images/django-tutorial/autocomplete-for-code-snippet.png)
 
-    When you select the completion, the snippet's code appears with the cursor on the snippet's insertion point:
+    当您选择完成时，代码片段的代码将与光标一起出现在代码片段的插入点上:
 
     ![Django tutorial: insertion of the djextlayout code snippet](images/django-tutorial/code-snippet-inserted.png)
 
-1. At the insertion point in the "title" block, write `Home`, and in the "content" block, write `<p>Home page for the Visual Studio Code Django tutorial.</p>`, then save the file. These lines are the only unique parts of the extended page template:
+1. 在 "title" 块中的插入点写入 `Home` ，在 "content" 块中写入 `<p>Home page for the Visual Studio Code Django tutorial.</p>` ，然后保存文件。这些行是扩展页面模板唯一独特的部分:
 
-1. In the `templates/hello` folder, create `about.html`, use the snippet to insert the boilerplate markup, insert `About us` and `<p>About page for the Visual Studio Code Django tutorial.</p>` in the "title" and "content" blocks, respectively, then save the file.
+1. 在 `templates/hello` 文件夹中，创建 `about.html` ，使用代码段插入样板标记，分别在 "title" 和 "content" 块中插入 `About us` 和 `<p>About page for the Visual Studio Code Django tutorial.</p>` ，然后保存文件。
 
-1. Repeat the previous step to create `templates/hello/contact.html` using `Contact us` and `<p>Contact page for the Visual Studio Code Django tutorial.</p>`.
+1. 重复前面的步骤，使用 `Contact us` 和 `<p>Contact page for the Visual Studio Code Django tutorial.</p>` 创建 `templates/hello/contact.html`
 
-1. In the app's `urls.py`, add routes for the /about and /contact pages. Be mindful that the `name` argument to the `path` function defines the name with which you refer to the page in the `{% url %}` tags in the templates.
+1. 在 app 的 `urls.py` 中，添加 /about 和 /contact 页面的路由。注意， `path` 函数的 `name` 参数定义了在模板的 `{% url %}` 标记中引用页面的名称。
 
     ```python
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     ```
 
-1. In `views.py`, add functions for the /about and /contact routes that refer to their respective page templates. Also modify the `home` function to use the `home.html` template.
+1. 在 `views.py` 中，为引用各自页面模板的 /about 和 /contact 路由添加功能。还可以修改 `home` 函数以使用 `home.html` 模板。
 
     ```python
     # Replace the existing home function with the one below
@@ -606,41 +603,41 @@ With the code snippet in place, you can quickly create templates for the Home, A
         return render(request, "hello/contact.html")
     ```
 
-### Run the app
+### 运行 app
 
-With all the page templates in place, save `views.py`, run the app, and open a browser to the home page to see the results. Navigate between the pages to verify that the page templates are properly extending the base template.
+有了所有的页面模板，保存 `views.py` ，运行应用程序，并打开浏览器到主页查看结果。在页面之间导航，以验证页面模板是否正确地扩展了基本模板。
 
 ![Django tutorial: app rendering a common nav bar from the base template](images/django-tutorial/full-app.png)
 
-## Work with data, data models, and migrations
+## 处理数据、数据模型和迁移
 
-Many web apps work with information stored in a database, and Django makes it easy to represent the objects in that database using *models*. In Django, a model is a Python class, derived from `django.db.models.Model`, that represents a specific database object, typically a table. You place these classes in an app's `models.py` file.
+许多web应用程序使用存储在数据库中的信息，Django使用 *models* 方便地表示数据库中的对象。在 Django 中，模型是一个Python类，派生自 `django.db.models.Model` ，它表示一个特定的数据库对象，通常是一个表。你把这些类放在应用的 `models.py` 文件中。
 
-With Django, your work with your database almost exclusively through the models you define in code. Django's "migrations" then handle all the details of the underlying database automatically as you evolve the models over time. The general workflow is as follows:
+使用 Django，您几乎完全通过在代码中定义的模型来处理数据库。Django 的 "migrations" 会自动处理底层数据库的所有细节，随着时间的推移，您可以对模型进行改进。一般工作流程如下:
 
-1. Make changes to the models in your *models.py* file.
-1. Run `python manage.py makemigrations` to generate scripts in the `migrations` folder that migrate the database from its current state to the new state.
-1. Run `python manage.py migrate` to apply the scripts to the actual database.
+1. 更改 *models.py* 文件中的模型。
+1. 运行 `python manage.py makemigrations` 以在 `migrations` 文件夹中生成将数据库从当前状态迁移到新状态的脚本。
+1. 运行 `python manage.py migrate` 将脚本应用于实际的数据库。
 
-The migration scripts effectively record all the incremental changes you make to your data models over time. By applying the migrations, Django updates the database to match your models. Because each incremental change has its own script, Django can automatically migrate *any* previous version of a database (including a new database) to the current version. As a result, you need concern yourself only with your models in `models.py`, never with the underlying database schema or the migration scripts. You let Django do that part!
+迁移脚本有效地记录了您随时间对数据模型所做的所有增量更改。通过应用迁移，Django更新数据库以匹配您的模型。因为每个增量更改都有自己的脚本，所以Django可以自动地将任何以前版本的数据库(包括新数据库)迁移到当前版本。因此，您只需要关心 `models.py` 中的模型，而不需要关心底层数据库模式或迁移脚本。你让Django演那个角色!
 
-In code, too, you work exclusively with your model classes to store and retrieve data; Django handles the underlying details. The one exception is that you can write data into your database using the Django administrative utility [loaddata command](https://docs.djangoproject.com/en/2.1/ref/django-admin/#loaddata). This utility is often used to initialize a data set after the `migrate` command has initialized the schema.
+在代码中，您也可以只使用模型类来存储和检索数据; Django 处理底层细节。唯一的例外是，可以使用Django管理实用程序 [loaddata command](https://docs.djangoproject.com/en/2.1/ref/django-admin/#loaddata) 将数据写入数据库。此实用程序通常用于在 `migrate` 命令初始化模式之后初始化数据集。
 
-When using the `db.sqlite3` file, you can also work directly with the database using a tool like the [SQLite browser](http://sqlitebrowser.org/). It's fine to add or delete records in tables using such a tool, but avoid making changes to the database schema because the database will then be out of sync with your app's models. Instead, change the models, run `makemigrations`, then run `migrate`.
+在使用 `db.sqlite3` 文件时，还可以使用 [SQLite browser](http://sqlitebrowser.org/) 之类的工具直接处理数据库。使用这样的工具在表中添加或删除记录是可以的，但是要避免更改数据库模式，因为这样数据库就会与应用程序的模型不同步。相反，更改模型，运行 `makemigrations` ，然后运行 `migrate` 。
 
-### Types of databases
+### 数据库类型
 
-By default, Django includes a `db.sqlite3` file for an app's database that's suitable for development work. As described on [When to use SQLite](https://www.sqlite.org/whentouse.html) (sqlite.org), SQLite works fine for low to medium traffic sites with fewer than 100 K hits/day, but is not recommended for higher volumes. It's also limited to a single computer, so it cannot be used in any multi-server scenario such as load-balancing and geo-replication.
+默认情况下，Django为应用程序的数据库提供了一个适合于开发工作的 `db.sqlite3` 文件。正如在[When to use SQLite](https://www.sqlite.org/whentouse.html) (sqlite.org)中所描述的，SQLite适用于低流量或中等流量的网站，但不推荐用于高流量的网站。它还仅限于一台计算机，因此不能用于任何多服务器场景，如负载平衡和异地备份。
 
-For these reasons, consider using a production-level data store such as [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), and [SQL Server](https://www.microsoft.com/en-ca/sql-server/). For information on Django's support for other databases, see [Database setup](https://docs.djangoproject.com/en/2.1/intro/tutorial02/#database-setup). You can also use the [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) to work with Azure storage services like tables and blobs.
+由于这些原因，可以考虑使用生产级的数据存储，如 [PostgreSQL](https://www.postgresql.org/)、[MySQL](https://www.mysql.com/) 和 [SQL Server](https://www.microsoft.com/en-ca/sql-server/) 。有关 Django 对其他数据库的支持的信息，请参阅 [Database setup](https://docs.djangoproject.com/en/2.1/intro/tutorial02/#database-setup) 。您还可以使用 [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) 来处理 Azure 存储服务，比如 tables 和 blobs 。
 
-### Define models
+### 定义模型
 
-A Django model is again a Python class derived from `django.db.model.Models`, which you place in the app's `models.py` file. In the database, each model is automatically given a unique ID field named `id`. All other fields are defined as properties of the class using types from `django.db.models` such as `CharField` (limited text), `TextField` (unlimited text), `EmailField`, `URLField`, `IntegerField`, `DecimalField`, `BooleanField`. `DateTimeField`, `ForeignKey`, and `ManyToMany`, among others. (See the [Model field reference](https://docs.djangoproject.com/en/2.1/ref/models/fields/) in the Django documentation for details.)
+Django 模型也是一个派生自 `django.db.model.Models` 的 Python 类，您可以将它放在应用程序的 `models.py` 文件中。在数据库中，每个模型都自动给出一个名为 `id` 的唯一ID字段。所有其他字段被定义为使用 `django.db.models` 类型的类的属性，如 `CharField` (有限的文本)、 `TextField` (无限的文本)、 `EmailField` 、 `URLField` 、 `IntegerField` 、 `DecimalField` 、 `BooleanField` 、 `DateTimeField`， `ForeignKey`， `ManyToMany`，等等。(详细信息请参阅 Django 文档中的 [Model field reference](https://docs.djangoproject.com/en/2.1/ref/models/fields/) )
 
-Each field takes some attributes, like `max_length`. The `blank=True` attribute means the field is optional; `null=true` means that a value is optional. There is also a `choices` attribute that limits values to values in an array of data value/display value tuples.
+每个字段都有一些属性，比如 `max_length` 。 `blank=True` 属性表示该字段是可选的 ;  `null=true` 表示一个值是可选的。还有一个 `choices` 属性，它将值限制为数据值/显示值元组数组中的值。
 
-For example, add the following class in `models.py` to define a data model that represents dated entries in a simple message log:
+例如，在 `models.py` 中添加以下类来定义一个数据模型，它表示一个简单的消息日志中的日期项:
 
 ```python
 from django.db import models
@@ -656,26 +653,26 @@ class LogMessage(models.Model):
         return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 ```
 
-A model class can include methods that return values computed from other class properties. Models typically include a `__str__` method that returns a string representation of the instance.
+模型类可以包含从其他类属性计算的返回值的方法。模型通常包含 `__str__` 方法，该方法返回实例的字符串表示形式。
 
-### Migrate the database
+### 迁移数据库
 
-Because you changed your data models by editing `models.py`, you need to update the database itself. In VS Code, open a Terminal with your virtual environment activated (use the **Terminal: Create New Integrated Terminal** command, `kb(workbench.action.terminal.new)`)), navigate to the project folder, and run the following commands:
+因为通过编辑 `models.py` 更改了数据模型，所以需要更新数据库本身。在VS Code中，打开一个终端，激活您的虚拟环境(使用 **Terminal: Create New Integrated Terminal** 命令)，导航到项目文件夹，运行以下命令:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-Take a look in the `migrations` folder to see the scripts that `makemigrations` generates. You can also look at the database itself to see that the schema is updated.
+查看 `migrations` 文件夹，查看 `makemigrations` 生成的脚本。您还可以查看数据库本身，以查看模式是否更新。
 
-If you see errors when running the commands, make sure you're not using a debugging terminal that's left over from previous steps, as they may not have the virtual environment activated.
+如果在运行命令时看到错误，请确保没有使用前面步骤遗留下来的调试终端，因为它们可能没有激活虚拟环境。
 
-### Use the database through the models
+### 通过模型使用数据库
 
-With your models in place and the database migrated, you can store and retrieve data using only your models. In this section, you add a form page to the app through which you can log a message. You then modify the home page to display those messages. Because you modify many code files here, be mindful of the details.
+有了模型并迁移了数据库之后，您只需要使用模型存储和检索数据。在本节中，您将向 app 添加一个表单页面，通过它可以记录消息。然后修改主页以显示这些消息。因为您在这里修改了许多代码文件，所以要注意细节。
 
-1. In the `hello` folder (where you have `views.py`), create a new file named `forms.py` with the following code, which defines a Django form that contains field drawn from the data model, `LogMessage`:
+1. 在 `hello` 文件夹中(其中有 `views.py` )，用以下代码创建一个名为 `forms.py` 的新文件，它定义了一个 Django 表单，其中包含从数据模型 `LogMessage` 中提取的字段:
 
     ```python
     from django import forms
@@ -687,7 +684,7 @@ With your models in place and the database migrated, you can store and retrieve 
             fields = ("message",)   # NOTE: the trailing comma is required
     ```
 
-1. In the `templates/hello` folder, create a new template named `log_message.html` with the following contents, which assumes that the template is given a variable named `form` to define the body of the form. It then adds a submit button with the label "Log".
+1. 在 `templates/hello` 文件夹中，使用以下内容创建一个名为 `log_message.html` 的新模板，该模板假设有一个名为 `form` 的变量来定义表单主体。然后添加一个带有标签 "Log" 的提交按钮。
 
     ```html
     {% extends "hello/layout.html" %}
@@ -703,9 +700,9 @@ With your models in place and the database migrated, you can store and retrieve 
     {% endblock %}
     ```
 
-    > **Note**: Django's `{% csrf_token %}` tag provides protection from cross-site request forgeries. See [Cross Site Request Forgery protection](https://docs.djangoproject.com/en/2.1/ref/csrf/) in the Django documentation for details.
+    > **注意**: Django的 `{% csrf_token %}` 标签提供了对跨站点请求伪造的保护。有关详细信息，请参阅Django文档中的 [Cross Site Request Forgery protection](https://docs.djangoproject.com/en/2.1/ref/csrf/) 。
 
-1. In the app's `static/hello/site.css` file, add a rule to make the input form wider:
+1. 在应用程序的 `static/hello/site.css` 文件中，添加一条规则使输入表单更宽:
 
     ```css
     input[name=message] {
@@ -713,13 +710,13 @@ With your models in place and the database migrated, you can store and retrieve 
     }
     ```
 
-1. In the app's `urls.py` file, add a route for the new page:
+1. 在应用程序的 `urls.py` 文件中，为新页面添加一条路径:
 
     ```python
     path("log/", views.log_message, name="log"),
     ```
 
-1. In `views.py`, define the view named `log_message` (as referred to by the URL route). This view handles both HTTP GET and POST cases. In the GET case (the `else:` section), it just displays the form that you defined in the previous steps. In the POST case, it retrieves the data from the form into a data object (`message`), sets the timestamp, then saves that object at which point it's written to the database:
+1. 在 `views.py` 中，定义名为 `log_message` 的视图(通过URL路由引用)。这个视图同时处理HTTP GET和POST两种情况。在GET案例( `else:` 部分)中，它只显示您在前面步骤中定义的表单。在POST的情况下，它从表单中检索数据到一个数据对象( `message` )中，设置时间戳，然后保存该对象写入数据库的时间:
 
     ```python
     # Add these to existing imports at the top of the file:
@@ -741,22 +738,22 @@ With your models in place and the database migrated, you can store and retrieve 
             return render(request, "hello/log_message.html", {"form": form})
     ```
 
-1. One more step before you're ready to try everything out! In `templates/hello/layout.html`, add a link in the "navbar" div for the message logging page:
+1. 在你准备好尝试一切之前，再多走一步! 在 `templates/hello/layout.html` 中，在 "navbar" div 中为消息日志页面添加一个链接:
 
     ```html
     <!-- Insert below the link to Home -->
     <a href="{% url 'log' %}" class="navbar-item">Log Message</a>
     ```
 
-1. Run the app and open a browser to the home page. Select the **Log Message** link on the nav bar, which should display the message logging page:
+1. 运行该应用程序并打开主页的浏览器。选择导航栏上的 **Log Message** 链接，将显示消息日志页面:
 
     ![Django tutorial: the message logging page added to the app](images/django-tutorial/message-logging-page.png)
 
-1. Enter a message, select **Log**, and you should be taken back to the home page. The home page doesn't yet show any of the logged messages yet (which you remedy in a moment). Feel free to log a few more messages as well. If you want, peek in the database using a tool like SQLite Browser to see that records have been created. Open the database as read-only, or otherwise remember to close the database before using the app, otherwise the app will fail because the database is locked.
+1. 输入一条消息，选择 **Log** ，您应该被带回到主页。主页还没有显示任何已记录的消息(稍后您将对此进行纠正)。您也可以随意记录更多的消息。如果需要，可以使用SQLite浏览器之类的工具在数据库中查看是否创建了记录。以只读方式打开数据库，或者在使用应用程序之前关闭数据库，否则应用程序将失败，因为数据库已被锁定。
 
-1. Stop the app when you're done.
+1. 完成后停止应用程序。
 
-1. Now modify the home page to display the logged messages. Start by replacing the contents of app's `templates/hello/home.html` file with the markup below. This template expects a context variable named `message_list`. If it receives one (checked with the `{% if message_list %}` tag), it then iterates over that list (the `{% for message in message_list %}` tag) to generate table rows for each message. Otherwise the page indicates that no messages have yet been logged.
+1. 现在修改主页以显示记录的消息。首先用下面的标记替换 app 的 `templates/hello/home.html` 文件的内容。该模板需要一个名为 `message_list` 的上下文变量。如果它收到一条消息(通过 `{% if message_list %}` 标记检查)，那么它将遍历该列表( `{% for message in message_list %}` 标记)，为每个消息生成表行。否则，该页面表明还没有记录任何消息。
 
     ```html
     {% extends "hello/layout.html" %}
@@ -793,7 +790,7 @@ With your models in place and the database migrated, you can store and retrieve 
     {% endblock %}
     ```
 
-1. In `static/hello/site.css`, add a rule to format the table a little:
+1. 在 `static/hello/site.css` 中，添加一个规则来稍微格式化表格:
 
     ```css
     .message_list th,td {
@@ -802,13 +799,13 @@ With your models in place and the database migrated, you can store and retrieve 
     }
     ```
 
-1. In `views.py`, import Django's generic `ListView` class, which we'll use to implement the home page:
+1. 在 `views.py` 中，导入 Django 的通用 `ListView` 类，我们将使用它来实现主页:
 
     ```python
     from django.views.generic import ListView
     ```
 
-1. Also in `views.py`, replace the `home` function with a *class* named `HomeListView`, derived from `ListView`, which ties itself to the `LogMessage` model and implements a function `get_context_data` to generate the context for the template.
+1. 同样在 `views.py` 中，将 `home` 函数替换为一个名为 `HomeListView` 的 *类* ,  `HomeListView` 派生于 `ListView` ，它将自己与 `LogMessage` 模型绑定，并实现一个 `get_context_data` 函数来生成模板的上下文。
 
     ```python
     # Remove the old home function if you want; it's no longer used
@@ -822,13 +819,13 @@ With your models in place and the database migrated, you can store and retrieve 
             return context
     ```
 
-1. In the app's `urls.py`, import the data model:
+1. 在app的 `urls.py` 中。导入数据模型:
 
     ```python
     from hello.models import LogMessage
     ```
 
-1. Also in `urls.py`, make a variable for the new view, which retrieves the five most recent `LogMessage` objects in descending order (meaning that it queries the database), and then provides a name for the data in the template context (`message_list`), and identifies the template to use:
+1. 同样在 `urls.py` 中，为新视图创建一个变量，该变量按降序检索最近的5个 `LogMessage` 对象(即查询数据库)，然后为模板上下文中的数据提供一个名称( `message_list` )，并标识要使用的模板:
 
     ```python
     home_list_view = views.HomeListView.as_view(
@@ -838,104 +835,104 @@ With your models in place and the database migrated, you can store and retrieve 
     )
     ```
 
-1. In `urls.py`, modify the path to the home page to use the `home_list_view` variable:
+1. 在 `urls.py`，修改主页的路径，使用 `home_list_view` 变量:
 
     ```python
         # Replace the existing path for ""
         path("", home_list_view, name="home"),
     ```
 
-1. Start the app and open a browser to the home page, which should now display messages:
+1. 启动应用程序，打开主页的浏览器，现在应该会显示以下信息:
 
     ![Django tutorial: app home page displaying message from the database](images/django-tutorial/app-with-message-list.png)
 
-1. Stop the app when you're done.
+1. 完成后停止应用程序。
 
-## Use the debugger with page templates
+## 使用带有页面模板的调试器
 
-As shown in the previous section, page templates can contain procedural directives like `{% for message in message_list %}` and `{% if message_list %}`, rather than only passive, declarative elements like `{% url %}` and `{% block %}`. As a result, you can have programming errors inside templates as with any other procedural code.
+如前一节所示，页面模板可以包含 `{% for message in message_list %}` 和 `{% if message_list %}` 这样的程序性指令，而不仅仅是 `{% url %}` 和 `{% block %}` 这样的被动的声明性元素。因此，与任何其他过程代码一样，模板内部也可能出现编程错误。
 
-Fortunately, the Python Extension for VS Code provides template debugging when you have `"django": true` in the debugging configuration (as you do already). The following steps demonstrate this capability:
+幸运的是，当您在调试配置中有 `"django": true` 时 ( 您已经这样做了 )，VS Code 的Python 扩展提供了模板调试。以下步骤演示了这种能力:
 
-1. In `templates/hello/home.html`, set breakpoints on both the `{% if message_list %}` and `{% for message in message_list %}` lines, as indicated by the yellow arrows in the image below:
+1. 在 `templates/hello/home.html` 中，在 `{% if message_list %}` 和 `{% for message in message_list %}` 线上设置断点，如下图中黄色箭头所示:
 
     ![Django tutorial: breakpoints set in a Django page template](images/django-tutorial/template-breakpoints.png)
 
-1. Run the app in the debugger and open a browser to the home page. (If you're already running the debugger, you don't have to restart the app after setting breakpoints; just refresh the page.) Observe that VS Code breaks into the debugger in the template on the `{% if %}` statement and shows all the context variables in the **Variables** pane:
+1. 在调试器中运行该应用程序，并打开主页的浏览器。(如果你已经在运行调试器，你不需要在设置断点后重新启动应用程序;请刷新页面。)注意，VS代码在 `{% if %}` 语句的模板中进入调试器，并在 **Variables** 窗格中显示所有上下文变量:
 
     ![Django tutorial: debugger stopped at breakpoints in the page template](images/django-tutorial/template-debugger.png)
 
-1. Use the Step Over (`kb(workbench.action.debug.stepOver)`) command to step through the template code. Observe that the debugger steps over all declarative statements and pauses at any procedural code. For example, stepping through the `{% for message in message_list %}` loops lets you examine each value in `message` and lets you step to lines like `<td>\{{ message.log_date | date:'d M Y' }}</td>`.
+1. 使用 Step Over 命令逐步检查模板代码。观察调试器遍历所有声明性语句并暂停任何过程性代码。例如，遍历 `{% for message in message_list %}` 循环可以检查 `message` 中的每个值，还可以遍历像 `<td>\{{ message.log_date | date:'d M Y' }}</td>` 这样的行。
 
-1. You can also work with variables in the **Debug Console** panel. (Django filters like `date`, however, are not presently available in the console.)
+1. 您还可以使用 **Debug Console** 面板中的变量。(不过，像 `date` 这样的 Django 过滤器目前还不能在控制台中使用。)
 
-1. When you're ready, select Continue (`kb(workbench.action.debug.continue)`) to finish running the app and view the rendered page in the browser. Stop the debugger when you're done.
+1. 当你准备好了，选择继续完成运行应用程序，并在浏览器中查看呈现的页面。完成后停止调试器。
 
-## Optional activities
+## 可选活动
 
-The following sections describe additional steps that you might find helpful in your work with Python and Visual Studio Code.
+以下部分描述了您在使用 Python 和 Visual Studio Code 时可能会发现有帮助的其他步骤。
 
-### Create a requirements.txt file for the environment
+### 为环境创建一个 requirements.txt 文件
 
-When you share your app code through source control or some other means, it doesn't make sense to copy all the files in a virtual environment because recipients can always recreate that environment themselves.
+当您通过源代码控制或其他方式共享应用程序代码时，复制虚拟环境中的所有文件是没有意义的，因为收件人总是可以自己重新创建该环境。
 
-Accordingly, developers typically omit the virtual environment folder from source control and instead describe the app's dependencies using a `requirements.txt` file.
+因此，开发人员通常会忽略源代码控制中的虚拟环境文件夹，而是使用 `requirements.txt` 文件描述应用程序的依赖关系。
 
-Although you can create the file by hand, you can also use the `pip freeze` command to generate the file based on the exact libraries installed in the activated environment:
+虽然你可以手动创建文件，但你也可以使用 `pip freeze` 命令，根据安装在激活环境中的库生成文件:
 
-1. With your chosen environment selected using the **Python: Select Interpreter** command, run the **Terminal: Create New Integrated Terminal** command (`kb(workbench.action.terminal.new)`)) to open a terminal with that environment activated.
+1. 使用 **Python: Select Interpreter** 命令选择您所选择的环境后，运行 **Terminal: Create New Integrated Terminal** 命令以打开激活该环境的终端。
 
-1. In the terminal, run `pip freeze > requirements.txt` to create the `requirements.txt` file in your project folder.
+1. 在终端中，运行 `pip freeze > requirements.txt` 以在项目文件夹中创建 `requirements.txt` 文件。
 
-Anyone (or any build server) that receives a copy of the project needs only to run the `pip install -r requirements.txt` command to reinstall the packages on which the app depends within the active environment.
+任何接收到项目副本的人(或任何构建服务器)只需要运行 `pip install -r requirements.txt` 命令就可以在活动环境中重新安装应用程序所依赖的包。
 
-> **Note**: `pip freeze` lists all the Python packages you have installed in the current environment, including packages you aren't currently using. The command also lists packages with exact version numbers, which you might want to convert to ranges for more flexibility in the future. For more information, see [Requirements files](https://pip.readthedocs.io/1.1/requirements.html) in the pip command documentation.
+> **注意**: `pip freeze` 列出了您在当前环境中安装的所有Python包，包括您当前没有使用的包。该命令还列出了具有确切版本号的包，您可能希望将这些版本号转换为范围，以便将来获得更大的灵活性。有关更多信息，请参见 pip 命令文档中的[Requirements files](https://pip.readthedocs.io/1.1/requirements.html)。
 
-### Create a superuser and enable the administrative interface
+### 创建超级用户并启用管理界面
 
-By default, Django provides an administrative interface for a web app that's protected by authentication. The interface is implemented through the build-in `django.contrib.admin` app, which is included by default in the project's `INSTALLED_APPS` list (`settings.py`), and authentication is handled with the built-in `django.contrib.auth` app, which is also in `INSTALLED_APPS` by default.
+缺省情况下，Django 为受身份验证保护的 web 应用程序提供管理界面。该接口通过内置的 `django.contrib.admin` 应用程序实现， `django.contrib.admin` 应用程序默认包含在项目的 `INSTALLED_APPS` 列表( `settings.py` )中，认证使用内置的 `django.contrib.auth` 应用程序处理， `django.contrib.auth` 应用程序默认也在 `INSTALLED_APPS` 中。
 
-Perform the following steps to enable the administrative interface:
+执行以下步骤以启用管理界面:
 
-1. Create a superuser account in the app by opening a Terminal in VS Code for your virtual environment, then running the command `python manage.py createsuperuser --username=<username> --email=<email>`, replacing `<username>` and `<email>`, of course, with your personal information. When you run the command, Django prompts you to enter and confirm your password.
+1. 在 app 中为你的虚拟环境打开一个 VS Code 的终端，创建一个超级用户账号，然后运行命令 `python manage.py createsuperuser --username=<username> --email=<email>` ，当然是用你的个人信息代替 `<username>` 和 `<email>` 。当您运行该命令时，Django会提示您输入并确认您的密码。
 
-    Be sure to remember your username and password combination. These are the credentials you use to authenticate with the app.
+    请务必记住您的用户名和密码组合。这些是您用来验证应用程序的凭据。
 
-1. Add the following URL route in the project-level `urls.py` (`web_project/urls.py` in this tutorial) to point to the built-in administrative interface:
+1. 在项目级 `urls.py` (本教程中的 `web_project/urls.py` )中添加以下URL路由，以指向内置的管理界面:
 
     ```python
     # This path is included by default when creating the app
      path("admin/", admin.site.urls),
     ```
 
-1. Run the server, the open a browser to the app's /admin page (such as `http://127.0.0.1:8000/admin` when using the development server).
+1. 运行服务器，打开浏览器到应用程序的 /admin 页面(如使用开发服务器时的 `http://127.0.0.1:8000/admin` )。
 
-1. A login page appears, courtesy of `django.contrib.auth`. Enter your superuser credentials.
+1. 出现一个登录页面，由 `django.contrib.auth` 提供。输入您的超级用户凭证。
 
     ![Django tutorial: default Django login prompt](images/django-tutorial/login-prompt.png)
 
-1. Once you're authenticated, you see the default administration page, through which you can manage users and groups:
+1. 一旦你通过认证，你可以看到默认的管理页面，通过这个页面你可以管理用户和组:
 
     ![Django tutorial: the default Django administrative interface](images/django-tutorial/default-admin-interface.png)
 
-You can customize the administrative interface as much as you like. For example, you could provide capabilities to edit and remove entries in the database. For more information on making customizations, refer to the [Django admin site documentation](https://docs.djangoproject.com/en/2.1/ref/contrib/admin/).
+您可以根据需要定制管理接口。例如，您可以提供编辑和删除数据库中的条目的功能。有关定制的更多信息，请参考 [Django admin site documentation](https://docs.djangoproject.com/en/2.1/ref/contrib/admin/).
 
-## Next steps
+## 下一个步骤
 
-Congratulations on completing this walkthrough of working with Django in Visual Studio Code!
+祝贺您完成了在Visual Studio Code中使用Django的演练!
 
-The completed code project from this tutorial can be found on GitHub: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
+本教程中的完整代码项目可以在GitHub上找到: [python-sample-vscode-django-tutorial](https://github.com/Microsoft/python-sample-vscode-django-tutorial).
 
-In this tutorial, we've only scratched the surface of everything Django can do. Be sure to visit the [Django documentation](https://docs.djangoproject.com/en/2.1/) and the [official Django tutorial](https://docs.djangoproject.com/en/2.1/intro/tutorial01/) for many more details on views, templates, data models, URL routing, the administrative interface, using other kinds of databases, deployment to production, and more.
+在本教程中，我们只讨论了Django所能做的所有事情的皮毛。请务必访问 [Django documentation](https://docs.djangoproject.com/en/2.1/) 和 [official Django tutorial](https://docs.djangoproject.com/en/2.1/intro/tutorial01/)，以获得关于视图、模板、数据模型、URL路由、管理接口、使用其他类型的数据库、部署到生产环境等等的更多详细信息。
 
-To try your app on a production website, check out the tutorial [Deploy Python apps to Azure App Service using Docker Containers](https://docs.microsoft.com/azure/python/tutorial-deploy-containers-01). Azure also offers a standard container, [App Service on Linux](https://docs.microsoft.com/azure/python/tutorial-deploy-app-service-on-linux-01), to which you deploy web apps from within VS Code.
+要在产品网站上试用你的应用程序，请查看教程 [Deploy Python apps to Azure App Service using Docker Containers](https://docs.microsoft.com/azure/python/tutorial-deploy-containers-01)。Azure还提供了一个标准的容器，[App Service on Linux](https://docs.microsoft.com/azure/python/tutorial-deploy-app-service-on-linux-01)，您可以在 VS Code 中部署 web 应用程序。
 
-You may also want to review the following articles in the VS Code docs that are relevant to Python:
+你也可以在 VS Code 文档中查看以下与 Python 相关的文章:
 
-- [Editing Python code](/docs/python/editing.md)
+- [编辑Python代码](/docs/python/editing.md)
 - [Linting](/docs/python/linting.md)
-- [Managing Python environments](/docs/python/environments.md)
-- [Debugging Python](/docs/python/debugging.md)
-- [Testing](/docs/python/testing.md)
+- [管理Python环境](/docs/python/environments.md)
+- [Python调试](/docs/python/debugging.md)
+- [测试](/docs/python/testing.md)
 
-If you encountered any problems in the course of this tutorial, feel free to file an issue in the [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues).
+如果您在本教程中遇到任何问题，请随时在 [VS Code documentation repository](https://github.com/Microsoft/vscode-docs/issues) 中提交问题
