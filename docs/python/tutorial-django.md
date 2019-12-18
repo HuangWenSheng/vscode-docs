@@ -629,7 +629,7 @@ Django中的基本页面模板包含一组页面的所有共享部分，包括�
 
 默认情况下，Django为应用程序的数据库提供了一个适合于开发工作的 `db.sqlite3` 文件。正如在[When to use SQLite](https://www.sqlite.org/whentouse.html) (sqlite.org)中所描述的，SQLite适用于低流量或中等流量的网站，但不推荐用于高流量的网站。它还仅限于一台计算机，因此不能用于任何多服务器场景，如负载平衡和异地备份。
 
-由于这些原因，可以考虑使用生产级的数据存储，如 [PostgreSQL](https://www.postgresql.org/)、[MySQL](https://www.mysql.com/) 和 [SQL Server](https://www.microsoft.com/en-ca/sql-server/) 。有关 Django 对其他数据库的支持的信息，请参阅 [Database setup](https://docs.djangoproject.com/en/2.1/intro/tutorial02/#database-setup) 。您还可以使用 [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) 来处理 Azure 存储服务，比如 tables 和 blobs 。
+由于这些原因，可以考虑使用生产级的数据存储，如 [PostgreSQL](https://www.postgresql.org/)、[MySQL](https://www.mysql.com/) 和 [SQL Server](https://www.microsoft.com/en-ca/sql-server/) 。有关 Django 对其他数据库的支持的信息，请参阅 [Database setup](https://docs.djangoproject.com/zh-hans/2.1/intro/tutorial02/#database-setup) 。您还可以使用 [Azure SDK for Python](https://docs.microsoft.com/azure/python/python-sdk-azure-get-started) 来处理 Azure 存储服务，比如 tables 和 blobs 。
 
 ### 定义模型
 
