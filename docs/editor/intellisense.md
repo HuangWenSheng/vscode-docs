@@ -7,49 +7,49 @@ PageTitle: IntelliSense in Visual Studio Code
 DateApproved: 10/9/2019
 MetaDescription:  Learn about Visual Studio Code IntelliSense (intelligent code completion).
 ---
-# IntelliSense
+# 智能感知
 
-IntelliSense is a general term for a variety of code editing features including: code completion, parameter info, quick info, and member lists. IntelliSense features are sometimes called by other names such as "code completion", "content assist", and "code hinting."
+智能感知是各种代码编辑特性的通用术语，包括:代码完成、参数信息、快速信息和成员列表。智能感知功能还有其他名称，如“代码完成”、“内容辅助”和“代码提示”。
 
 ![IntelliSense demo](images/intellisense/intellisense.gif)
 
-## IntelliSense for your programming language
+## 编程语言的智能感知
 
-Visual Studio Code IntelliSense is provided for JavaScript, TypeScript, JSON, HTML, CSS, SCSS, and Less out of the box. VS Code supports word based completions for any programming language but can also be configured to have richer IntelliSense by installing a language extension.
+Visual Studio Code 提供了对 JavaScript、TypeScript、JSON、HTML、CSS、SCSS 等的智能感知 。VS Code 支持任何编程语言的基于关键字的补全，但是也可以通过安装语言扩展来配置成更丰富的智能感知 。
 
-Below are the most popular language extensions in the [Marketplace](https://marketplace.visualstudio.com/vscode). Click on an extension tile below to read the description and reviews to decide which extension is best for you.
+下面是 [市场](https://marketplace.visualstudio.com/vscode) 上最流行的语言扩展。单击下面的扩展块阅读描述和评论，以决定哪个扩展最适合您。
 
 <div class="marketplace-extensions-languages-curated"></div>
 
-## IntelliSense features
+## 智能感知功能
 
-VS Code IntelliSense features are powered by a language service. A language service provides intelligent code completions based on language semantics and an analysis of your source code. If a language service knows possible completions, the IntelliSense suggestions will pop up as you type. If you continue typing characters, the list of members (variables, methods, etc.) is filtered to only include members containing your typed characters. Pressing `kbstyle(Tab)` or `kbstyle(Enter)` will insert the selected member.
+VS Code 智能感知功能是由语言服务提供的。语言服务提供基于语言语义和源代码分析的智能代码补全。如果语言服务知道可能的补全，那么在您键入时将弹出智能感知建议。如果继续键入字符，成员列表(变量、方法等)将被筛选为只包含包含键入字符的成员。 按 `kbstyle(Tab)` or `kbstyle(Enter)` 将插入所选成员。
 
-You can trigger IntelliSense in any editor window by typing `kb(editor.action.triggerSuggest)` or by typing a trigger character (such as the dot character (`kbstyle(.)`) in JavaScript).
+您可以在任何编辑器窗口中通过输入 `kb(editor.action.triggerSuggest)` 或输入一个触发字符 (比如JavaScript中的点字符 (`kbstyle(.)`) 来触发智能感知。
 
 ![intellisense in package json](images/intellisense/intellisense_packagejson.gif)
 
-> **Tip:** The suggestions widget supports CamelCase filtering, meaning you can type the letters which are upper cased in a method name to limit the suggestions. For example, "cra" will quickly bring up "createApplication".
+> **提示:** suggestions小部件支持CamelCase过滤，这意味着您可以在方法名称中键入大写字母来限制建议。例如，“cra”将快速打开“createApplication”。
 
-If you prefer, you can turn off IntelliSense while you type. See [Customizing IntelliSense](/docs/editor/intellisense.md#customizing-intellisense) below to learn how to disable or customize VS Code's IntelliSense features.
+如果你愿意，你可以在编码的时候关闭智能感知。 详见 [定制智能感知](/docs/editor/intellisense.md#customizing-intellisense) 。下面学习如何禁用或自定义VS Code 的智能感知特性。
 
-As provided by the language service, you can see **quick info** for each method by either pressing `kb(toggleSuggestionDetails)` or clicking the info icon. The accompanying documentation for the method will now expand to the side. The expanded documentation will stay so and will update as you navigate the list. You can close this by pressing `kb(toggleSuggestionDetails)` again or by clicking on the close icon.
+由语言服务提供，你可以看到 **快速信息** 的每个方法，要么按 `kb(toggleSuggestionDetails)` 或点击信息图标。该方法的相关文档现在将扩展到侧面。扩展的文档将保持不变，并在您浏览列表时更新。你可以通过再次点击 `kb(toggleSuggestionDetails)` 或者点击关闭图标来关闭它。
 
 ![quick info](images/intellisense/intellisense_docs.gif)
 
-After choosing a method you are provided with **parameter info**.
+在选择一个方法后，您将获得 **参数信息**.
 
 ![parameter info](images/intellisense/paramater_info.png)
 
-When applicable, a language service will surface the underlying types in the quick info and method signatures. In the image above, you can see several `any` types. Because JavaScript is dynamic and doesn't need or enforce types, `any` suggests that the variable can be of any type.
+如果适用，语言服务将在 quick info 和 method signatures 中显示底层类型。 在上图中，你可以看到几种 `any` 类型. 因为 JavaScript 是动态的，不需要或强制类型， `any` 表示变量可以是任何类型。
 
-## Types of completions
+## 类型的完成
 
-The JavaScript code below illustrates IntelliSense completions. IntelliSense gives both inferred proposals and the global identifiers of the project. The inferred symbols are presented first, followed by the global identifiers (shown by the document icon).
+下面的JavaScript代码演示了智能感知的完成。智能感知给出了推断的建议和项目的全局标识符。首先显示推断符号，然后是全局标识符(由文档图标显示)。
 
 ![intellisense icons](images/intellisense/intellisense_icons.png)
 
-VS Code IntelliSense offers different types of completions, including language server suggestions, snippets, and simple word based textual completions.
+VS Code 智能感知提供了不同类型的补全，包括语言服务器建议、代码片段和简单的基于单词的文本补全。
 
 |       |         |       |
 | ----- | ------- | ----- |
@@ -67,17 +67,17 @@ VS Code IntelliSense offers different types of completions, including language s
 | ![a square with ellipses forming the bottom show snippet prefix](images/intellisense/Snippet_16x.svg) | Snippet Prefixes | `snippet` |
 | ![a square with letters abc word completion](images/intellisense/String_16x.svg) | Words | `text` |
 
-## Customizing IntelliSense
+## 定制智能感知
 
-You can customize your IntelliSense experience in settings and key bindings.
+您可以在设置和键绑定中自定义智能感知体验。
 
-### Settings
+### 设置
 
-The settings shown below are the default settings. You can change these settings in your `settings.json` file as described in [User and Workspace Settings](/docs/getstarted/settings.md).
+下面显示的是默认设置。 您可以在 `settings.json` 中更改这些。[用户和工作区设置](/docs/getstarted/settings.md) 。
 
 ```javascript
 {
-    // Controls if quick suggestions should show up while typing
+    // 输入时控制是否显示快速建议
     "editor.quickSuggestions": {
         "other": true,
         "comments": false,
@@ -110,25 +110,25 @@ The settings shown below are the default settings. You can change these settings
 }
 ```
 
-### Tab Completion
+### Tab补全
 
-The editor supports "tab completion" which inserts the best matching completion when pressing `kb(insertBestCompletion)`. This works regardless of the suggest widget showing or not. Also, pressing `kb(insertNextSuggestion)` after inserting a suggestions will insert the next best suggestion.
+编辑器支持“tab补全”，当按下 `kb(insertBestCompletion)` 键时，它会插入最匹配的补全。无论是否显示建议小部件，这都是有效的。此外，在插入建议之后按下 `kb(insertNextSuggestion)` 将插入下一个最佳建议。
 
 ![Tab Completion](images/intellisense/tabCompletion.gif)
 
-By default, tab completion is disabled. Use the `editor.tabCompletion` setting to enable it. These values exist:
+默认情况下，Tab补全是禁用的。使用 `editor.tabCompletion` 设置启用。这些值为:
 
-* `off` - (default) Tab completion is disabled.
-* `on` - Tab completion is enabled for all suggestions and repeated invocations insert the next best suggestion.
-* `onlySnippets` - Tab completion only inserts static snippets which prefix match the current line prefix.
+* `off` - (默认) Tab补全是禁用。
+* `on` - 所有建议都启用了Tab补全，重复调用会插入次佳建议。
+* `onlySnippets` - 只Tab补全插入与当前行前缀匹配的静态代码片段。
 
 ### Locality Bonus
 
-Sorting of suggestions depends on extension information and on how well they match the current word you are typing. In addition, you can ask the editor to boost suggestions that appear closer to the cursor position, using the `editor.suggest.localityBonus` setting.
+建议的排序取决于扩展信息以及它们与当前输入的单词的匹配程度。此外，您还可以使用 `editor.suggest.localityBonus` 设置来要求编辑器增强显示在更靠近光标位置的建议。
 
 ![Sorted By Locality](images/intellisense/localitybonus.png)
 
-In above images you can see that `count`, `context`, and `colocated` are sorted based on the scopes in which they appear (loop, function, file).
+在上面的图片中，你可以看到 `count`, `context`, 和 `colocated` 是根据它们出现的范围(循环、函数、文件)来排序的。
 
 ### Suggestion selection
 
