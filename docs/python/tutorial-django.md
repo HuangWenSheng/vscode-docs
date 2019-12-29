@@ -328,7 +328,7 @@ Django 是一个高水平的，可用来快速、 安全、可伸缩开发 web �
 
 ## 使用模版和渲染页面
 
-到目前为止，您在本教程中创建的应用程序用Python代码仅生成纯文本web页面 。虽然可以直接在代码中生成HTML，但开发人员避免这样做，因为这样会将应用程序以 [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting) 方式打开 。例如，在本教程的 `hello_there` 函数中，可以考虑使用类似 `content = "<h1>Hello there, " + clean_name + "!</h1>` 的代码格式来格式化输出，其中 `content` 的结果直接提供给浏览器 。这个开放允许攻击者将恶意HTML(包括JavaScript代码)放置在 `clean_name` 后面的URL中运行。
+到目前为止，您在本教程中创建的应用程序用Python代码仅生成纯文本web页面 。虽然可以直接在代码中生成HTML，但开发人员避免这样做，因为这样应用程序将受到 [cross-site scripting (XSS) attacks](https://en.wikipedia.org/wiki/Cross-site_scripting) 跨站脚本攻击 。例如，在本教程的 `hello_there` 函数中，可以考虑使用类似 `content = "<h1>Hello there, " + clean_name + "!</h1>` 的代码格式来格式化输出，其中 `content` 的结果直接提供给浏览器 。这个开放允许攻击者将恶意HTML(包括JavaScript代码)放置在 `clean_name` 后面的URL中运行。
 
 一个更好的实践是通过使用 **templates** 将HTML完全排除在您的代码之外，这样您的代码只关心数据值而不关心渲染。
 
