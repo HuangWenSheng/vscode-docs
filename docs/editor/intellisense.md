@@ -17,7 +17,7 @@ MetaDescription:  Learn about Visual Studio Code IntelliSense (intelligent code 
 
 Visual Studio Code 提供了对 JavaScript、TypeScript、JSON、HTML、CSS、SCSS 等的智能感知 。VS Code 支持任何编程语言的基于关键字的补全，但是也可以通过安装语言扩展来配置成更丰富的智能感知 。
 
-下面是 [市场](https://marketplace.visualstudio.com/vscode) 上最流行的语言扩展。单击下面的扩展块阅读描述和评论，以决定哪个扩展最适合您。
+这里是 [市场](https://marketplace.visualstudio.com/vscode) 上最流行的语言扩展。单击下面的扩展块阅读描述和评论，以决定哪个扩展最适合您。
 
 <div class="marketplace-extensions-languages-curated"></div>
 
@@ -132,17 +132,17 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
 
 ### Suggestion selection
 
-By default, VS Code pre-selects the previously used suggestion in the suggestion list. This is very useful as you can quickly insert the same completion multiple times. If you'd like different behavior, for example, always select the top item in the suggestion list, you can use the `editor.suggestSelection` setting.
+默认情况下，VS Code 会在提示列表中预先选择以前使用过的提示。这非常有用，因为您可以多次快速地插入相同的补全。如果你想不一样，例如，总是选择提示列表中的第一项，你可以设置 `editor.suggestSelection` 。
 
-The available `editor.suggestSelection` values are:
+可设置的 `editor.suggestSelection` 参数值是:
 
-* `first` - Always select the top list item.
-* `recentlyUsed` - (default) The previously used item is selected unless a prefix (type to select) selects a different item.
-* `recentlyUsedByPrefix` - Select items based on previous prefixes that have completed those suggestions.
+* `first` - 始终选择顶部列表项。
+* `recentlyUsed` - (默认)选择以前使用过的项目， 除非前缀(type to select)选择不同的项。
+* `recentlyUsedByPrefix` - 根据以前完成这些提示的前缀选择项。
 
-"Type to select" means that the current prefix (roughly the text left of the cursor) is used to filter and sort suggestions. When this happens and when its result differs from the result of `recentlyUsed` it will be given precedence.
+“Type to select”表示当前前缀(大致是光标左边的文本)用于筛选和排序建议。当这种情况发生时，当它的结果与 `recentlyUsed` 的结果不同时，它将获得优先级。
 
-When using the last option, `recentlyUsedByPrefix`, VS Code remembers which item was selected for a specific prefix (partial text). For example, if you typed `co` and then selected `console`, the next time you typed `co`, the suggestion `console` would be pre-selected. This lets you quickly map various prefixes to different suggestions, for example `co` -> `console` and `con` -> `const`.
+当使用最后一个选项 `recentlyUsedByPrefix` 时，VS Code 会记住为特定的前缀(部分文本)选择了哪个项。例如，如果您输入 `co` ，然后选择 `console` ，那么下一次您输入 `co` 时，建议的 `console` 将被预先选择。这使您可以快速地将各种前缀映射到不同的建议，例如  `co` -> `console` and `con` -> `const` 。
 
 ### Snippets in suggestions
 
