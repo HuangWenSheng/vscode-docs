@@ -124,7 +124,7 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
 
 ### Locality Bonus
 
-建议的排序取决于扩展信息以及它们与当前输入的单词的匹配程度。此外，您还可以使用 `editor.suggest.localityBonus` 设置来要求编辑器增强显示在更靠近光标位置的建议。
+提示的排序取决于扩展信息以及它们与当前输入的单词的匹配程度。此外，您还可以使用 `editor.suggest.localityBonus` 设置来要求编辑器增强显示在更靠近光标位置的建议。
 
 ![Sorted By Locality](images/intellisense/localitybonus.png)
 
@@ -140,18 +140,18 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
 * `recentlyUsed` - (默认)选择以前使用过的项目， 除非前缀(type to select)选择不同的项。
 * `recentlyUsedByPrefix` - 根据以前完成这些提示的前缀选择项。
 
-“Type to select”表示当前前缀(大致是光标左边的文本)用于筛选和排序建议。当这种情况发生时，当它的结果与 `recentlyUsed` 的结果不同时，它将获得优先级。
+"Type to select" 表示当前前缀(大致是光标左边的文本)用于筛选和排序建议。当这种情况发生时，当它的结果与 `recentlyUsed` 的结果不同时，它将获得优先级。
 
-当使用最后一个选项 `recentlyUsedByPrefix` 时，VS Code 会记住为特定的前缀(部分文本)选择了哪个项。例如，如果您输入 `co` ，然后选择 `console` ，那么下一次您输入 `co` 时，建议的 `console` 将被预先选择。这使您可以快速地将各种前缀映射到不同的建议，例如  `co` -> `console` and `con` -> `const` 。
+当使用最后一个选项 `recentlyUsedByPrefix` 时，VS Code 会记住为特定的前缀(部分文本)选择了哪个项。例如，如果您输入 `co` ，然后选择 `console` ，那么下一次您输入 `co` 时，建议的 `console` 将被预先选择。这使您可以快速地将各种前缀映射到不同的提示，例如  `co` -> `console` and `con` -> `const` 。
 
-### Snippets in suggestions
+### 片段的提示
 
-By default, VS Code shows snippets and completion proposals in one widget. You can control the behavior with the `editor.snippetSuggestions` setting. To remove snippets from the suggestions widget, set the value to `"none"`. If you'd like to see snippets, you can specify the order relative to suggestions; at the top (`"top"`), at the bottom (`"bottom"`), or inline ordered alphabetically (`"inline"`). The default is `"inline"`.
+默认情况下， VS Code 在一个小部件中显示代码片段和补全建议。您可以使用 `editor.snippetSuggestions`  设置。要从小部件中删除代码片段，请将值设置为 `"none"` 。如果您想查看片段，您可以指定相对于建议的顺序 ; 在顶部  (`"top"`) ，在底部  (`"bottom"`) ，或按字母顺序排列的行内  (`"inline"`) 。默认是  `"inline"` 。
 
 
 ### Key bindings
 
-The key bindings shown below are the default key bindings. You can change these in your `keybindings.json` file as described in [Key Bindings](/docs/getstarted/keybindings.md).
+下面显示的键绑定是默认的。您可以在您的 `keybindings.json` 文件中按照 [Key Bindings](/docs/getstarted/keybindings.md) 中描述的那样更改它们。
 
 > **Note:** There are many more key bindings relating to IntelliSense. Open the **Default Keyboard Shortcuts** (**File** > **Preferences** > **Keyboard Shortcuts**) and search for "suggest".
 
@@ -175,34 +175,33 @@ The key bindings shown below are the default key bindings. You can change these 
 ]
 ```
 
-## Troubleshooting
+## 故障排除
 
-If you find IntelliSense has stopped working, the language service may not be running. Try restarting VS Code and this should solve the issue. If you are still missing IntelliSense features after installing a language extension, open an issue in the repository of the language extension.
+如果发现智能感知停止工作，语言服务可能无法运行。尝试重新启动 VS Code，这应该可以解决问题。如果在安装语言扩展后仍然缺少智能感知功能，请在语言扩展问题库中展示你的问题。
 
-> **Tip:** For configuring and troubleshooting JavaScript IntelliSense, see the [JavaScript documentation](/docs/languages/javascript.md#intellisense).
+> **Tip:** 配置和排除JavaScript智能感知 , 详见 [JavaScript documentation](/docs/languages/javascript.md#intellisense) 。
 
-A particular language extension may not support all the VS Code IntelliSense features. Review the extension's README to find out what is supported. If you think there are issues with a language extension, you can usually find the issue repository for an extension through the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode). Navigate to the extension's detail page and click the `Support` link.
+特定的语言扩展可能不支持 VS Code 的所有智能感知特性。查看扩展的 README 文件以了解支持什么。如果您认为存在语言扩展的问题，通常可以通过 [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) 找到扩展的问题仓库。导航到扩展的详细信息页面并单击 `Support` 链接。
 
-## Next steps
+## 下一步
 
-IntelliSense is just one of VS Code's powerful features. Read on to learn more:
+智能感知只是 VS Code 的强大功能之一。继续往下读 ，了解更多信息:
 
-* [JavaScript](/docs/languages/javascript.md) - Get the most out of your JavaScript development, including configuring IntelliSense.
-* [Node.js](/docs/nodejs/nodejs-tutorial.md) - See an example of IntelliSense in action in the Node.js walkthrough.
-* [Debugging](/docs/editor/debugging.md) - Learn how to set up debugging for your application.
-* [Creating Language extensions](/api/language-extensions/programmatic-language-features.md) - Learn how to create extensions that add IntelliSense for new programming languages.
+* [JavaScript](/docs/languages/javascript.md) - 充分利用JavaScript开发，包括配置智能感知。
+* [Node.js](/docs/nodejs/nodejs-tutorial.md) - 在Node.js演练中可以看到一个智能感知的例子。
+* [Debugging](/docs/editor/debugging.md) - 了解如何设置应用程序的调试。
+* [Creating Language extensions](/api/language-extensions/programmatic-language-features.md) - 学习如何为新的编程语言创建添加智能感知的扩展。
 
-## Common questions
+## 常见问题
 
-### Why am I not getting any suggestions?
+### 为什么我没有任何提示?
 
 ![image of IntelliSense not working](images/intellisense/intellisense_error.png)
 
-This can be caused by a variety of reasons. First, try restarting VS Code. If the problem persists, consult the language extension's documentation. For JavaScript specific troubleshooting, please see the [JavaScript language topic](/docs/languages/javascript.md#intellisense).
+这可能是由多种原因造成的。首先，尝试重新启动 VS Code 。如果问题仍然存在，请参阅语言扩展的文档。有关 JavaScript 的具体故障排除，请参阅 [JavaScript language topic](/docs/languages/javascript.md#intellisense).
 
-### Why am I not seeing method and variable suggestions?
+### 为什么我看不到方法和变量提示?
 
 ![image of IntelliSense showing no useful suggestions](images/intellisense/missing_typings.png)
 
-This issue is caused by missing type declaration (typings) files in JavaScript. You can check if a type declaration file package is available for a specific library by using the [TypeSearch](https://microsoft.github.io/TypeSearch) site. There is more information about this issue in the [JavaScript language topic](/docs/languages/javascript.md#intellisense). For other languages, please consult the extension's documentation.
-
+这个问题是由 JavaScript 中缺少类型声明(typings)文件引起的。您可以使用 [TypeSearch](https://microsoft.github.io/TypeSearch) 站点检查类型声明文件包是否可用于特定的库。在 [JavaScript language topic](/docs/languages/javascript.md#intellisense) 中有关于这个问题的更多信息。对于其他语言，请参考扩展的文档。
