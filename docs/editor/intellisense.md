@@ -17,10 +17,9 @@ MetaDescription:  Learn about Visual Studio Code IntelliSense (intelligent code 
 
 Visual Studio Code 提供了对 JavaScript、TypeScript、JSON、HTML、CSS、SCSS 等的智能感知 。VS Code 支持任何编程语言的基于关键字的补全，但是也可以通过安装语言扩展来配置成更丰富的智能感知 。
 
-这里是 [市场](https://marketplace.visualstudio.com/vscode) 上最流行的语言扩展。单击下面的扩展块阅读描述和评论，以决定哪个扩展最适合您。
+这是 [市场](https://marketplace.visualstudio.com/vscode) 有最流行的语言扩展。单击扩展块阅读描述和评论，以决定哪个扩展最适合您。
 
 <div class="marketplace-extensions-languages-curated"></div>
-
 ## 智能感知功能
 
 VS Code 智能感知功能是由语言服务提供的。语言服务提供基于语言语义和源代码分析的智能代码补全。如果语言服务知道可能的补全，那么在您键入时将弹出智能感知建议。如果继续键入字符，成员列表(变量、方法等)将被筛选为只包含包含键入字符的成员。 按 `kbstyle(Tab)` or `kbstyle(Enter)` 将插入所选成员。
@@ -84,7 +83,7 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
         "strings": false
     },
 
-    // Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
+    // 控制除了 Tab 键以外， Enter 键是否同样可以接受建议。这能减少“插入新行”和“接受建议”命令之间的歧义。smart表示仅在文本更改时使用Enter接受建议。Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
     "editor.acceptSuggestionOnEnter": "on",
 
     // Controls the delay in ms after which quick suggestions will show up.
