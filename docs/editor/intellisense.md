@@ -28,7 +28,7 @@ VS Code 智能感知功能是由语言服务提供的。语言服务提供基于
 
 ![intellisense in package json](images/intellisense/intellisense_packagejson.gif)
 
-> **提示:** suggestions小部件支持CamelCase过滤，这意味着您可以在方法名称中键入大写字母来限制建议。例如，“cra”将快速打开“createApplication”。
+> **提示:** 建议小部件支持CamelCase过滤，这意味着您可以在方法名称中键入大写字母来限制建议。例如，“cra”将快速打开“createApplication”。
 
 如果你愿意，你可以在编码的时候关闭智能感知。 详见 [定制智能感知](/docs/editor/intellisense.md#customizing-intellisense) 。下面学习如何禁用或自定义VS Code 的智能感知特性。
 
