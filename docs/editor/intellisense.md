@@ -86,25 +86,25 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
     // 控制除了 Tab 键以外， Enter 键是否同样可以接受建议。这能减少“插入新行”和“接受建议”命令之间的歧义。smart表示仅在文本更改时使用Enter接受建议。
     "editor.acceptSuggestionOnEnter": "on",
 
-    // Controls the delay in ms after which quick suggestions will show up.
+    // 控制显示快速建议前的等待时间 (毫秒)。
     "editor.quickSuggestionsDelay": 10,
 
-    // Controls if suggestions should automatically show up when typing trigger characters
+    // 控制在键入触发字符后是否自动显示建议。
     "editor.suggestOnTriggerCharacters": true,
 
-    // Controls if pressing tab inserts the best suggestion and if tab cycles through other suggestions
+    // 在按下Tab键时进行Tab补全，将插入最佳匹配建议。
     "editor.tabCompletion": "on",
 
-    // Controls whether sorting favours words that appear close to the cursor
+    // 控制排序时是否提高靠近光标的词语的优先级。
     "editor.suggest.localityBonus": true,
 
-    // Controls how suggestions are pre-selected when showing the suggest list
+    // 控制在建议列表中如何预先选择建议。
     "editor.suggestSelection": "recentlyUsed",
 
-    // Enable word based suggestions
+    // 控制是否根据文档中的文字计算自动完成列表。
     "editor.wordBasedSuggestions": true,
 
-    // Enable parameter hints
+    // 在输入时显示含有参数文档和类型信息的小面板。
     "editor.parameterHints.enabled": true,
 }
 ```
