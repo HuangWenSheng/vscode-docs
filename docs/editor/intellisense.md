@@ -83,7 +83,7 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
         "strings": false
     },
 
-    // 控制除了 Tab 键以外， Enter 键是否同样可以接受建议。这能减少“插入新行”和“接受建议”命令之间的歧义。smart表示仅在文本更改时使用Enter接受建议。Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
+    // 控制除了 Tab 键以外， Enter 键是否同样可以接受建议。这能减少“插入新行”和“接受建议”命令之间的歧义。smart表示仅在文本更改时使用Enter接受建议。
     "editor.acceptSuggestionOnEnter": "on",
 
     // Controls the delay in ms after which quick suggestions will show up.
