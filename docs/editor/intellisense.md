@@ -52,19 +52,19 @@ VS Code 智能感知提供了不同类型的补全，包括语言服务器建议
 
 |       |         |       |
 | ----- | ------- | ----- |
-| ![method icon](images/intellisense/Method_16x.svg) | Methods and Functions | `method`, `function`  |
-| ![variable icon](images/intellisense/Field_16x.svg) | Variables and Fields | `variable`, `field` |
-| ![class](images/intellisense/Class_16x.svg) | Classes | `class` |
-| ![interface](images/intellisense/Interface_16x.svg) | Interfaces | `interface` |
-| ![module](images/intellisense/Namespace_16x.svg) | Modules | `module` |
-| ![property](images/intellisense/Property_16x.svg) | Properties and Attributes | `property` |
-| ![enumeration icon](images/intellisense/EnumItem_16x.svg) | Values and Enumerations | `value`, `enum` |
-| ![reference](images/intellisense/Reference_16x.svg) | References | `reference` |
-| ![keyword](images/intellisense/Keyword_16x.svg) | Keywords | `keyword` |
-| ![color](images/intellisense/ColorPalette_16x.svg) | Colors | `color` |
-| ![unit](images/intellisense/Ruler_16x.svg) | Unit | `unit` |
-| ![a square with ellipses forming the bottom show snippet prefix](images/intellisense/Snippet_16x.svg) | Snippet Prefixes | `snippet` |
-| ![a square with letters abc word completion](images/intellisense/String_16x.svg) | Words | `text` |
+| ![method icon](images/intellisense/Method_16x.svg) | 方法 和 函数 | `method`, `function`  |
+| ![variable icon](images/intellisense/Field_16x.svg) | 变量 和 字段 | `variable`, `field` |
+| ![class](images/intellisense/Class_16x.svg) | 类 | `class` |
+| ![interface](images/intellisense/Interface_16x.svg) | 接口 | `interface` |
+| ![module](images/intellisense/Namespace_16x.svg) | 模块 | `module` |
+| ![property](images/intellisense/Property_16x.svg) | 属性 | `property` |
+| ![enumeration icon](images/intellisense/EnumItem_16x.svg) | 值 和 枚举 | `value`, `enum` |
+| ![reference](images/intellisense/Reference_16x.svg) | 引用 | `reference` |
+| ![keyword](images/intellisense/Keyword_16x.svg) | 关键字 | `keyword` |
+| ![color](images/intellisense/ColorPalette_16x.svg) | 颜色 | `color` |
+| ![unit](images/intellisense/Ruler_16x.svg) | 单元 | `unit` |
+| ![a square with ellipses forming the bottom show snippet prefix](images/intellisense/Snippet_16x.svg) | 前缀片段 | `snippet` |
+| ![a square with letters abc word completion](images/intellisense/String_16x.svg) | 文本 | `text` |
 
 ## 定制智能感知
 
