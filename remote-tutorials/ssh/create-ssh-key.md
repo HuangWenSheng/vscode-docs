@@ -20,7 +20,7 @@ ssh-keygen -t rsa -b 2048
 
 This will generate the SSH key. Press `kbstyle(Enter)` at the following prompt to save the key in the default location (under your user directory as a folder named `.ssh`).
 
-![ssh-keygen output](images/ssh/ssh-keygen.png)
+![ssh-keygen output](../images/ssh/ssh-keygen.png)
 
 You will then be prompted to enter a secure passphrase but you can leave that blank. You should now have a `id_rsa.pub` file which containers your new public SSH key.
 

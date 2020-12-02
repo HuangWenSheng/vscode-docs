@@ -18,13 +18,13 @@ node --version; npm --version
 
 This should show the following versions:
 
-![Node.js version check](images/containers/version-check.png)
+![Node.js version check](../images/containers/version-check.png)
 
 ## Run the application
 
 We can now hit `kb(workbench.action.debug.start)` which will run the application inside the container. Once the process starts, navigate to http://localhost:3000 and you should see the simple Node.js server running!
 
-![Running the application](images/containers/hello-remote-world.png)
+![Running the application](../images/containers/hello-remote-world.png)
 
 ## Let us know how it went
 

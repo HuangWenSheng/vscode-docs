@@ -68,15 +68,15 @@ To be able to browse to the web app on your local machine, you can leverage anot
 
 To be able to access a port on the remote machine that may not be publicly exposed, you need to establish a connection or a tunnel between a port on your local machine and the server. With the app still running, open the SSH Explorer and find the **Forwarded Ports** view. Click on the **Forward a port** link and indicate that you want to forward port 3000:
 
-![Enter the port to forward](images/ssh/enter-port.png)
+![Enter the port to forward](../images/ssh/enter-port.png)
 
 Name the connection "browser":
 
-![Name the port](images/ssh/name-port.png)
+![Name the port](../images/ssh/name-port.png)
 
 The server will now forward traffic on port 3000 to your local machine. When you browse to http://localhost:3000, you see the running web app.
 
-![Running Express Application](images/ssh/express.png)
+![Running Express Application](../images/ssh/express.png)
 
 ----
 

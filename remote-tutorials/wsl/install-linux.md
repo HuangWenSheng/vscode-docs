@@ -10,15 +10,15 @@ DateApproved: 10/9/2019
 
 You install Linux distributions for WSL from the Microsoft Store. You can use the store app, or search for a Linux distro in the Windows search bar. Choose the Linux distribution you want to install (for example Ubuntu) and follow the prompts.
 
-![select Ubuntu distro](images/wsl/select-distro.png)
+![select Ubuntu distro](../images/wsl/select-distro.png)
 
 Select **Install**.
 
-![install Ubuntu](images/wsl/install-ubuntu.png)
+![install Ubuntu](../images/wsl/install-ubuntu.png)
 
 And when done, select **Launch** to get started. This will open a Linux terminal and complete the installation.  You'll need to create a user ID and password since you are setting up a full Linux instance. You are now running Linux on Windows.
 
-![Linux terminal](images/wsl/linux-terminal.png)
+![Linux terminal](../images/wsl/linux-terminal.png)
 
 ---
 

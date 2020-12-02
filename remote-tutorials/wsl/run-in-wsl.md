@@ -12,29 +12,29 @@ In the WSL terminal, make sure you are in the helloWorld folder, and type in `'c
 
 > **Tip**: If you are on WSL 2 and the `code` shell command hangs, update to the latest Windows Insiders build from Windows Update.
 
-![launch VS Code](images/wsl/launch-code.png)
+![launch VS Code](../images/wsl/launch-code.png)
 
 The first thing you'll see is a message about "Installing VS Code Server" (the c7d83e57… number is the version of the VS Code Server that matches the client-side tools you just installed). VS Code is installing a small server on the Linux side that the desktop VS Code will then talk to. That server will then install and host extensions in WSL, so that they run in the context of the tools and frameworks installed in WSL. In other words, your language extensions will run against the tools and frameworks installed in WSL, not against what is installed on the Windows side, as it should for the proper development experience.
 
 The next thing that happens is VS Code will start and open the `helloWorld` folder. You may see a quick notification telling you that VS Code is connecting to WSL, and you may be prompted to allow access to the Node.js-based server.
 
-![installing vscode server](images/wsl/installing-vscode-server.png)
+![installing vscode server](../images/wsl/installing-vscode-server.png)
 
 Now, when you hover over `hello.py`, you get the proper Linux path.
 
-![show hello.py Linux path](images/wsl/show-linux-path.png)
+![show hello.py Linux path](../images/wsl/show-linux-path.png)
 
 ## Integrated Terminal
 
 Run **Terminal** > **New Terminal** (`kb(workbench.action.terminal.toggleTerminal)`) to open a new terminal instance.
 
-![new terminal in WSL](images/wsl/new-terminal-in-wsl.png)
+![new terminal in WSL](../images/wsl/new-terminal-in-wsl.png)
 
 You'll start a new instance of the bash shell in WSL, again from VS Code running on Windows.
 
 **Tip**: In the lower left corner of the Status Bar, you can see that you're connected to your **WSL: Ubuntu** instance.
 
-![Remote - WSL Status bar](images/wsl/wsl-status-bar.png)
+![Remote - WSL Status bar](../images/wsl/wsl-status-bar.png)
 
 ### Known issue: Missing Activity bar icons
 

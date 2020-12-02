@@ -16,11 +16,11 @@ The Remote - Containers extension lets you run Visual Studio Code inside a Docke
 
 With the Remote - Containers extension installed, you will see a new Status bar item at the far left.
 
-![Remote Status bar item](images/containers/remote-status-bar.png)
+![Remote Status bar item](../images/containers/remote-status-bar.png)
 
 The Remote Status bar item can quickly show you in which context VS Code is running (local or remote) and clicking on the item will bring up the Remote - Containers commands.
 
-![Remote - Containers commands](images/containers/remote-containers-commands.png)
+![Remote - Containers commands](../images/containers/remote-containers-commands.png)
 
 ----
 

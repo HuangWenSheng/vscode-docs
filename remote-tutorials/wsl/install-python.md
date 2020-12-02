@@ -31,11 +31,11 @@ python3 hello.py
 
 In a remote Linux environment (this WSL distro is technically another machine without UI, that just happens to be running locally on your computer), your development tools and experiences are pretty limited.  You can run [Vim](https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/) in the terminal to edit your file or you can edit the sources on the Windows side through the `\\wsl$` mount:
 
-![\\wsl$ mount](images/wsl/wsl$-mount.png)
+![\\wsl$ mount](../images/wsl/wsl$-mount.png)
 
 The problem with this model is that the Python runtime, pip, or any conda packages for that matter, are not installed on Windows.
 
-![no Python on Windows](images/wsl/no-python-on-windows.png)
+![no Python on Windows](../images/wsl/no-python-on-windows.png)
 
 Remember, Python is installed in the Linux distro, which means if you're editing Python files on the Windows side, you can't run or debug them unless you install the same Python development stack on Windows. And that defeats the purpose of having an isolated Linux instance set up with all your Python tools and runtimes!
 

@@ -20,19 +20,19 @@ git clone https://github.com/Microsoft/vscode-remote-try-node
 
 Upon opening one of the sample projects listed above, you should see the following notification prompting you to reopen the workspace inside a dev container. Select **Reopen in Container**.
 
-![Dev container notification](images/containers/dev-container-toast.png)
+![Dev container notification](../images/containers/dev-container-toast.png)
 
 ## Wait for the container to build
 
 If this is your first time connecting, a Docker image will be downloaded, built, and starts a container with a copy of VS Code Server running. This might take a few minutes the first time, but future connections will only take seconds.
 
-![Building image](images/containers/building-image.png)
+![Building image](../images/containers/building-image.png)
 
 ## Check
 
 Once the container is running and you're connected, you should see your remote context change in the bottom left of the Status bar:
 
-![Building image](images/containers/connected.png)
+![Building image](../images/containers/connected.png)
 
 ----
 

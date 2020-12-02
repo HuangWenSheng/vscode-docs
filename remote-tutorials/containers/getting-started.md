@@ -35,7 +35,7 @@ Docker might take a few minutes to start.
 If the whale icon is animated, it is probably still in the process of starting.
 You can click on the icon to see the status.
 
-![Docker status](images/containers/docker-status.png)
+![Docker status](../images/containers/docker-status.png)
 
 ## Check
 

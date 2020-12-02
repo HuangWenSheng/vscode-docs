@@ -14,17 +14,17 @@ From the Visual Studio Code File Explorer (`kb(workbench.view.explorer)`), navig
 
 You have syntax highlighting for the JavaScript file as well as IntelliSense with hovers, just like you would see if the source code was on your local machine.
 
-![Express app.js hover](images/ssh/express-hover.png)
+![Express app.js hover](../images/ssh/express-hover.png)
 
 When you start typing, you'll get smart completions for the object methods and properties.
 
-![Express app.js smart completions](images/ssh/express-completions.png)
+![Express app.js smart completions](../images/ssh/express-completions.png)
 
 ## Debugging
 
 Set a breakpoint on line 10 of `app.js` by clicking in the gutter to the left of the line number or by putting the cursor on the line and pressing `kb(editor.debug.action.toggleBreakpoint)`. The breakpoint will be displayed as a red circle.
 
-![set breakpoint](images/ssh/set-breakpoint.png)
+![set breakpoint](../images/ssh/set-breakpoint.png)
 
 Now, press `kb(workbench.action.debug.start)` to run your application. If you are asked how to run the application, choose **Node.js**.
 
@@ -32,7 +32,7 @@ The app will start, and you'll hit the breakpoint. You can inspect variables, cr
 
 Press `kb(workbench.action.debug.stepOver)` to step or `kb(workbench.action.debug.start)` again to finish your debugging session.
 
-![VS Code debug view](images/ssh/debug-view.png)
+![VS Code debug view](../images/ssh/debug-view.png)
 
 You get the full development experience of Visual Studio Code connected over SSH.
 
